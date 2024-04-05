@@ -1,7 +1,8 @@
-package com.sookmyung.umbrellafriend
+package com.sookmyung.umbrellafriend.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.sookmyung.umbrellafriend.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
