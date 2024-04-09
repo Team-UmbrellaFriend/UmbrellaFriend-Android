@@ -33,7 +33,7 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
 //        } else {
 //            Intent(this, LoginActivity::class.java)
 //        }
-        val intent = Intent(this, LoginActivity::class.java)
+        val intent = Intent(this, SplashEntryActivity::class.java)
         startActivity(intent)
         finish()
     }
