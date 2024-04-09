@@ -8,8 +8,6 @@ plugins {
     id("kotlin-parcelize")
     id("org.jlleitschuh.gradle.ktlint")
     id("org.jetbrains.kotlin.plugin.serialization") version "1.9.0"
-    id("com.google.gms.google-services")
-    id("com.google.firebase.crashlytics")
 }
 
 android {
