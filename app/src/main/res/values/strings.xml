@@ -1,104 +1,10 @@
 <resources>
     <string name="app_name">UmbrellaFriend</string>
 
-    <!-- Logo -->
-    <style name="Logo">
-        <item name="android:fontFamily">@font/tmoney_roundwind_extrabold</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textSize">28dp</item>
-        <item name="lineHeight">36dp</item>
-        <item name="android:letterSpacing">0</item>
-    </style>
+    <!-- splash -->
+    <string name="splash_sub_title">비올 때 마다 생각나는 친구</string>
+    <string name="splash_title">우산친구</string>
+    <string name="splash_login_title">로그인</string>
+    <string name="splash_join_title">회원가입</string>
 
-    <!-- Head -->
-    <style name="Heading1">
-        <item name="android:fontFamily">@font/suit_bold</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textSize">48dp</item>
-        <item name="lineHeight">60dp</item>
-        <item name="android:letterSpacing">-0.5</item>
-    </style>
-
-    <style name="Heading2">
-        <item name="android:fontFamily">@font/suit_bold</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textSize">28dp</item>
-        <item name="lineHeight">34dp</item>
-        <item name="android:letterSpacing">-0.5</item>
-    </style>
-
-    <style name="Heading3">
-        <item name="android:fontFamily">@font/suit_bold</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textSize">24dp</item>
-        <item name="lineHeight">32dp</item>
-        <item name="android:letterSpacing">-0.5</item>
-    </style>
-
-    <!-- Title -->
-    <style name="Title1">
-        <item name="android:fontFamily">@font/suit_bold</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textSize">18dp</item>
-        <item name="lineHeight">22dp</item>
-        <item name="android:letterSpacing">-0.5</item>
-    </style>
-
-    <style name="Subtitle1">
-        <item name="android:fontFamily">@font/suit_semibold</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textSize">16dp</item>
-        <item name="lineHeight">22dp</item>
-        <item name="android:letterSpacing">-0.5</item>
-    </style>
-
-    <!-- Body -->
-    <style name="Body1">
-        <item name="android:fontFamily">@font/suit_bold</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textSize">16dp</item>
-        <item name="lineHeight">22dp</item>
-        <item name="android:letterSpacing">-0.5</item>
-    </style>
-
-    <style name="Body2">
-        <item name="android:fontFamily">@font/suit_semibold</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textSize">16dp</item>
-        <item name="lineHeight">22dp</item>
-        <item name="android:letterSpacing">-0.5</item>
-    </style>
-
-    <style name="Body3">
-        <item name="android:fontFamily">@font/suit_medium</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textSize">16dp</item>
-        <item name="lineHeight">22dp</item>
-        <item name="android:letterSpacing">-0.5</item>
-    </style>
-
-    <style name="Body4">
-        <item name="android:fontFamily">@font/suit_semibold</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textSize">14dp</item>
-        <item name="lineHeight">18dp</item>
-        <item name="android:letterSpacing">-0.5</item>
-    </style>
-
-    <style name="Body5">
-        <item name="android:fontFamily">@font/suit_medium</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textSize">16dp</item>
-        <item name="lineHeight">22dp</item>
-        <item name="android:letterSpacing">-0.5</item>
-    </style>
-
-    <!-- Caption -->
-    <style name="Caption1">
-        <item name="android:fontFamily">@font/tmoney_roundwind_regular</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textSize">12dp</item>
-        <item name="lineHeight">16dp</item>
-        <item name="android:letterSpacing">-0.5</item>
-    </style>
 </resources>
