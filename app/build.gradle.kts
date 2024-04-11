@@ -52,7 +52,6 @@ android {
 }
 
 dependencies {
-
     // Glide
     implementation("com.github.bumptech.glide:glide:4.13.2")
     kapt("com.github.bumptech.glide:glide:4.13.2")
@@ -136,6 +135,10 @@ dependencies {
 
     // Coroutine
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3")
+
+    //ML Kit
+    implementation("com.google.mlkit:text-recognition-korean:16.0.0")
+    implementation("com.google.android.gms:play-services-mlkit-text-recognition-korean:16.0.0")
 }
 
 fun getApiKey(propertyKey: String): String {
