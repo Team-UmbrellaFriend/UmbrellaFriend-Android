@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tv_join_register_photo_info_title"
+            style="@style/Heading3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:maxLength="20"
+            android:text="학생증을\n등록해 인증해주세요."
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_join_register_photo_info_subtitle"
+            style="@style/Body3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="학번과 이름이 보이게 첨부해주세요."
+            android:textColor="@color/gray_700"
+            app:layout_constraintStart_toStartOf="@id/tv_join_register_photo_info_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_join_register_photo_info_title" />
+
+        <ImageView
+            android:id="@+id/iv_join_register_photo_background"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="97dp"
+            android:layout_marginTop="116dp"
+            android:background="@drawable/selector_photo_plus_btn"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_join_register_photo_info_subtitle" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:padding="62dp"
+            android:src="@drawable/ic_round_plus"
+            app:layout_constraintBottom_toBottomOf="@id/iv_join_register_photo_background"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="@id/iv_join_register_photo_background"
+            app:layout_constraintStart_toStartOf="@id/iv_join_register_photo_background"
+            app:layout_constraintTop_toTopOf="@id/iv_join_register_photo_background" />
+
+        <ImageView
+            android:id="@+id/iv_join_register_photo_preview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="53dp"
+            android:src="@color/gray_500"
+            android:visibility="invisible"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_join_register_photo_info_subtitle"
+            tools:visibility="visible" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_iamge_cancel"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@id/iv_join_register_photo_preview"
+            app:layout_constraintTop_toTopOf="@id/iv_join_register_photo_preview"
+            tools:visibility="visible" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/Subtitle1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/shape_mainblue_fill_12_rect"
+            android:clickable="false"
+            android:enabled="false"
+            android:paddingVertical="12dp"
+            android:text="다음"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
