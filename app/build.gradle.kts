@@ -57,6 +57,9 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.13.2")
     kapt("com.github.bumptech.glide:glide:4.13.2")
 
+    //Crop Image
+    implementation("com.vanniktech:android-image-cropper:4.3.3")
+
     // Hilt
     implementation("com.google.dagger:hilt-android:2.48.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")

@@ -16,7 +16,7 @@ class JoinActivity : BindingActivity<ActivityJoinBinding>(R.layout.activity_join
         val currentFragment = supportFragmentManager.findFragmentById(R.id.fcv_join)
         if (currentFragment == null) {
             supportFragmentManager.beginTransaction()
-                .add(R.id.fcv_join, JoinInputFragment())
+                .add(R.id.fcv_join, JoinRegisterPhotoFragment())
                 .commit()
         }
     }

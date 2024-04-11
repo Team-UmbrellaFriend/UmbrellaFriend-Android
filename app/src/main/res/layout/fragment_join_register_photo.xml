@@ -5,6 +5,11 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <variable
+            name="vm"
+            type="com.sookmyung.umbrellafriend.ui.join.JoinRegisterPhotoViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -43,21 +48,39 @@
             android:layout_marginHorizontal="97dp"
             android:layout_marginTop="116dp"
             android:background="@drawable/selector_photo_plus_btn"
+            android:clickable="@{!vm.isUriUpdated}"
+            android:visibility="@{vm.isUriUpdated ? View.INVISIBLE : View.VISIBLE}"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_join_register_photo_info_subtitle" />
 
         <ImageView
+            android:id="@+id/iv_join_register_photo_plus"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:padding="62dp"
             android:src="@drawable/ic_round_plus"
+            android:visibility="@{vm.isUriUpdated ? View.INVISIBLE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="@id/iv_join_register_photo_background"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="@id/iv_join_register_photo_background"
             app:layout_constraintStart_toStartOf="@id/iv_join_register_photo_background"
             app:layout_constraintTop_toTopOf="@id/iv_join_register_photo_background" />
+
+        <ImageView
+            android:id="@+id/iv_join_register_photo_preview_background"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="53dp"
+            android:src="@color/black"
+            android:visibility="@{vm.isUriUpdated ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_join_register_photo_info_subtitle"
+            tools:visibility="visible" />
 
         <ImageView
             android:id="@+id/iv_join_register_photo_preview"
@@ -66,7 +89,7 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="53dp"
             android:src="@color/gray_500"
-            android:visibility="invisible"
+            android:visibility="@{vm.isUriUpdated ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -74,24 +97,27 @@
             tools:visibility="visible" />
 
         <ImageView
+            android:id="@+id/btn_join_register_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:clickable="@{vm.isUriUpdated}"
             android:src="@drawable/ic_iamge_cancel"
-            android:visibility="invisible"
+            android:visibility="@{vm.isUriUpdated ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintEnd_toEndOf="@id/iv_join_register_photo_preview"
             app:layout_constraintTop_toTopOf="@id/iv_join_register_photo_preview"
             tools:visibility="visible" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_join_register_photo_next"
             style="@style/Subtitle1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/shape_mainblue_fill_12_rect"
-            android:clickable="false"
-            android:enabled="false"
+            android:background="@{vm.isUriUpdated ? @drawable/shape_mainblue_fill_12_rect : @drawable/shape_gray300_fill_12_rect}"
+            android:clickable="@{vm.isUriUpdated}"
             android:paddingVertical="12dp"
+            android:stateListAnimator="@null"
             android:text="다음"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"

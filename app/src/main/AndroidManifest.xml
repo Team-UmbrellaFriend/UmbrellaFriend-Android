@@ -5,6 +5,13 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32"
+        tools:ignore="ScopedStorage" />
 
     <application
         android:name=".UmbrellaFriendApplication"
@@ -22,8 +29,7 @@
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="false"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
 
         <activity
             android:name=".ui.splash.SplashActivity"
@@ -36,9 +42,21 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.splash.SplashEntryActivity"
+        <activity
+            android:name=".ui.splash.SplashEntryActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.join.JoinActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".ui.join.ImageCropActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
