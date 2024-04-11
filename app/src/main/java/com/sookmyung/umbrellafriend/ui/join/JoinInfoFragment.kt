@@ -1,13 +1,17 @@
 package com.sookmyung.umbrellafriend.ui.join
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.EditText
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LiveData
 import com.sookmyung.umbrellafriend.R
 import com.sookmyung.umbrellafriend.databinding.FragmentJoinInfoBinding
-import com.sookmyung.umbrellafriend.domain.entity.Student
 import com.sookmyung.umbrellafriend.ui.join.JoinRegisterPhotoFragment.Companion.NAME
 import com.sookmyung.umbrellafriend.ui.join.JoinRegisterPhotoFragment.Companion.STUDENT_ID
+import com.sookmyung.umbrellafriend.ui.main.MainActivity
 import com.sookmyung.umbrellafriend.util.binding.BindingFragment
 
 class JoinInfoFragment : BindingFragment<FragmentJoinInfoBinding>(R.layout.fragment_join_info) {
@@ -17,6 +21,9 @@ class JoinInfoFragment : BindingFragment<FragmentJoinInfoBinding>(R.layout.fragm
         binding.vm = viewModel
 
         getStudentBundle()
+        showError()
+        checkJoinAvailable()
+        join()
     }
 
     private fun getStudentBundle() {
@@ -24,7 +31,67 @@ class JoinInfoFragment : BindingFragment<FragmentJoinInfoBinding>(R.layout.fragm
         if (bundle != null) {
             val studentId = bundle.getString(STUDENT_ID)
             val name = bundle.getString(NAME)
-            viewModel.updateStudent(Student(studentId = studentId ?: "", name = name ?: ""))
+            viewModel.updateStudentCardInfo(name ?: "", studentId ?: "")
+        }
+    }
+
+    private fun checkJoinAvailable() {
+        observeFieldsAndJoinAvailability(viewModel.email, viewModel.name, viewModel.studentId)
+    }
+
+    private fun showError() {
+        observeTextAndSetError(
+            binding.etJoinInfoPhone,
+            viewModel.phoneNumber
+        ) { viewModel.isValidPhoneNumber() }
+
+        observeTextAndSetError(
+            binding.etJoinInfoPassword,
+            viewModel.password
+        ) { viewModel.isValidPassword() }
+
+        observeTextAndSetError(
+            binding.etJoinInfoPasswordCheck,
+            viewModel.password2
+        ) { viewModel.isValidPassword2() }
+    }
+
+    private fun observeTextAndSetError(
+        editText: EditText,
+        liveData: LiveData<String>,
+        isValid: () -> Boolean
+    ) {
+        liveData.observe(viewLifecycleOwner) { text ->
+            with(editText) {
+                val isValidText = isValid() || text.isNullOrEmpty()
+                val backgroundResource =
+                    if (isValidText) R.drawable.shape_gray100_fill_12_rect else R.drawable.shape_gray100_fill_error_stroke_12_rect
+                val textColorResource = if (isValidText) R.color.gray_1100 else R.color.error
+
+                setBackgroundResource(backgroundResource)
+                setTextColor(ContextCompat.getColor(context, textColorResource))
+            }
+            viewModel.isJoinAvailable()
+        }
+    }
+
+    private fun observeFieldsAndJoinAvailability(vararg liveData: LiveData<String>) {
+        liveData.forEach { data ->
+            data.observe(viewLifecycleOwner) {
+                viewModel.isJoinAvailable()
+            }
+        }
+    }
+
+    private fun join() {
+        binding.btnNext.setOnClickListener {
+            //TODO 회원가입 서버 연결
+            startActivity(
+                Intent(
+                    requireActivity(),
+                    MainActivity::class.java
+                ).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            )
         }
     }
 }

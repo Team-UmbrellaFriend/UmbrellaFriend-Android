@@ -32,8 +32,8 @@ class JoinRegisterPhotoViewModel : ViewModel() {
         val regex = Regex("(\\p{L}+)\\s*\\((\\d{7})\\s*\\)")
         val matchResult = regex.find(input)
         if (matchResult != null) {
-            val studentId = matchResult.groupValues[1]
-            val name = matchResult.groupValues[2]
+            val studentId = matchResult.groupValues[2]
+            val name = matchResult.groupValues[1]
             _studentId.value = studentId
             _name.value = name
         } else {
