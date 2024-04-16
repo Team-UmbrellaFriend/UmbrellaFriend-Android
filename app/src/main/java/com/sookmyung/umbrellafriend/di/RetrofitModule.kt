@@ -2,6 +2,7 @@ package com.sookmyung.umbrellafriend.di
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.sookmyung.umbrellafriend.BuildConfig
+import com.sookmyung.umbrellafriend.data.source.LocalDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,7 +23,6 @@ object RetrofitModule {
     private val json = Json { ignoreUnknownKeys = true }
     private const val CONTENT_TYPE = "Content-Type"
     private const val APPLICATION_JSON = "application/json"
-    private const val BEARER = "Bearer "
     private const val AUTHORIZATION = "Authorization"
 
     @Qualifier
@@ -32,16 +32,17 @@ object RetrofitModule {
     @Provides
     @Singleton
     @UmbrellaFriendType
-    fun providesUmbrellaFriendInterceptor(): Interceptor = Interceptor { chain ->
+    fun providesUmbrellaFriendInterceptor(
+        localDataSource: LocalDataSource
+    ): Interceptor = Interceptor { chain ->
         val request = chain.request()
-        var response = chain.proceed(
+        return@Interceptor chain.proceed(
             request
                 .newBuilder()
                 .addHeader(CONTENT_TYPE, APPLICATION_JSON)
-                .addHeader(AUTHORIZATION, BEARER) //TODO server HEADER 확인하기
+                .addHeader(AUTHORIZATION, localDataSource.token)
                 .build()
         )
-        return@Interceptor response
     }
 
     @Provides

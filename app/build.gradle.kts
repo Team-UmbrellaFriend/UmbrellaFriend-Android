@@ -8,6 +8,8 @@ plugins {
     id("kotlin-parcelize")
     id("org.jlleitschuh.gradle.ktlint")
     id("org.jetbrains.kotlin.plugin.serialization") version "1.9.0"
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -52,10 +54,13 @@ android {
 }
 
 dependencies {
-
     // Glide
     implementation("com.github.bumptech.glide:glide:4.13.2")
+    implementation("com.google.firebase:firebase-messaging:23.4.1")
     kapt("com.github.bumptech.glide:glide:4.13.2")
+
+    //Crop Image
+    implementation("com.vanniktech:android-image-cropper:4.3.3")
 
     // Hilt
     implementation("com.google.dagger:hilt-android:2.48.1")
@@ -133,6 +138,10 @@ dependencies {
 
     // Coroutine
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3")
+
+    //ML Kit
+    implementation("com.google.mlkit:text-recognition-korean:16.0.0")
+    implementation("com.google.android.gms:play-services-mlkit-text-recognition-korean:16.0.0")
 }
 
 fun getApiKey(propertyKey: String): String {
