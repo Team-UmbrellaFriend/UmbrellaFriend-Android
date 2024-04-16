@@ -229,7 +229,7 @@
             android:layout_marginHorizontal="16dp"
             android:background="@{vm.isJoin ? @drawable/shape_mainblue_fill_12_rect : @drawable/shape_gray300_fill_12_rect}"
             android:clickable="@{vm.isJoin}"
-            android:paddingVertical="20dp"
+            android:paddingVertical="13dp"
             android:stateListAnimator="@null"
             android:text="다음"
             android:textColor="@color/white"
