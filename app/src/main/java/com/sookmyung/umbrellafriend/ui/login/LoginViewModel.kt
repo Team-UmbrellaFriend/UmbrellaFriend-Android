@@ -22,12 +22,26 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
 //    private val postJoinUseCase: PostJoinUseCase
 ) : ViewModel() {
+    lateinit var token: String
     val studentId: MutableLiveData<String> = MutableLiveData("")
     val password: MutableLiveData<String> = MutableLiveData("")
     private val _isLoginAvailable: MutableLiveData<Boolean> = MutableLiveData(false)
     val isLoginAvailable: LiveData<Boolean> get() = _isLoginAvailable
     private val _isLoginSuccess: MutableLiveData<Boolean> = MutableLiveData(false)
     val isLoginSuccess: LiveData<Boolean> get() = _isLoginSuccess
+
+    init {
+        getToken()
+    }
+    private fun getToken() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Timber.e("Fetching FCM registration token failed. ${task.exception}")
+                return@OnCompleteListener
+            }
+            token = task.result
+        })
+    }
 
     fun isJoinAvailable() {
         _isLoginAvailable.value =

@@ -10,6 +10,7 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
     private val viewModel by viewModels<LoginViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding.vm = viewModel
 
         login()
     }
