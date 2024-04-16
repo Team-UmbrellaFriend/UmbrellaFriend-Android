@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import com.sookmyung.umbrellafriend.R
 import com.sookmyung.umbrellafriend.databinding.ActivityImageCropBinding
 import com.sookmyung.umbrellafriend.util.binding.BindingActivity
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.ByteArrayOutputStream
 
 

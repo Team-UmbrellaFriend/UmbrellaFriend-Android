@@ -8,6 +8,8 @@ plugins {
     id("kotlin-parcelize")
     id("org.jlleitschuh.gradle.ktlint")
     id("org.jetbrains.kotlin.plugin.serialization") version "1.9.0"
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -54,6 +56,7 @@ android {
 dependencies {
     // Glide
     implementation("com.github.bumptech.glide:glide:4.13.2")
+    implementation("com.google.firebase:firebase-messaging:23.4.1")
     kapt("com.github.bumptech.glide:glide:4.13.2")
 
     //Crop Image

@@ -20,7 +20,9 @@ import com.sookmyung.umbrellafriend.ui.join.ImageCropActivity.Companion.CROP_URI
 import com.sookmyung.umbrellafriend.ui.join.ImageCropActivity.Companion.IMAGE_URI
 import com.sookmyung.umbrellafriend.util.binding.BindingAdapter.setImage
 import com.sookmyung.umbrellafriend.util.binding.BindingFragment
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.IOException
+
 
 class JoinRegisterPhotoFragment :
     BindingFragment<FragmentJoinRegisterPhotoBinding>(R.layout.fragment_join_register_photo) {
@@ -74,6 +76,7 @@ class JoinRegisterPhotoFragment :
                     val bundle = Bundle().apply {
                         putString(STUDENT_ID, viewModel.studentId.value)
                         putString(NAME, viewModel.name.value)
+                        putString(URI, viewModel.croppedUri.value.toString())
                     }
 
                     val joinInfoFragment = JoinInfoFragment()
@@ -112,5 +115,6 @@ class JoinRegisterPhotoFragment :
         const val MLKIT = "MLKit"
         const val NAME = "NAME"
         const val STUDENT_ID = "STUDENT_ID"
+        const val URI = "URI"
     }
 }

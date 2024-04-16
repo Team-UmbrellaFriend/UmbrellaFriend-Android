@@ -4,7 +4,9 @@ import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
 import timber.log.Timber
 import com.sookmyung.umbrellafriend.BuildConfig
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class UmbrellaFriendApplication : Application() {
     override fun onCreate() {
         super.onCreate()

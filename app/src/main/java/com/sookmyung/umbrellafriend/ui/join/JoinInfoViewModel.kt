@@ -4,9 +4,27 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
+import com.sookmyung.umbrellafriend.domain.usecase.InitTokenUseCase
+import com.sookmyung.umbrellafriend.domain.usecase.PostJoinUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import timber.log.Timber
+import javax.inject.Inject
 
-
-class JoinInfoViewModel : ViewModel() {
+@HiltViewModel
+class JoinInfoViewModel @Inject constructor(
+    private val postJoinUseCase: PostJoinUseCase,
+    private val initTokenUseCase: InitTokenUseCase
+) : ViewModel() {
+    private lateinit var imageUri: MultipartBody.Part
+    private lateinit var token: String
     val name: MutableLiveData<String> = MutableLiveData("")
     val studentId: MutableLiveData<String> = MutableLiveData("")
     val phoneNumber: MutableLiveData<String> = MutableLiveData("")
@@ -15,10 +33,27 @@ class JoinInfoViewModel : ViewModel() {
     val password2: MutableLiveData<String> = MutableLiveData("")
     private val _isJoin: MutableLiveData<Boolean> = MutableLiveData(false)
     val isJoin: LiveData<Boolean> get() = _isJoin
+    private val _isJoinSuccess: MutableLiveData<Boolean> = MutableLiveData(false)
+    val isJoinSuccess: LiveData<Boolean> get() = _isJoinSuccess
 
-    fun updateStudentCardInfo(n: String, id: String) {
+    init {
+        getToken()
+    }
+
+    private fun getToken() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Timber.e("Fetching FCM registration token failed. ${task.exception}")
+                return@OnCompleteListener
+            }
+            token = task.result
+        })
+    }
+
+    fun updateStudentCardInfo(n: String, id: String, uri: MultipartBody.Part) {
         name.value = n
         studentId.value = id
+        imageUri = uri
     }
 
     fun isValidPhoneNumber(): Boolean {
@@ -39,5 +74,33 @@ class JoinInfoViewModel : ViewModel() {
     fun isJoinAvailable() {
         _isJoin.value =
             (!name.value.isNullOrEmpty()) && (!studentId.value.isNullOrEmpty()) && isValidPassword() && isValidPassword2() && isValidPhoneNumber() && (!email.value.isNullOrEmpty())
+    }
+
+    fun postJoin() {
+        viewModelScope.launch {
+            val fullEmail = "${email.value}@sookmyung.ac.kr"
+
+            postJoinUseCase(
+                studentCard = imageUri,
+                body = hashMapOf(
+                    "username" to name.value!!.toRequestBody(),
+                    "email" to fullEmail.toRequestBody(),
+                    "password" to password.value!!.toRequestBody(),
+                    "password2" to password2.value!!.toRequestBody(),
+                    "profile.studentID" to studentId.value!!.toRequestBody(),
+                    "profile.phoneNumber" to phoneNumber.value!!.toRequestBody(),
+                    "fcm_token" to token.toRequestBody()
+                )
+            )
+                .onSuccess { response ->
+                    initTokenUseCase(response.token)
+                    _isJoinSuccess.value = true
+                }.onFailure { throwable ->
+                    Timber.e("$throwable")
+                }
+        }
+    }
+    private fun String.toRequestBody(): RequestBody {
+        return this.toRequestBody("application/json".toMediaTypeOrNull())
     }
 }

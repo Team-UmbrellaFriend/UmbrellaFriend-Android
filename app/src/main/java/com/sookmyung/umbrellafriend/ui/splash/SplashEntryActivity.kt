@@ -6,7 +6,9 @@ import com.sookmyung.umbrellafriend.R
 import com.sookmyung.umbrellafriend.databinding.ActivitySplashEntryBinding
 import com.sookmyung.umbrellafriend.ui.join.JoinActivity
 import com.sookmyung.umbrellafriend.util.binding.BindingActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SplashEntryActivity :
     BindingActivity<ActivitySplashEntryBinding>(R.layout.activity_splash_entry) {
     override fun onCreate(savedInstanceState: Bundle?) {

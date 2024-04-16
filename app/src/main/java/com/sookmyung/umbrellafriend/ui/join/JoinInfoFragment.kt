@@ -1,6 +1,7 @@
 package com.sookmyung.umbrellafriend.ui.join
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
@@ -11,9 +12,13 @@ import com.sookmyung.umbrellafriend.R
 import com.sookmyung.umbrellafriend.databinding.FragmentJoinInfoBinding
 import com.sookmyung.umbrellafriend.ui.join.JoinRegisterPhotoFragment.Companion.NAME
 import com.sookmyung.umbrellafriend.ui.join.JoinRegisterPhotoFragment.Companion.STUDENT_ID
+import com.sookmyung.umbrellafriend.ui.join.JoinRegisterPhotoFragment.Companion.URI
 import com.sookmyung.umbrellafriend.ui.main.MainActivity
+import com.sookmyung.umbrellafriend.util.ContentUriRequestBody
 import com.sookmyung.umbrellafriend.util.binding.BindingFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class JoinInfoFragment : BindingFragment<FragmentJoinInfoBinding>(R.layout.fragment_join_info) {
     private val viewModel by viewModels<JoinInfoViewModel>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -24,6 +29,7 @@ class JoinInfoFragment : BindingFragment<FragmentJoinInfoBinding>(R.layout.fragm
         showError()
         checkJoinAvailable()
         join()
+        moveToMain()
     }
 
     private fun getStudentBundle() {
@@ -31,7 +37,14 @@ class JoinInfoFragment : BindingFragment<FragmentJoinInfoBinding>(R.layout.fragm
         if (bundle != null) {
             val studentId = bundle.getString(STUDENT_ID)
             val name = bundle.getString(NAME)
-            viewModel.updateStudentCardInfo(name ?: "", studentId ?: "")
+            val uri = bundle.getString(URI)
+            val imageMultipartBody =
+                ContentUriRequestBody(
+                    requireContext(),
+                    "profile.studentCard",
+                    Uri.parse(uri)
+                ).toFormData()
+            viewModel.updateStudentCardInfo(name ?: "", studentId ?: "", imageMultipartBody)
         }
     }
 
@@ -85,13 +98,20 @@ class JoinInfoFragment : BindingFragment<FragmentJoinInfoBinding>(R.layout.fragm
 
     private fun join() {
         binding.btnNext.setOnClickListener {
-            //TODO 회원가입 서버 연결
-            startActivity(
-                Intent(
-                    requireActivity(),
-                    MainActivity::class.java
-                ).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            )
+            viewModel.postJoin()
+        }
+    }
+
+    private fun moveToMain() {
+        viewModel.isJoinSuccess.observe(viewLifecycleOwner) { isJoinSuccess ->
+            if (isJoinSuccess) {
+                startActivity(
+                    Intent(
+                        requireActivity(),
+                        MainActivity::class.java
+                    ).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                )
+            }
         }
     }
 }

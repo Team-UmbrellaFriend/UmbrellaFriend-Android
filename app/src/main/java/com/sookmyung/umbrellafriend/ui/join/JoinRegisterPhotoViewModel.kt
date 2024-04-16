@@ -3,7 +3,7 @@ package com.sookmyung.umbrellafriend.ui.join
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-
+import dagger.hilt.android.lifecycle.HiltViewModel
 
 class JoinRegisterPhotoViewModel : ViewModel() {
     private val _croppedUri: MutableLiveData<String> = MutableLiveData("")
