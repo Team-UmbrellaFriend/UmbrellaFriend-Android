@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.sookmyung.umbrellafriend.R
 import com.sookmyung.umbrellafriend.databinding.ActivitySplashEntryBinding
 import com.sookmyung.umbrellafriend.ui.join.JoinActivity
+import com.sookmyung.umbrellafriend.ui.login.LoginActivity
 import com.sookmyung.umbrellafriend.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,6 +16,10 @@ class SplashEntryActivity :
         super.onCreate(savedInstanceState)
         binding.btnSplashEntryJoin.setOnClickListener {
             startActivity(Intent(this, JoinActivity::class.java))
+        }
+
+        binding.btnSplashEntryLogin.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
         }
     }
 }

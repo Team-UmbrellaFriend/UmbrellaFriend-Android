@@ -46,7 +46,7 @@
     <style name="Subtitle1">
         <item name="android:fontFamily">@font/suit_semibold</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">18dp</item>
         <item name="lineHeight">22dp</item>
         <item name="android:letterSpacing">-0.03</item>
     </style>

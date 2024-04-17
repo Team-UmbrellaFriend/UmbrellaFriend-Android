@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.sookmyung.umbrellafriend.ui.login.LoginViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/iv_login_navi_back"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_left"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_login_info_title"
+            style="@style/Heading3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:maxLength="20"
+            android:text="안녕하세요,\n로그인해주세요:)"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_login_navi_back" />
+
+        <EditText
+            android:id="@+id/et_login_info_student_id"
+            style="@style/Body2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/shape_gray100_fill_12_rect"
+            android:hint="학번"
+            android:inputType="number"
+            android:maxLength="7"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="15dp"
+            android:text="@={vm.studentId}"
+            android:textColor="@color/gray_1100"
+            android:textColorHint="@color/gray_400"
+            app:layout_constraintTop_toBottomOf="@id/tv_login_info_title" />
+
+        <EditText
+            android:id="@+id/et_login_info_password"
+            style="@style/Body2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/shape_gray100_fill_12_rect"
+            android:hint="비밀번호"
+            android:inputType="textPassword"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="15dp"
+            android:text="@={vm.password}"
+            android:textColor="@color/gray_1100"
+            android:textColorHint="@color/gray_400"
+            app:layout_constraintTop_toBottomOf="@id/et_login_info_student_id" />
+
+        <TextView
+            android:id="@+id/tv_login_error"
+            style="@style/Body5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="104dp"
+            android:text="* 학번과 비밀번호를 다시 확인하세요."
+            android:textColor="@color/error"
+            android:visibility="@{vm.isLoginSuccess ? View.INVISIBLE: View.VISIBLE}"
+            app:layout_constraintStart_toStartOf="@id/et_login_info_password"
+            app:layout_constraintTop_toBottomOf="@id/et_login_info_password" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_login"
+            style="@style/Subtitle1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="13dp"
+            android:layout_marginTop="48dp"
+            android:background="@{vm.isLoginAvailable ? @drawable/shape_mainblue_fill_12_rect : @drawable/shape_gray300_fill_12_rect}"
+            android:clickable="@{vm.isLoginAvailable}"
+            android:paddingVertical="20dp"
+            android:stateListAnimator="@null"
+            android:text="로그인"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_login_info_password" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

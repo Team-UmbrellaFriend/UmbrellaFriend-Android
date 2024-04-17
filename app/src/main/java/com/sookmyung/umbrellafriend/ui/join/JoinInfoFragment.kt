@@ -13,7 +13,7 @@ import com.sookmyung.umbrellafriend.databinding.FragmentJoinInfoBinding
 import com.sookmyung.umbrellafriend.ui.join.JoinRegisterPhotoFragment.Companion.NAME
 import com.sookmyung.umbrellafriend.ui.join.JoinRegisterPhotoFragment.Companion.STUDENT_ID
 import com.sookmyung.umbrellafriend.ui.join.JoinRegisterPhotoFragment.Companion.URI
-import com.sookmyung.umbrellafriend.ui.main.MainActivity
+import com.sookmyung.umbrellafriend.ui.splash.SplashEntryActivity
 import com.sookmyung.umbrellafriend.util.ContentUriRequestBody
 import com.sookmyung.umbrellafriend.util.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -108,9 +108,11 @@ class JoinInfoFragment : BindingFragment<FragmentJoinInfoBinding>(R.layout.fragm
                 startActivity(
                     Intent(
                         requireActivity(),
-                        MainActivity::class.java
-                    ).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                )
+                        SplashEntryActivity::class.java
+                    ).apply {
+                        addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    })
             }
         }
     }
