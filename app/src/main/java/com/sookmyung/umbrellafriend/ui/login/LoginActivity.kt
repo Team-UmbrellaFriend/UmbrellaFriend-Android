@@ -2,12 +2,12 @@ package com.sookmyung.umbrellafriend.ui.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import com.sookmyung.umbrellafriend.R
 import com.sookmyung.umbrellafriend.databinding.ActivityLoginBinding
 import com.sookmyung.umbrellafriend.ui.main.MainActivity
 import com.sookmyung.umbrellafriend.util.binding.BindingActivity
-import com.sookmyung.umbrellafriend.util.toast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,9 +24,11 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
     private fun checkIsLoginAvailable() {
         viewModel.studentId.observe(this) {
             viewModel.isJoinAvailable()
+            binding.tvLoginError.visibility = View.INVISIBLE
         }
         viewModel.password.observe(this) {
             viewModel.isJoinAvailable()
+            binding.tvLoginError.visibility = View.INVISIBLE
         }
     }
 
@@ -44,10 +46,10 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
                     Intent(
                         this,
                         MainActivity::class.java
-                    ).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                )
-            } else {
-                toast("로그인에 실패했습니다.") //TODO ask to design
+                    ).apply {
+                        addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    })
             }
         }
     }

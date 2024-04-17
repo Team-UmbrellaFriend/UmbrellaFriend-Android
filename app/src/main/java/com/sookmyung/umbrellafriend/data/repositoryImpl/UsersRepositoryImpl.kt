@@ -29,4 +29,9 @@ class UsersRepositoryImpl @Inject constructor(
         localDataSource.token = token
     }
 
+    override fun setLogin(login: Boolean) {
+        localDataSource.login = login
+    }
+
+    override fun getLogin() = localDataSource.login
 }

@@ -16,4 +16,6 @@ interface UsersRepository {
     ): Result<Token>
 
     fun initToken(token: String)
+    fun setLogin(login: Boolean)
+    fun getLogin():Boolean
 }

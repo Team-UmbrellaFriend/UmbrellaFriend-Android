@@ -7,6 +7,8 @@
         <variable
             name="vm"
             type="com.sookmyung.umbrellafriend.ui.login.LoginViewModel" />
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -46,11 +48,11 @@
             android:layout_marginTop="24dp"
             android:background="@drawable/shape_gray100_fill_12_rect"
             android:hint="학번"
-            android:text="@={vm.studentId}"
             android:inputType="number"
             android:maxLength="7"
             android:paddingHorizontal="12dp"
             android:paddingVertical="15dp"
+            android:text="@={vm.studentId}"
             android:textColor="@color/gray_1100"
             android:textColorHint="@color/gray_400"
             app:layout_constraintTop_toBottomOf="@id/tv_login_info_title" />
@@ -65,12 +67,25 @@
             android:background="@drawable/shape_gray100_fill_12_rect"
             android:hint="비밀번호"
             android:inputType="textPassword"
-            android:text="@={vm.password}"
             android:paddingHorizontal="12dp"
             android:paddingVertical="15dp"
+            android:text="@={vm.password}"
             android:textColor="@color/gray_1100"
             android:textColorHint="@color/gray_400"
             app:layout_constraintTop_toBottomOf="@id/et_login_info_student_id" />
+
+        <TextView
+            android:id="@+id/tv_login_error"
+            style="@style/Body5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="104dp"
+            android:text="* 학번과 비밀번호를 다시 확인하세요."
+            android:textColor="@color/error"
+            android:visibility="@{vm.isLoginSuccess ? View.INVISIBLE: View.VISIBLE}"
+            app:layout_constraintStart_toStartOf="@id/et_login_info_password"
+            app:layout_constraintTop_toBottomOf="@id/et_login_info_password" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_login"

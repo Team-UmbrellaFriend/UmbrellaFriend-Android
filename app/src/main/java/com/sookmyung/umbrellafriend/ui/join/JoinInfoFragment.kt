@@ -109,8 +109,10 @@ class JoinInfoFragment : BindingFragment<FragmentJoinInfoBinding>(R.layout.fragm
                     Intent(
                         requireActivity(),
                         SplashEntryActivity::class.java
-                    ).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                )
+                    ).apply {
+                        addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    })
             }
         }
     }

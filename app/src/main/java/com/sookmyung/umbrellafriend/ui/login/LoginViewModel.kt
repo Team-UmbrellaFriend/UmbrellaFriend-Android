@@ -9,6 +9,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.sookmyung.umbrellafriend.data.entity.request.LoginRequest
 import com.sookmyung.umbrellafriend.domain.usecase.InitTokenUseCase
 import com.sookmyung.umbrellafriend.domain.usecase.PostLoginUseCase
+import com.sookmyung.umbrellafriend.domain.usecase.setLoginUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -17,7 +18,8 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val postLoginUseCase: PostLoginUseCase,
-    private val initTokenUseCase: InitTokenUseCase
+    private val initTokenUseCase: InitTokenUseCase,
+    private val setLoginUseCase: setLoginUseCase
 ) : ViewModel() {
     lateinit var token: String
     val studentId: MutableLiveData<String> = MutableLiveData("")
@@ -56,7 +58,9 @@ class LoginViewModel @Inject constructor(
                 .onSuccess { response ->
                     _isLoginSuccess.value = true
                     initTokenUseCase(response.token)
+                    setLoginUseCase(true)
                 }.onFailure { throwable ->
+                    _isLoginSuccess.value = false
                     Timber.e("$throwable")
                 }
         }

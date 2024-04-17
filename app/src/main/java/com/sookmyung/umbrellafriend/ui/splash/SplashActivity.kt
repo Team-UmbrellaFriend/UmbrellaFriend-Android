@@ -4,14 +4,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import androidx.activity.viewModels
 import com.sookmyung.umbrellafriend.R
 import com.sookmyung.umbrellafriend.databinding.ActivitySplashBinding
+import com.sookmyung.umbrellafriend.ui.main.MainActivity
 import com.sookmyung.umbrellafriend.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_splash) {
+    private val viewModel by viewModels<SplashViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -30,15 +33,15 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
     }
 
     private fun startApp() {
-//        회원가입 여부에 따른 이동화면 전환
-//        val intent: Intent = if (viewModel.isSignedUp() && viewModel.isMember()) {
-//            Intent(this, MainActivity::class.java)
-//        } else {
-//            Intent(this, LoginActivity::class.java)
-//        }
-        val intent = Intent(this, SplashEntryActivity::class.java)
-        startActivity(intent)
-        finish()
+        viewModel.isLogin.observe(this) { isLogin ->
+            val intent: Intent = if (isLogin) {
+                Intent(this, MainActivity::class.java)
+            } else {
+                Intent(this, SplashEntryActivity::class.java)
+            }
+            startActivity(intent)
+            finish()
+        }
     }
 
     companion object {
