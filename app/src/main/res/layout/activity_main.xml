@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="vm"
+            type="com.sookmyung.umbrellafriend.ui.main.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,7 +28,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
-            app:layout_constraintVertical_weight="1.2">
+            app:layout_constraintVertical_weight="1.1">
 
             <ImageView
                 android:id="@+id/iv_home_profile_logo"
@@ -47,10 +50,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="23dp"
-                android:text="눈송이님"
+                android:text="@{vm.home.user.username}"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toEndOf="@id/iv_home_profile_logo"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="눈송이님" />
 
             <TextView
                 android:id="@+id/tv_home_profile_mention"
@@ -64,6 +68,7 @@
                 android:gravity="center"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="18dp"
+                android:text="@{vm.home.weather.message}"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -110,7 +115,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    android:text="2024년 2월 6일"
+                    android:text="@{vm.home.weather.dateWeather.date}"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -134,11 +139,12 @@
                     style="@style/Heading1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="%d%"
                     android:textColor="@color/white"
+                    android:text="@{@string/home_rain_percent(vm.home.weather.dateWeather.percent)}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_home_rain_percentage_title" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_home_rain_percentage_title"
+                    tools:text="30%" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -153,7 +159,7 @@
             app:layout_constraintEnd_toStartOf="@id/cl_home_umbrella_return"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cl_home_rain"
-            app:layout_constraintVertical_weight="1.3">
+            app:layout_constraintVertical_weight="1.4">
 
             <ImageView
                 android:id="@+id/iv_home_umbrella_rental_icon"
@@ -179,6 +185,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/iv_home_umbrella_rental_icon" />
 
+            <ImageView
+                android:id="@+id/iv_home_umbrella_rental_crop_umbrella"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_umbrella_half_transparent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
             <TextView
                 android:id="@+id/tv_home_umbrella_rental_subtitle"
                 style="@style/Caption1"
@@ -189,14 +203,6 @@
                 android:textColor="@color/gray_700"
                 app:layout_constraintStart_toStartOf="@id/tv_home_umbrella_rental_title"
                 app:layout_constraintTop_toBottomOf="@id/tv_home_umbrella_rental_title" />
-
-            <ImageView
-                android:id="@+id/iv_home_umbrella_rental_crop_umbrella"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_umbrella_half_transparent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -212,7 +218,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/cl_home_umbrella_rental"
             app:layout_constraintTop_toBottomOf="@id/cl_home_rain"
-            app:layout_constraintVertical_weight="1.3">
+            app:layout_constraintVertical_weight="1.4">
+
+            <ImageView
+                android:id="@+id/iv_home_umbrella_return_icon"
+                android:layout_width="54dp"
+                android:layout_height="0dp"
+                android:layout_margin="12dp"
+                android:background="@drawable/shape_white_90_fill_oval"
+                android:padding="11dp"
+                android:src="@drawable/ic_fold_umbrella"
+                app:layout_constraintDimensionRatio="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_home_umbrella_return_date"
@@ -223,6 +241,7 @@
                 android:background="@drawable/shape_white_90_fill_oval"
                 android:gravity="center"
                 android:textColor="@color/main_blue"
+                android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="D-1" />
@@ -239,6 +258,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_home_umbrella_return_date" />
 
+            <ImageView
+                android:id="@+id/iv_home_umbrella_return_crop_umbrella"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_return_umbrella"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
             <TextView
                 android:id="@+id/tv_home_umbrella_return_subtitle"
                 style="@style/Caption1"
@@ -249,14 +276,6 @@
                 android:textColor="@color/gray_700"
                 app:layout_constraintStart_toStartOf="@id/tv_home_umbrella_return_title"
                 app:layout_constraintTop_toBottomOf="@id/tv_home_umbrella_return_title" />
-
-            <ImageView
-                android:id="@+id/iv_home_umbrella_return_crop_umbrella"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_return_umbrella"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -307,7 +326,7 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="16dp"
                 android:text="대여할 수 있는 우산의 위치를 파악해요"
-                android:textColor="@color/white"
+                android:textColor="@color/light_orange"
                 app:layout_constraintStart_toStartOf="@id/tv_home_map_title"
                 app:layout_constraintTop_toBottomOf="@id/tv_home_map_title" />
 

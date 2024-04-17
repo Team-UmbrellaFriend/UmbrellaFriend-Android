@@ -7,4 +7,7 @@
     <string name="splash_login_title">로그인</string>
     <string name="splash_join_title">회원가입</string>
 
+    <!-- home -->
+    <string name="home_rain_percent">%1$s%%</string>
+
 </resources>
