@@ -9,5 +9,7 @@
 
     <!-- home -->
     <string name="home_rain_percent">%1$s%%</string>
+    <string name="home_return_renting_date">D-%1$s</string>
+    <string name="home_return_overdue_date">D+%1$s</string>
 
 </resources>
