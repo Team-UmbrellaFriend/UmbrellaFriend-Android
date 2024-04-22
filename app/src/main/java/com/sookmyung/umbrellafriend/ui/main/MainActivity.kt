@@ -36,7 +36,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
 
     private fun updateViewForNotRented() {
         updateReturnView(true, "사용한 우산을 반납해요")
-        updateRentalView("우산을 대여할 수 있어요", R.drawable.ic_unfold_umbrella)
+        updateRentalView("우산 대여","우산을 대여할 수 있어요", R.drawable.ic_unfold_umbrella)
     }
 
 
@@ -47,7 +47,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
                 viewModel.home.value?.dDay?.daysRemaining.toString()
             )
         )
-        updateRentalView("3일 추가로 연장돼요", R.drawable.ic_unfold_umbrella_gray)
+        updateRentalView("대여 연장","3일 추가로 연장돼요", R.drawable.ic_unfold_umbrella_gray)
         setSpannableBuilder()
     }
 
@@ -59,7 +59,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
                 viewModel.home.value?.dDay?.overdueDays.toString()
             )
         )
-        updateRentalView("연체해서 대여할 수 없어요", R.drawable.ic_unfold_umbrella_gray)
+        updateRentalView("대여 불가","연체해서 대여할 수 없어요", R.drawable.ic_unfold_umbrella_gray)
         setSpannableBuilder()
     }
 
@@ -81,8 +81,9 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         }
     }
 
-    private fun updateRentalView(subTitle: String, icon: Int) {
+    private fun updateRentalView(title:String,subTitle: String, icon: Int) {
         with(binding) {
+            tvHomeUmbrellaRentalTitle.text = title
             tvHomeUmbrellaRentalSubtitle.text = subTitle
             ivHomeUmbrellaRentalIcon.setImageResource(icon)
         }

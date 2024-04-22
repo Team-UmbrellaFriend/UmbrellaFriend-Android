@@ -128,7 +128,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="27dp"
-                    android:text="오늘 비 올 확률"
+                    android:text="@string/home_rain_probability_title"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -139,8 +139,8 @@
                     style="@style/Heading1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
                     android:text="@{@string/home_rain_percent(vm.home.weather.dateWeather.percent)}"
+                    android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_home_rain_percentage_title"
@@ -180,7 +180,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="44dp"
-                android:text="우산 대여"
+                android:text="@string/home_umbrella_rental_title_default"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/iv_home_umbrella_rental_icon" />
@@ -199,7 +199,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="우산을 대여할 수 있어요"
+                android:text="@string/home_umbrella_rental_subtitle_default"
                 android:textColor="@color/gray_700"
                 app:layout_constraintStart_toStartOf="@id/tv_home_umbrella_rental_title"
                 app:layout_constraintTop_toBottomOf="@id/tv_home_umbrella_rental_title" />
@@ -253,7 +253,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="44dp"
-                android:text="우산 반납"
+                android:text="@string/home_umbrella_return_title_default"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_home_umbrella_return_date" />
@@ -272,7 +272,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="사용한 우산을 반납해요"
+                android:text="@string/home_umbrella_return_subtitle_default"
                 android:textColor="@color/gray_700"
                 app:layout_constraintStart_toStartOf="@id/tv_home_umbrella_return_title"
                 app:layout_constraintTop_toBottomOf="@id/tv_home_umbrella_return_title" />
@@ -313,7 +313,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="27dp"
-                android:text="우산 대여 지도"
+                android:text="@string/home_umbrella_map_title"
                 android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_home_map_icon" />
@@ -325,7 +325,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="16dp"
-                android:text="대여할 수 있는 우산의 위치를 파악해요"
+                android:text="@string/home_umbrella_map_subtitle"
                 android:textColor="@color/light_orange"
                 app:layout_constraintStart_toStartOf="@id/tv_home_map_title"
                 app:layout_constraintTop_toBottomOf="@id/tv_home_map_title" />
