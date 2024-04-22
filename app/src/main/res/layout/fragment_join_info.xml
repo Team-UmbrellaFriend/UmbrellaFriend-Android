@@ -87,7 +87,6 @@
                     android:background="@drawable/shape_gray100_fill_12_rect"
                     android:hint="1234567"
                     android:inputType="number"
-                    android:maxLength="7"
                     android:paddingHorizontal="12dp"
                     android:paddingVertical="15dp"
                     android:text="@={vm.studentId}"

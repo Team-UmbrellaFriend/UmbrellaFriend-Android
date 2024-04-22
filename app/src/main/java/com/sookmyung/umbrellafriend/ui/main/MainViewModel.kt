@@ -1,6 +1,5 @@
 package com.sookmyung.umbrellafriend.ui.main
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -22,7 +21,8 @@ class MainViewModel @Inject constructor(
 ) : ViewModel() {
     private val _home: MutableLiveData<Home> = MutableLiveData()
     val home: LiveData<Home> get() = _home
-    var rentalStatus: RentalStatus = NOT_RENTED
+    private val _rentalStatus: MutableLiveData<RentalStatus> = MutableLiveData(NOT_RENTED)
+    val rentalStatus: LiveData<RentalStatus> get() = _rentalStatus
 
     init {
         getHome()
@@ -31,8 +31,8 @@ class MainViewModel @Inject constructor(
     private fun getHome() {
         viewModelScope.launch {
             getHomeUseCase().onSuccess { response ->
-                checkRentalStatus()
                 _home.value = response
+                checkRentalStatus()
             }.onFailure { throwable ->
                 Timber.e("$throwable")
             }
@@ -42,7 +42,7 @@ class MainViewModel @Inject constructor(
     private fun checkRentalStatus() {
         val dDay = home.value?.dDay
 
-        rentalStatus = when {
+        _rentalStatus.value = when {
             dDay?.isOverDue == true -> OVERDUE
             dDay?.overdueDays == -1 -> NOT_RENTED
             else -> RENTING
@@ -52,7 +52,7 @@ class MainViewModel @Inject constructor(
     fun findDateIndex(): Pair<Int, Int>? {
         val text = home.value?.weather?.message
         val charSeq: CharSequence = text ?: ""
-        val pattern = "\\b\\d+일\\b".toRegex()
+        val pattern = "\\d+일".toRegex()
         val matchResult = pattern.find(charSeq)
 
         return if (matchResult != null) {
@@ -69,4 +69,5 @@ class MainViewModel @Inject constructor(
     companion object {
         const val HOME_TAG = "HOME"
 
-    }}
+    }
+}

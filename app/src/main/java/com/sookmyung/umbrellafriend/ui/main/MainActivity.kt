@@ -25,8 +25,8 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
 
         binding.vm = viewModel
 
-        viewModel.home.observe(this) {
-            when (viewModel.rentalStatus) {
+        viewModel.rentalStatus.observe(this) { rentalStatus ->
+            when (rentalStatus) {
                 NOT_RENTED -> updateViewForNotRented()
                 RENTING -> updateViewForRenting()
                 OVERDUE -> updateViewForOverdue()
@@ -56,10 +56,10 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         updateReturnView(
             false, "대여한 우산이 연체되었어요", R.color.sub_orange, getString(
                 R.string.home_return_overdue_date,
-                viewModel.home.value?.dDay?.daysRemaining.toString()
+                viewModel.home.value?.dDay?.overdueDays.toString()
             )
         )
-        updateRentalView("연장할 수 없어요", R.drawable.ic_unfold_umbrella_gray)
+        updateRentalView("연체해서 대여할 수 없어요", R.drawable.ic_unfold_umbrella_gray)
         setSpannableBuilder()
     }
 
@@ -93,8 +93,18 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         if (indexes != null) {
             val ssb = SpannableStringBuilder(viewModel.home.value?.weather?.message)
             ssb.apply {
-                setSpan(StyleSpan(Typeface.BOLD), indexes.first, indexes.second, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                setSpan(UnderlineSpan(), indexes.first, indexes.second, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                setSpan(
+                    StyleSpan(Typeface.BOLD),
+                    indexes.first,
+                    indexes.second,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+                setSpan(
+                    UnderlineSpan(),
+                    indexes.first,
+                    indexes.second,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
             }
             binding.tvHomeProfileMention.text = ssb
         }
