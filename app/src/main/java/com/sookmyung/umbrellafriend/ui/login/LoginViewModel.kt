@@ -9,7 +9,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.sookmyung.umbrellafriend.data.entity.request.LoginRequest
 import com.sookmyung.umbrellafriend.domain.usecase.InitTokenUseCase
 import com.sookmyung.umbrellafriend.domain.usecase.PostLoginUseCase
-import com.sookmyung.umbrellafriend.domain.usecase.setLoginUseCase
+import com.sookmyung.umbrellafriend.domain.usecase.SetLoginUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -19,7 +19,7 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val postLoginUseCase: PostLoginUseCase,
     private val initTokenUseCase: InitTokenUseCase,
-    private val setLoginUseCase: setLoginUseCase
+    private val setLoginUseCase: SetLoginUseCase
 ) : ViewModel() {
     lateinit var token: String
     val studentId: MutableLiveData<String> = MutableLiveData("")

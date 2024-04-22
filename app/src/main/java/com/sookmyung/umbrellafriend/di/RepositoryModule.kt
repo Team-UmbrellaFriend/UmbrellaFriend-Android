@@ -1,6 +1,8 @@
 package com.sookmyung.umbrellafriend.di
 
+import com.sookmyung.umbrellafriend.data.repositoryImpl.HomeRepositoryImpl
 import com.sookmyung.umbrellafriend.data.repositoryImpl.UsersRepositoryImpl
+import com.sookmyung.umbrellafriend.domain.repository.HomeRepository
 import com.sookmyung.umbrellafriend.domain.repository.UsersRepository
 import dagger.Binds
 import dagger.Module
@@ -16,4 +18,10 @@ abstract class RepositoryModule {
     abstract fun bindToUsersRepository(
         usersRepositoryImpl: UsersRepositoryImpl
     ): UsersRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindToHomeRepository(
+        homeRepositoryImpl: HomeRepositoryImpl
+    ): HomeRepository
 }

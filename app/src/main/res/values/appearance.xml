@@ -37,15 +37,15 @@
     <!-- Title -->
     <style name="Title1">
         <item name="android:fontFamily">@font/suit_bold</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textSize">18dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20dp</item>
         <item name="lineHeight">22dp</item>
-        <item name="android:letterSpacing">-0.03</item>
+        <item name="android:letterSpacing">-0.02</item>
     </style>
 
     <style name="Subtitle1">
-        <item name="android:fontFamily">@font/suit_semibold</item>
-        <item name="android:textStyle">normal</item>
+        <item name="android:fontFamily">@font/suit_bold</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textSize">18dp</item>
         <item name="lineHeight">22dp</item>
         <item name="android:letterSpacing">-0.03</item>
@@ -54,7 +54,7 @@
     <!-- Body -->
     <style name="Body1">
         <item name="android:fontFamily">@font/suit_bold</item>
-        <item name="android:textStyle">normal</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textSize">16dp</item>
         <item name="lineHeight">22dp</item>
         <item name="android:letterSpacing">-0.03</item>
@@ -62,10 +62,10 @@
 
     <style name="Body2">
         <item name="android:fontFamily">@font/suit_semibold</item>
-        <item name="android:textStyle">normal</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textSize">16dp</item>
         <item name="lineHeight">22dp</item>
-        <item name="android:letterSpacing">-0.03</item>
+        <item name="android:letterSpacing">-0.02</item>
     </style>
 
     <style name="Body3">
@@ -87,7 +87,7 @@
     <style name="Body5">
         <item name="android:fontFamily">@font/suit_medium</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">14dp</item>
         <item name="lineHeight">22dp</item>
         <item name="android:letterSpacing">-0.03</item>
     </style>

@@ -7,4 +7,16 @@
     <string name="splash_login_title">로그인</string>
     <string name="splash_join_title">회원가입</string>
 
+    <!-- home -->
+    <string name="home_rain_percent">%1$s%%</string>
+    <string name="home_return_renting_date">D-%1$s</string>
+    <string name="home_return_overdue_date">D+%1$s</string>
+    <string name="home_rain_probability_title">오늘 비 올 확률</string>
+    <string name="home_umbrella_rental_title_default">우산 대여</string>
+    <string name="home_umbrella_rental_subtitle_default">우산을 대여할 수 있어요</string>
+    <string name="home_umbrella_return_title_default">우산 반납</string>
+    <string name="home_umbrella_return_subtitle_default">사용한 우산을 반납해요</string>
+    <string name="home_umbrella_map_title">우산 대여 지도</string>
+    <string name="home_umbrella_map_subtitle">대여할 수 있는 우산의 위치를 파악해요</string>
+
 </resources>
