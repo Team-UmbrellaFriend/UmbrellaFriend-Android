@@ -15,6 +15,8 @@ interface UsersRepository {
         loginRequest: LoginRequest
     ): Result<Token>
 
+    suspend fun getLogout(): Result<Unit>
+
     fun initToken(token: String)
     fun setLogin(login: Boolean)
     fun getLogin():Boolean

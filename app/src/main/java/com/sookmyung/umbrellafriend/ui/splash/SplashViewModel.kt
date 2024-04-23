@@ -11,7 +11,7 @@ import javax.inject.Inject
 class SplashViewModel @Inject constructor(
     private val getLoginUseCase: GetLoginUseCase
 ) : ViewModel() {
-    private val _isLogin: MutableLiveData<Boolean> = MutableLiveData()
+    private val _isLogin: MutableLiveData<Boolean> = MutableLiveData(false)
     val isLogin: LiveData<Boolean> get() = _isLogin
 
     init {
