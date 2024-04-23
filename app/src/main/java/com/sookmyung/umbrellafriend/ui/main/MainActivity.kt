@@ -1,5 +1,6 @@
 package com.sookmyung.umbrellafriend.ui.main
 
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Spannable
@@ -14,6 +15,7 @@ import com.sookmyung.umbrellafriend.databinding.ActivityMainBinding
 import com.sookmyung.umbrellafriend.domain.entity.RentalStatus.NOT_RENTED
 import com.sookmyung.umbrellafriend.domain.entity.RentalStatus.OVERDUE
 import com.sookmyung.umbrellafriend.domain.entity.RentalStatus.RENTING
+import com.sookmyung.umbrellafriend.ui.mypage.MypageActivity
 import com.sookmyung.umbrellafriend.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,6 +33,10 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
                 RENTING -> updateViewForRenting()
                 OVERDUE -> updateViewForOverdue()
             }
+        }
+
+        binding.btnMypage.setOnClickListener {
+            startActivity(Intent(this, MypageActivity::class.java))
         }
     }
 
