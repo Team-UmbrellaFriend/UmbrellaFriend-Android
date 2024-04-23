@@ -44,6 +44,7 @@
         tools:text="자동으로 3일이\n추가 연장되었습니다." />
 
     <TextView
+        android:id="@+id/btn_dialog"
         style="@style/Body1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
