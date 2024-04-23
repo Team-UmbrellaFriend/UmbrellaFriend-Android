@@ -1,6 +1,7 @@
 package com.sookmyung.umbrellafriend.di
 
 import com.sookmyung.umbrellafriend.data.service.HomeService
+import com.sookmyung.umbrellafriend.data.service.MypageService
 import com.sookmyung.umbrellafriend.data.service.UsersService
 import dagger.Module
 import dagger.Provides
@@ -18,5 +19,9 @@ object RetrofitServiceModule {
     @Provides
     fun providesHomeService(@RetrofitModule.UmbrellaFriendType retrofit: Retrofit): HomeService =
         retrofit.create(HomeService::class.java)
+
+    @Provides
+    fun providesMypageService(@RetrofitModule.UmbrellaFriendType retrofit: Retrofit): MypageService =
+        retrofit.create(MypageService::class.java)
 
 }
