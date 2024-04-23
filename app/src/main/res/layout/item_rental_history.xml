@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="data"
+            type="com.sookmyung.umbrellafriend.domain.entity.History" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,9 +15,9 @@
         android:paddingVertical="12dp">
 
         <TextView
-            android:text="2024년 03월 05일"
             android:id="@+id/tv_item_rental_history_date"
             style="@style/Body5"
+            android:text="@{data.rentDate}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/gray_1000"
@@ -26,6 +28,7 @@
         <TextView
             android:id="@+id/tv_item_rental_history_term"
             style="@style/Body4"
+            android:text="@{data.rentalPeriod}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/gray_1000"
