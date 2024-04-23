@@ -5,6 +5,11 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <variable
+            name="vm"
+            type="com.sookmyung.umbrellafriend.ui.mypage.MypageViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -51,6 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="56dp"
+                android:text="@{vm.mypage.user.username}"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -63,6 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="13dp"
+                android:text="@{vm.mypage.user.studentID}"
                 android:textColor="@color/gray_900"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -75,6 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
+                android:text="@{vm.mypage.user.phoneNumber}"
                 android:textColor="@color/gray_900"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -87,6 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
+                android:text="@{vm.mypage.user.email}"
                 android:textColor="@color/gray_900"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -168,6 +177,7 @@
                 android:layout_marginHorizontal="124dp"
                 android:layout_marginBottom="11dp"
                 android:src="@drawable/ic_no_history"
+                android:visibility="@{vm.isHistoryEmpty ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toTopOf="@id/tv_mypage_rental_history_empty"
                 app:layout_constraintDimensionRatio="1:1.52"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -181,6 +191,7 @@
                 android:layout_marginBottom="67dp"
                 android:text="아직 내역이 없어요"
                 android:textColor="@color/gray_500"
+                android:visibility="@{vm.isHistoryEmpty ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
