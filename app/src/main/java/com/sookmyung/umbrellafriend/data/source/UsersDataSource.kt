@@ -19,4 +19,6 @@ class UsersDataSource @Inject constructor(
     suspend fun postLogin(
         loginRequest: LoginRequest
     ): BaseResponse<TokenResponse> = usersService.postLogin(loginRequest)
+
+    suspend fun getLogout(): BaseResponse<Unit> = usersService.getLogout()
 }

@@ -24,6 +24,12 @@ class UsersRepositoryImpl @Inject constructor(
         usersDataSource.postLogin(loginRequest)
     }.map { response -> requireNotNull(response.data).toToken() }
 
+    override suspend fun getLogout(): Result<Unit> = runCatching {
+        localDataSource.login = false
+        localDataSource.token = ""
+        usersDataSource.getLogout()
+
+    }
 
     override fun initToken(token: String) {
         localDataSource.token = token
