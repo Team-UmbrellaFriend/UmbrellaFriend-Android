@@ -1,8 +1,10 @@
 package com.sookmyung.umbrellafriend.data.repositoryImpl
 
+import com.sookmyung.umbrellafriend.data.entity.request.EditRequest
 import com.sookmyung.umbrellafriend.data.entity.request.LoginRequest
 import com.sookmyung.umbrellafriend.data.source.LocalDataSource
 import com.sookmyung.umbrellafriend.data.source.UsersDataSource
+import com.sookmyung.umbrellafriend.domain.entity.MypageProfile
 import com.sookmyung.umbrellafriend.domain.entity.Token
 import com.sookmyung.umbrellafriend.domain.repository.UsersRepository
 import okhttp3.MultipartBody
@@ -23,6 +25,17 @@ class UsersRepositoryImpl @Inject constructor(
     override suspend fun postLogin(loginRequest: LoginRequest): Result<Token> = runCatching {
         usersDataSource.postLogin(loginRequest)
     }.map { response -> requireNotNull(response.data).toToken() }
+
+    override suspend fun getUserProfile(userId: Int): Result<MypageProfile> = runCatching {
+        usersDataSource.getUserProfile(userId)
+    }.map { response -> requireNotNull(response.data).toMypageProfile() }
+
+    override suspend fun putUserProfile(
+        userId: Int,
+        editRequest: EditRequest
+    ): Result<MypageProfile> = runCatching {
+        usersDataSource.putUserProfile(userId, editRequest)
+    }.map { response -> requireNotNull(response.data).toMypageProfile() }
 
     override suspend fun getLogout(): Result<Unit> = runCatching {
         localDataSource.login = false

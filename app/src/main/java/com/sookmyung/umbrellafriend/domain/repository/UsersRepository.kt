@@ -1,6 +1,8 @@
 package com.sookmyung.umbrellafriend.domain.repository
 
+import com.sookmyung.umbrellafriend.data.entity.request.EditRequest
 import com.sookmyung.umbrellafriend.data.entity.request.LoginRequest
+import com.sookmyung.umbrellafriend.domain.entity.MypageProfile
 import com.sookmyung.umbrellafriend.domain.entity.Token
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -15,9 +17,15 @@ interface UsersRepository {
         loginRequest: LoginRequest
     ): Result<Token>
 
+    suspend fun getUserProfile(userId: Int): Result<MypageProfile>
+    suspend fun putUserProfile(
+        userId: Int,
+        editRequest: EditRequest
+    ): Result<MypageProfile>
+
     suspend fun getLogout(): Result<Unit>
 
     fun initToken(token: String)
     fun setLogin(login: Boolean)
-    fun getLogin():Boolean
+    fun getLogin(): Boolean
 }
