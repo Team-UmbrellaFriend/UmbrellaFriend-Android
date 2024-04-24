@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
 import com.sookmyung.umbrellafriend.R
 import com.sookmyung.umbrellafriend.databinding.FragmentMypageEditBinding
+import com.sookmyung.umbrellafriend.ui.mypage.MypageViewModel.Companion.USER_ID
 import com.sookmyung.umbrellafriend.util.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,10 +20,18 @@ class MypageEditFragment :
         super.onViewCreated(view, savedInstanceState)
         binding.vm = viewModel
 
+        getUserIdBundle()
         showError()
         checkJoinAvailable()
         edit()
         moveToMain()
+    }
+    private fun getUserIdBundle() {
+        val bundle = arguments
+        if (bundle != null) {
+            val userId = bundle.getInt(USER_ID)
+            viewModel.updateUserId(userId)
+        }
     }
 
     private fun checkJoinAvailable() {
@@ -88,11 +97,10 @@ class MypageEditFragment :
     private fun moveToMain() {
         viewModel.isEditSuccess.observe(viewLifecycleOwner) { isEditSuccess ->
             if (isEditSuccess) {
-                val fragmentTransaction =
-                    requireActivity().supportFragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.fcv_mypage , MypageFragment())
-                fragmentTransaction.addToBackStack(null)
-                fragmentTransaction.commit()
+                val fragmentManager =
+                    requireActivity().supportFragmentManager
+                fragmentManager.beginTransaction().remove(this).commit()
+                fragmentManager.popBackStack()
             }
         }
     }

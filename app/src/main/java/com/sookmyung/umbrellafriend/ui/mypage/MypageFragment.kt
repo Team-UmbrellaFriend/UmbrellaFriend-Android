@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.sookmyung.umbrellafriend.R
 import com.sookmyung.umbrellafriend.databinding.FragmentMypageBinding
+import com.sookmyung.umbrellafriend.ui.mypage.MypageViewModel.Companion.USER_ID
 import com.sookmyung.umbrellafriend.ui.splash.SplashActivity
 import com.sookmyung.umbrellafriend.util.binding.BindingFragment
 import com.sookmyung.umbrellafriend.util.setSingleOnClickListener
@@ -26,6 +27,11 @@ class MypageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
         setHistoryObserver()
         logout()
         moveToMypageEdit()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getMypageProfile()
     }
 
     private fun setMypageHistoryListAdapter() {
@@ -53,6 +59,13 @@ class MypageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
 
     private fun moveToMypageEdit() {
         binding.btnMypageEdit.setSingleOnClickListener {
+            val bundle = Bundle().apply {
+                putInt(USER_ID, viewModel.mypage.value?.user?.id ?: 0)
+            }
+
+            val mypageEditFragment = MypageEditFragment()
+            mypageEditFragment.arguments = bundle
+
             val fragmentTransaction =
                 requireActivity().supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.fcv_mypage, MypageEditFragment())

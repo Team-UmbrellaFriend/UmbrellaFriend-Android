@@ -17,6 +17,7 @@ class MypageEditViewModel @Inject constructor(
     private val putUserProfileUseCase: PutUserProfileUseCase,
     private val getUserProfileUseCase: GetUserProfileUseCase
 ) : ViewModel() {
+    var userId: Int = 0
     val name: MutableLiveData<String> = MutableLiveData("")
     val studentId: MutableLiveData<String> = MutableLiveData("")
     val phoneNumber: MutableLiveData<String> = MutableLiveData("")
@@ -30,6 +31,10 @@ class MypageEditViewModel @Inject constructor(
 
     init {
         getUserProfile()
+    }
+
+    fun updateUserId(bundleUserId: Int) {
+        userId = bundleUserId
     }
 
     fun isValidPhoneNumber(): Boolean {
@@ -63,7 +68,7 @@ class MypageEditViewModel @Inject constructor(
 
     private fun getUserProfile() {
         viewModelScope.launch {
-            getUserProfileUseCase(38).onSuccess { response ->
+            getUserProfileUseCase(userId).onSuccess { response ->
                 name.value = response.username
                 email.value = parseEmail(response.email)
                 studentId.value = response.profile.studentID.toString()
@@ -79,7 +84,7 @@ class MypageEditViewModel @Inject constructor(
             val fullEmail = "${email.value}@sookmyung.ac.kr"
 
             putUserProfileUseCase(
-                userId = 38,
+                userId = userId,
                 editRequest = EditRequest(
                     requireNotNull(name.value),
                     fullEmail,
