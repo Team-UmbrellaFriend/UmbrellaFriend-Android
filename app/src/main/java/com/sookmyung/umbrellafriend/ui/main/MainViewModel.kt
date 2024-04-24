@@ -9,6 +9,7 @@ import com.sookmyung.umbrellafriend.domain.entity.RentalStatus
 import com.sookmyung.umbrellafriend.domain.entity.RentalStatus.NOT_RENTED
 import com.sookmyung.umbrellafriend.domain.entity.RentalStatus.OVERDUE
 import com.sookmyung.umbrellafriend.domain.entity.RentalStatus.RENTING
+import com.sookmyung.umbrellafriend.domain.usecase.GetExtendUseCase
 import com.sookmyung.umbrellafriend.domain.usecase.GetHomeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -17,12 +18,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val getHomeUseCase: GetHomeUseCase
+    private val getHomeUseCase: GetHomeUseCase,
+    private val getExtendUseCase: GetExtendUseCase
 ) : ViewModel() {
     private val _home: MutableLiveData<Home> = MutableLiveData()
     val home: LiveData<Home> get() = _home
     private val _rentalStatus: MutableLiveData<RentalStatus> = MutableLiveData(NOT_RENTED)
     val rentalStatus: LiveData<RentalStatus> get() = _rentalStatus
+    private val _isExtended: MutableLiveData<Boolean> = MutableLiveData(false)
+    val isExtended: LiveData<Boolean> get() = _isExtended
 
     init {
         getHome()
@@ -35,6 +39,17 @@ class MainViewModel @Inject constructor(
                 checkRentalStatus()
             }.onFailure { throwable ->
                 Timber.e("$throwable")
+            }
+        }
+    }
+
+    fun getExtend() {
+        viewModelScope.launch {
+            getExtendUseCase().onSuccess {
+                getHome()
+                _isExtended.value = true
+            }.onFailure {
+                _isExtended.value = false
             }
         }
     }

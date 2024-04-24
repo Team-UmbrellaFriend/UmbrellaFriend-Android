@@ -19,6 +19,7 @@ import com.sookmyung.umbrellafriend.ui.mypage.MypageActivity
 import com.sookmyung.umbrellafriend.util.BindingCustomDialog
 import com.sookmyung.umbrellafriend.util.binding.BindingActivity
 import com.sookmyung.umbrellafriend.util.setSingleOnClickListener
+import com.sookmyung.umbrellafriend.util.toast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,25 +30,48 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
 
         binding.vm = viewModel
 
-        BindingCustomDialog.Builder().build(
-            title = "대여 연장 완료",
-            subtitle = "자동으로 3일이\n추가 연장되었습니다.",
-            btnContent = "확인",
-            imageDrawable = R.drawable.ic_check,
-            btnAction = {}
-        )
-
-        binding.clHomeUmbrellaRental.setSingleOnClickListener {
-            BindingCustomDialog.Builder().build(
-                title = "대여 연장 완료",
-                subtitle = "자동으로 3일이\n추가 연장되었습니다.",
-                btnContent = "확인",
-                imageDrawable = R.drawable.ic_check,
-                btnAction = {}
-            ).show(supportFragmentManager, "CUSTOM_DIALOG")
-        }
+        clickRentalBtn()
+        showExtendedDialog()
         checkRentalStatus()
         moveToMypage()
+    }
+
+    private fun clickRentalBtn() {
+        binding.clHomeUmbrellaRental.setSingleOnClickListener {
+            when (viewModel.rentalStatus.value) {
+                RENTING -> viewModel.getExtend()
+                NOT_RENTED -> {
+                    toast("우산 대여 화면으로 넘어가기!")
+                }
+
+                OVERDUE -> showExtendedFailDialog()
+                else -> {}
+            }
+        }
+    }
+
+    private fun showExtendedDialog() {
+        viewModel.isExtended.observe(this) { isExtended ->
+            if (isExtended) {
+                BindingCustomDialog.Builder().build(
+                    title = "대여 연장 완료",
+                    subtitle = "자동으로 3일이\n추가 연장되었습니다.",
+                    btnContent = "확인",
+                    imageDrawable = R.drawable.ic_check,
+                    btnAction = {}
+                ).show(supportFragmentManager, "CUSTOM_DIALOG")
+            }
+        }
+    }
+
+    private fun showExtendedFailDialog() {
+        BindingCustomDialog.Builder().build(
+            title = "대여 연장 실패",
+            subtitle = "연체된 사용자는 연장할 수 없습니다.",
+            btnContent = "확인",
+            imageDrawable = R.drawable.ic_fail,
+            btnAction = {}
+        ).show(supportFragmentManager, "CUSTOM_DIALOG")
     }
 
     private fun checkRentalStatus() {
@@ -78,7 +102,6 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
     }
 
     private fun updateViewForOverdue() {
-        binding.clHomeUmbrellaRental.isClickable = false
         updateReturnView(
             false, "대여한 우산이 연체되었어요", R.color.sub_orange, getString(
                 R.string.home_return_overdue_date,
