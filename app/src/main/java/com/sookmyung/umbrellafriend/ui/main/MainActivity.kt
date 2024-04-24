@@ -16,7 +16,10 @@ import com.sookmyung.umbrellafriend.domain.entity.RentalStatus.NOT_RENTED
 import com.sookmyung.umbrellafriend.domain.entity.RentalStatus.OVERDUE
 import com.sookmyung.umbrellafriend.domain.entity.RentalStatus.RENTING
 import com.sookmyung.umbrellafriend.ui.mypage.MypageActivity
+import com.sookmyung.umbrellafriend.util.BindingCustomDialog
 import com.sookmyung.umbrellafriend.util.binding.BindingActivity
+import com.sookmyung.umbrellafriend.util.setSingleOnClickListener
+import com.sookmyung.umbrellafriend.util.toast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,6 +30,51 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
 
         binding.vm = viewModel
 
+        clickRentalBtn()
+        showExtendedDialog()
+        checkRentalStatus()
+        moveToMypage()
+    }
+
+    private fun clickRentalBtn() {
+        binding.clHomeUmbrellaRental.setSingleOnClickListener {
+            when (viewModel.rentalStatus.value) {
+                RENTING -> viewModel.getExtend()
+                NOT_RENTED -> {
+                    toast("우산 대여 화면으로 넘어가기!")
+                }
+
+                OVERDUE -> showExtendedFailDialog()
+                else -> {}
+            }
+        }
+    }
+
+    private fun showExtendedDialog() {
+        viewModel.isExtended.observe(this) { isExtended ->
+            if (isExtended) {
+                BindingCustomDialog.Builder().build(
+                    title = "대여 연장 완료",
+                    subtitle = "자동으로 3일이\n추가 연장되었습니다.",
+                    btnContent = "확인",
+                    imageDrawable = R.drawable.ic_check,
+                    btnAction = {}
+                ).show(supportFragmentManager, "CUSTOM_DIALOG")
+            }
+        }
+    }
+
+    private fun showExtendedFailDialog() {
+        BindingCustomDialog.Builder().build(
+            title = "대여 연장 실패",
+            subtitle = "연체된 사용자는 연장할 수 없습니다.",
+            btnContent = "확인",
+            imageDrawable = R.drawable.ic_fail,
+            btnAction = {}
+        ).show(supportFragmentManager, "CUSTOM_DIALOG")
+    }
+
+    private fun checkRentalStatus() {
         viewModel.rentalStatus.observe(this) { rentalStatus ->
             when (rentalStatus) {
                 NOT_RENTED -> updateViewForNotRented()
@@ -34,15 +82,11 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
                 OVERDUE -> updateViewForOverdue()
             }
         }
-
-        binding.btnMypage.setOnClickListener {
-            startActivity(Intent(this, MypageActivity::class.java))
-        }
     }
 
     private fun updateViewForNotRented() {
         updateReturnView(true, "사용한 우산을 반납해요")
-        updateRentalView("우산 대여","우산을 대여할 수 있어요", R.drawable.ic_unfold_umbrella)
+        updateRentalView("우산 대여", "우산을 대여할 수 있어요", R.drawable.ic_unfold_umbrella)
     }
 
 
@@ -53,19 +97,18 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
                 viewModel.home.value?.dDay?.daysRemaining.toString()
             )
         )
-        updateRentalView("대여 연장","3일 추가로 연장돼요", R.drawable.ic_unfold_umbrella_gray)
+        updateRentalView("대여 연장", "3일 추가로 연장돼요", R.drawable.ic_unfold_umbrella_gray)
         setSpannableBuilder()
     }
 
     private fun updateViewForOverdue() {
-        binding.clHomeUmbrellaRental.isClickable = false
         updateReturnView(
             false, "대여한 우산이 연체되었어요", R.color.sub_orange, getString(
                 R.string.home_return_overdue_date,
                 viewModel.home.value?.dDay?.overdueDays.toString()
             )
         )
-        updateRentalView("대여 불가","연체해서 대여할 수 없어요", R.drawable.ic_unfold_umbrella_gray)
+        updateRentalView("대여 불가", "연체해서 대여할 수 없어요", R.drawable.ic_unfold_umbrella_gray)
         setSpannableBuilder()
     }
 
@@ -87,7 +130,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         }
     }
 
-    private fun updateRentalView(title:String,subTitle: String, icon: Int) {
+    private fun updateRentalView(title: String, subTitle: String, icon: Int) {
         with(binding) {
             tvHomeUmbrellaRentalTitle.text = title
             tvHomeUmbrellaRentalSubtitle.text = subTitle
@@ -114,6 +157,12 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
                 )
             }
             binding.tvHomeProfileMention.text = ssb
+        }
+    }
+
+    private fun moveToMypage() {
+        binding.btnMypage.setOnClickListener {
+            startActivity(Intent(this, MypageActivity::class.java))
         }
     }
 }
