@@ -25,6 +25,7 @@ class MypageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
         setMypageHistoryListAdapter()
         setHistoryObserver()
         logout()
+        moveToMypageEdit()
     }
 
     private fun setMypageHistoryListAdapter() {
@@ -48,5 +49,15 @@ class MypageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
         val intent = Intent(requireActivity(), SplashActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NO_HISTORY)
         startActivity(intent)
+    }
+
+    private fun moveToMypageEdit() {
+        binding.btnMypageEdit.setSingleOnClickListener {
+            val fragmentTransaction =
+                requireActivity().supportFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.fcv_mypage, MypageEditFragment())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
     }
 }
