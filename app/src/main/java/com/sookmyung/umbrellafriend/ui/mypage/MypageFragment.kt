@@ -25,7 +25,7 @@ class MypageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
 
         setMypageHistoryListAdapter()
         setHistoryObserver()
-        logout()
+//        logout()
         moveToMypageEdit()
     }
 
@@ -44,12 +44,12 @@ class MypageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
         }
     }
 
-    private fun logout() {
-        binding.btnMypageLogout.setSingleOnClickListener {
-            viewModel.getLogout()
-            moveToSplash()
-        }
-    }
+//    private fun logout() {
+//        binding.btnMypageLogout.setSingleOnClickListener {
+//            viewModel.getLogout()
+//            moveToSplash()
+//        }
+//    }
 
     private fun moveToSplash() {
         val intent = Intent(requireActivity(), SplashActivity::class.java)
