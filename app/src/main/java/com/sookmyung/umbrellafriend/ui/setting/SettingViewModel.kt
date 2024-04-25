@@ -1,4 +1,4 @@
-package com.sookmyung.umbrellafriend.ui.mypage
+package com.sookmyung.umbrellafriend.ui.setting
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,24 +13,15 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class MypageViewModel @Inject constructor(
-    val getMypageUseCase: GetMypageUseCase,
+class SettingViewModel @Inject constructor(
     val getLogoutUseCase: GetLogoutUseCase
 ) : ViewModel() {
-    private val _mypage: MutableLiveData<Mypage> = MutableLiveData()
-    val mypage: LiveData<Mypage> get() = _mypage
-    val isHistoryEmpty: MutableLiveData<Boolean> = MutableLiveData()
 
-    init {
-        getMypageProfile()
-    }
-
-    fun getMypageProfile() {
+    fun getLogout() {
         viewModelScope.launch {
-            getMypageUseCase()
-                .onSuccess { response ->
-                    _mypage.value = response
-                    isHistoryEmpty.value = response.history.isEmpty()
+            getLogoutUseCase()
+                .onSuccess {
+                    Timber.e("logout")
                 }
                 .onFailure { throwable ->
                     Timber.e("$throwable")

@@ -78,6 +78,10 @@
         <activity android:name=".ui.mypage.MypageActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.setting.SettingActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
