@@ -255,7 +255,7 @@
             android:layout_marginHorizontal="16dp"
             android:background="@{vm.isEdit ? @drawable/shape_mainblue_fill_12_rect : @drawable/shape_gray300_fill_12_rect}"
             android:clickable="@{vm.isEdit}"
-            android:paddingVertical="13dp"
+            android:paddingVertical="15dp"
             android:stateListAnimator="@null"
             android:text="완료"
             android:textColor="@color/white"

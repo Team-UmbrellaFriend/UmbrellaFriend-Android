@@ -21,6 +21,7 @@ class SettingFragment : BindingFragment<FragmentSettingBinding>(R.layout.fragmen
         binding.vm = viewModel
         logout()
         moveToWithdraw()
+        moveToReport()
     }
 
     private fun logout() {
@@ -38,13 +39,6 @@ class SettingFragment : BindingFragment<FragmentSettingBinding>(R.layout.fragmen
 
     private fun moveToWithdraw() {
         binding.clSettingWithdraw.setSingleOnClickListener {
-//            val bundle = Bundle().apply {
-//                putInt(USER_ID, viewModel.mypage.value?.user?.id ?: 0)
-//            }
-//
-//            val mypageEditFragment = MypageEditFragment()
-//            mypageEditFragment.arguments = bundle
-//
 //            val fragmentTransaction =
 //                requireActivity().supportFragmentManager.beginTransaction()
 //            fragmentTransaction.replace(R.id.fcv_mypage, MypageEditFragment())
@@ -55,18 +49,11 @@ class SettingFragment : BindingFragment<FragmentSettingBinding>(R.layout.fragmen
 
     private fun moveToReport() {
         binding.clSettingReport.setSingleOnClickListener {
-//            val bundle = Bundle().apply {
-//                putInt(USER_ID, viewModel.mypage.value?.user?.id ?: 0)
-//            }
-//
-//            val mypageEditFragment = MypageEditFragment()
-//            mypageEditFragment.arguments = bundle
-//
-//            val fragmentTransaction =
-//                requireActivity().supportFragmentManager.beginTransaction()
-//            fragmentTransaction.replace(R.id.fcv_mypage, MypageEditFragment())
-//            fragmentTransaction.addToBackStack(null)
-//            fragmentTransaction.commit()
+            val fragmentTransaction =
+                requireActivity().supportFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.fcv_setting, ReportFragment())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
         }
     }
 }
