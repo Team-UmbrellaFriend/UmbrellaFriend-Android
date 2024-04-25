@@ -1,7 +1,9 @@
 package com.sookmyung.umbrellafriend.data.source
 
+import com.sookmyung.umbrellafriend.data.entity.request.EditRequest
 import com.sookmyung.umbrellafriend.data.entity.request.LoginRequest
 import com.sookmyung.umbrellafriend.data.entity.response.BaseResponse
+import com.sookmyung.umbrellafriend.data.entity.response.MypageProfileResponse
 import com.sookmyung.umbrellafriend.data.entity.response.TokenResponse
 import com.sookmyung.umbrellafriend.data.service.UsersService
 import okhttp3.MultipartBody
@@ -21,4 +23,10 @@ class UsersDataSource @Inject constructor(
     ): BaseResponse<TokenResponse> = usersService.postLogin(loginRequest)
 
     suspend fun getLogout(): BaseResponse<Unit> = usersService.getLogout()
+
+    suspend fun getUserProfile(userId: Int): BaseResponse<MypageProfileResponse> =
+        usersService.getUserProfile(userId)
+
+    suspend fun putUserProfile(userId: Int, editRequest: EditRequest):BaseResponse<MypageProfileResponse> =
+        usersService.putUserProfile(userId, editRequest)
 }

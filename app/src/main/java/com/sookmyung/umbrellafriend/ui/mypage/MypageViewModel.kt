@@ -22,10 +22,10 @@ class MypageViewModel @Inject constructor(
     val isHistoryEmpty: MutableLiveData<Boolean> = MutableLiveData()
 
     init {
-        getMypage()
+        getMypageProfile()
     }
 
-    private fun getMypage() {
+    fun getMypageProfile() {
         viewModelScope.launch {
             getMypageUseCase()
                 .onSuccess { response ->
@@ -48,5 +48,9 @@ class MypageViewModel @Inject constructor(
                     Timber.e("$throwable")
                 }
         }
+    }
+
+    companion object{
+        const val USER_ID = "USER_ID"
     }
 }
