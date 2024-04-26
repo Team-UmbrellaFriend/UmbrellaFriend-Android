@@ -12,7 +12,6 @@ import javax.inject.Inject
 class SettingViewModel @Inject constructor(
     val getLogoutUseCase: GetLogoutUseCase
 ) : ViewModel() {
-
     fun getLogout() {
         viewModelScope.launch {
             getLogoutUseCase()

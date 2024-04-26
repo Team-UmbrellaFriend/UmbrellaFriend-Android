@@ -1,0 +1,65 @@
+package com.sookmyung.umbrellafriend.ui.setting.report
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.sookmyung.umbrellafriend.domain.entity.ReportType
+import com.sookmyung.umbrellafriend.domain.entity.ReportType.ETC
+import com.sookmyung.umbrellafriend.domain.entity.ReportType.NONE
+import com.sookmyung.umbrellafriend.domain.usecase.GetLogoutUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import timber.log.Timber
+import javax.inject.Inject
+
+@HiltViewModel
+class ReportViewModel @Inject constructor(
+    val getLogoutUseCase: GetLogoutUseCase
+) : ViewModel() {
+    private val _screenStatus: MutableLiveData<ReportScreen> =
+        MutableLiveData(ReportScreen.REPORT_UMBRELLA_NUMBER)
+    val screenStatus: LiveData<ReportScreen> get() = _screenStatus
+    private val _isNext: MutableLiveData<Boolean> = MutableLiveData(false)
+    val isNext: LiveData<Boolean> get() = _isNext
+    private val _isReport: MutableLiveData<Boolean> = MutableLiveData(false)
+    val isReport: LiveData<Boolean> get() = _isReport
+    private val _isReportAvailable: MutableLiveData<Boolean> = MutableLiveData(false)
+    val isReportAvailable: LiveData<Boolean> get() = _isReportAvailable
+    private val _reportType: MutableLiveData<ReportType> = MutableLiveData(NONE)
+    val reportType: LiveData<ReportType> get() = _reportType
+    val umbrellaNumber: MutableLiveData<String> = MutableLiveData("")
+    val etc: MutableLiveData<String> = MutableLiveData("")
+
+
+    fun updateIsUmbrellaNumberBlank() {
+        _isNext.value = umbrellaNumber.value.isNullOrBlank().not()
+    }
+
+    fun updateScreenStatus(screen: ReportScreen) {
+        _screenStatus.value = screen
+    }
+
+    fun updateReportType(reportType: ReportType) {
+        _reportType.value = reportType
+        if (_reportType.value == NONE) _isReportAvailable.value = false
+        else _isReportAvailable.value = !(_reportType.value == ETC && etc.value.isNullOrBlank())
+    }
+
+    fun postReport() {
+        viewModelScope.launch {
+            _isReport.value = true
+//            getLogoutUseCase()
+//                .onSuccess {
+//                    Timber.e("logout")
+//                }
+//                .onFailure { throwable ->
+//                    Timber.e("$throwable")
+//                }
+        }
+    }
+
+    enum class ReportScreen {
+        REPORT_UMBRELLA_NUMBER, REPORT
+    }
+}
