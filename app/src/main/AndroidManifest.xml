@@ -31,10 +31,11 @@
             android:name="com.google.mlkit.vision.DEPENDENCIES"
             android:value="ocr" />
 
-        <service android:name="com.sookmyung.umbrellafriend.data.service.MessagingService"
+        <service
+            android:name="com.sookmyung.umbrellafriend.data.service.MessagingService"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
@@ -52,7 +53,7 @@
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".ui.splash.SplashEntryActivity"
@@ -75,9 +76,19 @@
             android:exported="false"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".ui.mypage.MypageActivity"
+        <activity
+            android:name=".ui.mypage.MypageActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.setting.SettingActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.setting.report.ReportActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

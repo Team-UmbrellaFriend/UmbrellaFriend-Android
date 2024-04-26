@@ -7,7 +7,7 @@ import androidx.fragment.app.viewModels
 import com.sookmyung.umbrellafriend.R
 import com.sookmyung.umbrellafriend.databinding.FragmentMypageBinding
 import com.sookmyung.umbrellafriend.ui.mypage.MypageViewModel.Companion.USER_ID
-import com.sookmyung.umbrellafriend.ui.splash.SplashActivity
+import com.sookmyung.umbrellafriend.ui.setting.SettingActivity
 import com.sookmyung.umbrellafriend.util.binding.BindingFragment
 import com.sookmyung.umbrellafriend.util.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,8 +25,8 @@ class MypageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
 
         setMypageHistoryListAdapter()
         setHistoryObserver()
-        logout()
         moveToMypageEdit()
+        moveToSetting()
     }
 
     override fun onResume() {
@@ -44,19 +44,6 @@ class MypageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
         }
     }
 
-    private fun logout() {
-        binding.btnMypageLogout.setSingleOnClickListener {
-            viewModel.getLogout()
-            moveToSplash()
-        }
-    }
-
-    private fun moveToSplash() {
-        val intent = Intent(requireActivity(), SplashActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NO_HISTORY)
-        startActivity(intent)
-    }
-
     private fun moveToMypageEdit() {
         binding.btnMypageEdit.setSingleOnClickListener {
             val bundle = Bundle().apply {
@@ -71,6 +58,12 @@ class MypageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
             fragmentTransaction.replace(R.id.fcv_mypage, MypageEditFragment())
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
+        }
+    }
+
+    private fun moveToSetting() {
+        binding.btnMypageSetting.setSingleOnClickListener {
+            startActivity(Intent(requireActivity(), SettingActivity::class.java))
         }
     }
 }

@@ -38,18 +38,6 @@ class MypageViewModel @Inject constructor(
         }
     }
 
-    fun getLogout() {
-        viewModelScope.launch {
-            getLogoutUseCase()
-                .onSuccess {
-                    Timber.e("logout")
-                }
-                .onFailure { throwable ->
-                    Timber.e("$throwable")
-                }
-        }
-    }
-
     companion object{
         const val USER_ID = "USER_ID"
     }

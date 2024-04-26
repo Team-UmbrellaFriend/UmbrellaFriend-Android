@@ -41,7 +41,6 @@ class UsersRepositoryImpl @Inject constructor(
         localDataSource.login = false
         localDataSource.token = ""
         usersDataSource.getLogout()
-
     }
 
     override fun initToken(token: String) {
