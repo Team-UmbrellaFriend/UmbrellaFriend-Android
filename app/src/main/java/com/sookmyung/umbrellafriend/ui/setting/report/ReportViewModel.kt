@@ -4,10 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sookmyung.umbrellafriend.data.entity.request.ReportRequest
 import com.sookmyung.umbrellafriend.domain.entity.ReportType
 import com.sookmyung.umbrellafriend.domain.entity.ReportType.ETC
 import com.sookmyung.umbrellafriend.domain.entity.ReportType.NONE
-import com.sookmyung.umbrellafriend.domain.usecase.GetLogoutUseCase
+import com.sookmyung.umbrellafriend.domain.entity.getType
+import com.sookmyung.umbrellafriend.domain.usecase.PostReportUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -15,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ReportViewModel @Inject constructor(
-    val getLogoutUseCase: GetLogoutUseCase
+    val postReportUseCase: PostReportUseCase
 ) : ViewModel() {
     private val _screenStatus: MutableLiveData<ReportScreen> =
         MutableLiveData(ReportScreen.REPORT_UMBRELLA_NUMBER)
@@ -30,7 +32,6 @@ class ReportViewModel @Inject constructor(
     val reportType: LiveData<ReportType> get() = _reportType
     val umbrellaNumber: MutableLiveData<String> = MutableLiveData("")
     val etc: MutableLiveData<String> = MutableLiveData("")
-
 
     fun updateIsUmbrellaNumberBlank() {
         _isNext.value = umbrellaNumber.value.isNullOrBlank().not()
@@ -48,14 +49,18 @@ class ReportViewModel @Inject constructor(
 
     fun postReport() {
         viewModelScope.launch {
-            _isReport.value = true
-//            getLogoutUseCase()
-//                .onSuccess {
-//                    Timber.e("logout")
-//                }
-//                .onFailure { throwable ->
-//                    Timber.e("$throwable")
-//                }
+            postReportUseCase(
+                ReportRequest(
+                    umbrellaNumber.value ?: "0",
+                    reportType.value?.getType() ?: "기타",
+                    etc.value ?: ""
+                )
+            ).onSuccess { response ->
+                Timber.e(response)
+                _isReport.value = true
+            }.onFailure { throwable ->
+                Timber.e("$throwable")
+            }
         }
     }
 

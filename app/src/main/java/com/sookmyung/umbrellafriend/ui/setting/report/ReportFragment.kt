@@ -15,6 +15,7 @@ import com.sookmyung.umbrellafriend.domain.entity.ReportType.ETC
 import com.sookmyung.umbrellafriend.domain.entity.ReportType.MISSING
 import com.sookmyung.umbrellafriend.domain.entity.ReportType.NONE
 import com.sookmyung.umbrellafriend.domain.entity.ReportType.QR
+import com.sookmyung.umbrellafriend.util.BindingCustomDialog
 import com.sookmyung.umbrellafriend.util.binding.BindingFragment
 import com.sookmyung.umbrellafriend.util.hideKeyboard
 import com.sookmyung.umbrellafriend.util.setSingleOnClickListener
@@ -154,7 +155,13 @@ class ReportFragment : BindingFragment<FragmentReportBinding>(R.layout.fragment_
     private fun finishReport() {
         viewModel.isReport.observe(viewLifecycleOwner) { isReport ->
             if (isReport) {
-                requireActivity().finish()
+                BindingCustomDialog.Builder().build(
+                    R.drawable.ic_check,
+                    "신고 접수 완료",
+                    "신고해 주셔서 감사합니다!\n이른 시일 내에 해결하겠습니다.",
+                    "확인"
+                ) { requireActivity().finish() }
+                    .show(requireActivity().supportFragmentManager, "CUSTOM_DIALOG")
             }
         }
     }
