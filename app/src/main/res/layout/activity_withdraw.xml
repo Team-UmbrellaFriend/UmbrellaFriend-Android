@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.sookmyung.umbrellafriend.ui.setting.withdraw.WithdrawViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/iv_withdraw_navi_back"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_left"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_withdraw_title"
+            style="@style/Heading3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="탈퇴하기"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_withdraw_navi_back" />
+
+        <TextView
+            android:id="@+id/tv_withdraw_subtitle"
+            style="@style/Body3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="7dp"
+            android:text="게정을 삭제하면, 프로필, 우산 대여 및 반납 등 모든 활동 정보가 삭제됩니다. 계정 삭제 후 7일간 다시 가입할 수 없어요."
+            android:textColor="@color/gray_700"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_withdraw_title" />
+
+        <ImageView
+            android:id="@+id/btn_withdraw_notice_check"
+            android:layout_width="24dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:onClick="@{() -> vm.updateNoticeCheck()}"
+            android:src="@{vm.isNoticeCheck ? @drawable/ic_radio_check : @drawable/shape_gray300_fill_4_rect}"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_withdraw_subtitle" />
+
+        <TextView
+            android:id="@+id/tv_withdraw_notice_check"
+            style="@style/Body3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:onClick="@{() -> vm.updateNoticeCheck()}"
+            android:text="유의사항을 확인했어요."
+            android:textColor="@color/gray_700"
+            app:layout_constraintBottom_toBottomOf="@id/btn_withdraw_notice_check"
+            app:layout_constraintStart_toEndOf="@id/btn_withdraw_notice_check"
+            app:layout_constraintTop_toTopOf="@id/btn_withdraw_notice_check" />
+
+        <TextView
+            android:id="@+id/tv_withdraw_reason_subtitle"
+            style="@style/Subtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="탈퇴 사유를 알려주세요."
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_withdraw_notice_check" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_withdraw_quantity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/shape_gray100_fill_12_rect"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_withdraw_reason_subtitle">
+
+            <TextView
+                android:id="@+id/tv_withdraw_quantity"
+                style="@style/Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:background="@drawable/shape_gray100_fill_12_rect"
+                android:text="우산 수량이 적어서 사용을 잘 안해요."
+                android:textColor="@color/gray_500"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_withdraw_quantity"
+                android:layout_width="24dp"
+                android:layout_height="0dp"
+                android:src="@drawable/shape_gray300_fill_4_rect"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_withdraw_management"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/shape_gray100_fill_12_rect"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_withdraw_quantity">
+
+            <TextView
+                android:id="@+id/tv_withdraw_management"
+                style="@style/Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:background="@drawable/shape_gray100_fill_12_rect"
+                android:text="우산 관리 잘 안되어 사용할 수 없어요."
+                android:textColor="@color/gray_500"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_withdraw_management"
+                android:layout_width="24dp"
+                android:layout_height="0dp"
+                android:src="@drawable/shape_gray300_fill_4_rect"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_withdraw_new_account"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/shape_gray100_fill_12_rect"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_withdraw_management">
+
+            <TextView
+                android:id="@+id/tv_withdraw_new_account"
+                style="@style/Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:background="@drawable/shape_gray100_fill_12_rect"
+                android:text="새 계정을 만들고 싶어요."
+                android:textColor="@color/gray_500"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_withdraw_new_account"
+                android:layout_width="24dp"
+                android:layout_height="0dp"
+                android:src="@drawable/shape_gray300_fill_4_rect"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <EditText
+            android:id="@+id/et_withdraw_etc"
+            style="@style/Body2"
+            android:layout_width="match_parent"
+            android:layout_height="152dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/shape_gray100_fill_12_rect"
+            android:gravity="top"
+            android:hint="기타사항 (직접 입력)"
+            android:paddingStart="14dp"
+            android:paddingTop="16dp"
+            android:text="@={vm.etc}"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray_500"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_withdraw_new_account" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_withdraw"
+            style="@style/Subtitle1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@{vm.isWithdrawAvailable ? @drawable/shape_mainblue_fill_12_rect : @drawable/shape_gray300_fill_12_rect}"
+            android:clickable="@{vm.isWithdrawAvailable}"
+            android:paddingVertical="15dp"
+            android:stateListAnimator="@null"
+            android:text="탈퇴하기"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

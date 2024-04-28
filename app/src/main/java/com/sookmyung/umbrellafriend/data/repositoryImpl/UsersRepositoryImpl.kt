@@ -2,6 +2,7 @@ package com.sookmyung.umbrellafriend.data.repositoryImpl
 
 import com.sookmyung.umbrellafriend.data.entity.request.EditRequest
 import com.sookmyung.umbrellafriend.data.entity.request.LoginRequest
+import com.sookmyung.umbrellafriend.data.entity.request.WithdrawRequest
 import com.sookmyung.umbrellafriend.data.source.LocalDataSource
 import com.sookmyung.umbrellafriend.data.source.UsersDataSource
 import com.sookmyung.umbrellafriend.domain.entity.MypageProfile
@@ -42,6 +43,11 @@ class UsersRepositoryImpl @Inject constructor(
         localDataSource.token = ""
         usersDataSource.getLogout()
     }
+
+    override suspend fun deleteWithdraw(withdrawRequest: WithdrawRequest): Result<String> =
+        runCatching {
+            usersDataSource.deleteWithdraw(withdrawRequest)
+        }.mapCatching { response -> requireNotNull(response.data) }
 
     override fun initToken(token: String) {
         localDataSource.token = token
