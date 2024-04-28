@@ -6,5 +6,5 @@ import javax.inject.Inject
 class InitTokenUseCase @Inject constructor(
     private val usersRepository: UsersRepository
 ) {
-    operator fun invoke(token: String) = usersRepository.initToken("Token $token")
+    operator fun invoke(token: String) = usersRepository.initToken(token)
 }

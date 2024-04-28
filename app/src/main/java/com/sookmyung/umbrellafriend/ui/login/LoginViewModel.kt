@@ -57,7 +57,7 @@ class LoginViewModel @Inject constructor(
             )
                 .onSuccess { response ->
                     _isLoginSuccess.value = true
-                    initTokenUseCase(response.token)
+                    initTokenUseCase("Token ${response.token}")
                     setLoginUseCase(true)
                 }.onFailure { throwable ->
                     _isLoginSuccess.value = false

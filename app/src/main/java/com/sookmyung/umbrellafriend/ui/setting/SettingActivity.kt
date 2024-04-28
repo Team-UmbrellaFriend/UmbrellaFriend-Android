@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import com.sookmyung.umbrellafriend.R
 import com.sookmyung.umbrellafriend.databinding.ActivitySettingBinding
 import com.sookmyung.umbrellafriend.ui.setting.report.ReportActivity
+import com.sookmyung.umbrellafriend.ui.setting.withdraw.WithdrawActivity
 import com.sookmyung.umbrellafriend.ui.splash.SplashActivity
 import com.sookmyung.umbrellafriend.util.binding.BindingActivity
 import com.sookmyung.umbrellafriend.util.setSingleOnClickListener
@@ -41,11 +42,7 @@ class SettingActivity : BindingActivity<ActivitySettingBinding>(R.layout.activit
 
     private fun moveToWithdraw() {
         binding.clSettingWithdraw.setSingleOnClickListener {
-//            val fragmentTransaction =
-//                requireActivity().supportFragmentManager.beginTransaction()
-//            fragmentTransaction.replace(R.id.fcv_mypage, MypageEditFragment())
-//            fragmentTransaction.addToBackStack(null)
-//            fragmentTransaction.commit()
+            startActivity(Intent(this, WithdrawActivity::class.java))
         }
     }
 

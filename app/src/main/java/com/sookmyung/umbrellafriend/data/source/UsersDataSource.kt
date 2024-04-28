@@ -2,6 +2,7 @@ package com.sookmyung.umbrellafriend.data.source
 
 import com.sookmyung.umbrellafriend.data.entity.request.EditRequest
 import com.sookmyung.umbrellafriend.data.entity.request.LoginRequest
+import com.sookmyung.umbrellafriend.data.entity.request.WithdrawRequest
 import com.sookmyung.umbrellafriend.data.entity.response.BaseResponse
 import com.sookmyung.umbrellafriend.data.entity.response.MypageProfileResponse
 import com.sookmyung.umbrellafriend.data.entity.response.TokenResponse
@@ -27,6 +28,12 @@ class UsersDataSource @Inject constructor(
     suspend fun getUserProfile(userId: Int): BaseResponse<MypageProfileResponse> =
         usersService.getUserProfile(userId)
 
-    suspend fun putUserProfile(userId: Int, editRequest: EditRequest):BaseResponse<MypageProfileResponse> =
+    suspend fun putUserProfile(
+        userId: Int,
+        editRequest: EditRequest
+    ): BaseResponse<MypageProfileResponse> =
         usersService.putUserProfile(userId, editRequest)
+
+    suspend fun deleteWithdraw(withdrawRequest: WithdrawRequest): BaseResponse<String> =
+        usersService.deleteWithdraw(withdrawRequest)
 }

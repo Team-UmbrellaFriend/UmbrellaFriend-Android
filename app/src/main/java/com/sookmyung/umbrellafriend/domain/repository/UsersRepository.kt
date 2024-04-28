@@ -2,6 +2,7 @@ package com.sookmyung.umbrellafriend.domain.repository
 
 import com.sookmyung.umbrellafriend.data.entity.request.EditRequest
 import com.sookmyung.umbrellafriend.data.entity.request.LoginRequest
+import com.sookmyung.umbrellafriend.data.entity.request.WithdrawRequest
 import com.sookmyung.umbrellafriend.domain.entity.MypageProfile
 import com.sookmyung.umbrellafriend.domain.entity.Token
 import okhttp3.MultipartBody
@@ -22,6 +23,8 @@ interface UsersRepository {
         userId: Int,
         editRequest: EditRequest
     ): Result<MypageProfile>
+
+    suspend fun deleteWithdraw(withdrawRequest: WithdrawRequest): Result<String>
 
     suspend fun getLogout(): Result<Unit>
 
