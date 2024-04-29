@@ -93,6 +93,10 @@
             android:name=".ui.setting.withdraw.WithdrawActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.map.UmbrellaMapActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
