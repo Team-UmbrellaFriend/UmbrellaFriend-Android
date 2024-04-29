@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="vm"
             type="com.sookmyung.umbrellafriend.ui.map.UmbrellaMapViewModel" />
@@ -50,22 +51,12 @@
                 android:background="@color/white">
 
                 <ImageView
-                    android:id="@+id/iv_umbrella_map"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:src="@drawable/ic_graphic_map"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintDimensionRatio="1.74"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
                     android:id="@+id/iv_umbrella_map_science"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="@{() -> vm.updateBuildingStatus(3)}"
                     android:padding="10dp"
                     android:src="@drawable/ic_science_map"
-                    android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.23"
@@ -77,9 +68,9 @@
                     android:id="@+id/iv_umbrella_map_renaissance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="@{() -> vm.updateBuildingStatus(2)}"
                     android:padding="10dp"
                     android:src="@drawable/ic_renaissance_map"
-                    android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.31"
@@ -91,15 +82,26 @@
                     android:id="@+id/iv_umbrella_map_myungsin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:onClick="@{() -> vm.updateBuildingStatus(1)}"
                     android:padding="10dp"
                     android:src="@drawable/ic_myungsin_map"
-                    android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.51"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.2" />
+
+                <ImageView
+                    android:id="@+id/iv_umbrella_map"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:src="@drawable/ic_graphic_map"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="1.74"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </HorizontalScrollView>

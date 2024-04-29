@@ -16,10 +16,23 @@ class UmbrellaMapViewModel @Inject constructor(
     val getAvailableUmbrellaUseCase: GetAvailableUmbrellaUseCase
 ) : ViewModel() {
     private val _availableUmbrellaList: MutableLiveData<List<AvailableUmbrella>> = MutableLiveData()
-    val availableUmbrellaList: LiveData<List<AvailableUmbrella>> get() = _availableUmbrellaList
+    private val _buildingStatus: MutableLiveData<Int> = MutableLiveData()
+    val buildingStatus: LiveData<Int> = _buildingStatus
+    private val _availableUmbrella: MutableLiveData<Int> = MutableLiveData()
+    val availableUmbrella: LiveData<Int> = _availableUmbrella
 
     init {
         getAvailableUmbrella()
+    }
+
+    fun updateBuildingStatus(buildingNum: Int) {
+        _buildingStatus.value = buildingNum
+        updateAvailableUmbrella()
+    }
+
+    private fun updateAvailableUmbrella() {
+        val index = (buildingStatus.value?.minus(1)) ?: 0
+        _availableUmbrella.value = _availableUmbrellaList.value?.get(index)?.numUmbrellas ?: 0
     }
 
     private fun getAvailableUmbrella() {
@@ -32,5 +45,11 @@ class UmbrellaMapViewModel @Inject constructor(
                     Timber.tag("availableUmbrella").d("$throwable")
                 }
         }
+    }
+
+    companion object {
+        const val MYUNGSIN = 1
+        const val RENAISSANCE = 2
+        const val SCIENCE = 3
     }
 }
