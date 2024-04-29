@@ -9,5 +9,5 @@ interface UmbrellaService {
     suspend fun getExtend(): BaseResponse<Unit>
 
     @GET("umbrella/available/")
-    suspend fun getAvailableUmbrella(): BaseResponse<AvailableUmbrellaResponse>
+    suspend fun getAvailableUmbrella(): BaseResponse<List<AvailableUmbrellaResponse>>
 }

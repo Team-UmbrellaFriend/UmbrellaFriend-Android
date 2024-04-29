@@ -12,7 +12,7 @@ class UmbrellaRepositoryImpl @Inject constructor(
         umbrellaDataSource.getExtend()
     }
 
-    override suspend fun getAvailableUmbrella(): Result<AvailableUmbrella> = runCatching {
+    override suspend fun getAvailableUmbrella(): Result<List<AvailableUmbrella>> = runCatching {
         umbrellaDataSource.getAvailableUmbrella()
-    }.mapCatching { response -> requireNotNull(response.data).toAvailableUmbrella() }
+    }.mapCatching { response -> requireNotNull(response.data).map { it.toAvailableUmbrella() } }
 }

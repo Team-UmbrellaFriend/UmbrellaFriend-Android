@@ -10,6 +10,6 @@ class UmbrellaDataSource @Inject constructor(
 ) {
     suspend fun getExtend(): BaseResponse<Unit> = umbrellaService.getExtend()
 
-    suspend fun getAvailableUmbrella(): BaseResponse<AvailableUmbrellaResponse> =
+    suspend fun getAvailableUmbrella(): BaseResponse<List<AvailableUmbrellaResponse>> =
         umbrellaService.getAvailableUmbrella()
 }
