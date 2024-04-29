@@ -142,6 +142,9 @@ dependencies {
     //ML Kit
     implementation("com.google.mlkit:text-recognition-korean:16.0.0")
     implementation("com.google.android.gms:play-services-mlkit-text-recognition-korean:16.0.0")
+
+    // zxing
+    implementation ("com.journeyapps:zxing-android-embedded:4.3.0")
 }
 
 fun getApiKey(propertyKey: String): String {

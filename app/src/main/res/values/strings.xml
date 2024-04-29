@@ -20,4 +20,7 @@
     <string name="home_umbrella_map_subtitle">대여할 수 있는 우산의 위치를 파악해요</string>
     <string name="mypage_report">신고하기</string>
 
+    <!-- rental -->
+    <string name="rental_search"><u>우산위치를 검색하고 싶으신가요?</u></string>
+
 </resources>
