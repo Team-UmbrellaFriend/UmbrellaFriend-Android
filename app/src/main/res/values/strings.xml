@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">UmbrellaFriend</string>
 
+    <!-- util -->
+    <string name="camera_permission_request">앱 실행을 위해서는 권한을 설정해야 합니다.</string>
+    <string name="camera_permission_granted">앱 실행을 위한 권한이 설정 되었습니다</string>
+    <string name="camera_permission_denied">앱 실행을 위한 권한이 취소 되었습니다</string>
+
     <!-- splash -->
     <string name="splash_sub_title">비올 때 마다 생각나는 친구</string>
     <string name="splash_title">우산친구</string>

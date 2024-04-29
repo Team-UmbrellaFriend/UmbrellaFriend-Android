@@ -17,6 +17,7 @@ import com.sookmyung.umbrellafriend.domain.entity.RentalStatus.OVERDUE
 import com.sookmyung.umbrellafriend.domain.entity.RentalStatus.RENTING
 import com.sookmyung.umbrellafriend.ui.map.UmbrellaMapActivity
 import com.sookmyung.umbrellafriend.ui.mypage.MypageActivity
+import com.sookmyung.umbrellafriend.ui.rental.RentalActivity
 import com.sookmyung.umbrellafriend.util.BindingCustomDialog
 import com.sookmyung.umbrellafriend.util.binding.BindingActivity
 import com.sookmyung.umbrellafriend.util.setSingleOnClickListener
@@ -36,6 +37,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         checkRentalStatus()
         moveToMypage()
         moveToUmbrellaMap()
+        moveToRental()
     }
 
     private fun clickRentalBtn() {
@@ -171,6 +173,12 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
     private fun moveToUmbrellaMap() {
         binding.clHomeMap.setSingleOnClickListener {
             startActivity(Intent(this, UmbrellaMapActivity::class.java))
+        }
+    }
+
+    private fun moveToRental() {
+        binding.clHomeUmbrellaRental.setSingleOnClickListener {
+            startActivity(Intent(this, RentalActivity::class.java))
         }
     }
 }

@@ -103,6 +103,13 @@
             android:name=".ui.map.UmbrellaMapActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.rental.RentalActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="fullSensor"
+            tools:replace="screenOrientation"/>
     </application>
 
 </manifest>
