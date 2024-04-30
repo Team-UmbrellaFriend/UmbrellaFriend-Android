@@ -42,7 +42,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
 
     override fun onResume() {
         super.onResume()
-        viewModel.getHome()
+        viewModel.getHomeInfo()
     }
 
     private fun clickRentalBtn() {
