@@ -156,12 +156,14 @@ class ReportFragment : BindingFragment<FragmentReportBinding>(R.layout.fragment_
         viewModel.isReport.observe(viewLifecycleOwner) { isReport ->
             if (isReport) {
                 BindingCustomDialog.Builder().build(
-                    R.drawable.ic_check,
-                    "신고 접수 완료",
-                    "신고해 주셔서 감사합니다!\n이른 시일 내에 해결하겠습니다.",
-                    "확인"
-                ) { requireActivity().finish() }
-                    .show(requireActivity().supportFragmentManager, "CUSTOM_DIALOG")
+                    title = "신고 접수 완료",
+                    subtitle = "신고해 주셔서 감사합니다!\n이른 시일 내에 해결하겠습니다.",
+                    btnContent = "확인",
+                    imageDrawable = R.drawable.ic_check,
+                    btnDoAction = {requireActivity().finish() },
+                    btnBackAction = {},
+                    isBackBtn = false
+                ).show(requireActivity().supportFragmentManager, "CUSTOM_DIALOG")
             }
         }
     }

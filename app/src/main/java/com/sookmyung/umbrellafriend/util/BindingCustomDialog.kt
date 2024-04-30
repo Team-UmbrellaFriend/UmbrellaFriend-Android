@@ -5,13 +5,15 @@ import android.view.View
 import androidx.fragment.app.DialogFragment
 import androidx.viewbinding.ViewBinding
 
-abstract class BindingCustomDialog:DialogFragment() {
+abstract class BindingCustomDialog : DialogFragment() {
     protected var _binding: ViewBinding? = null
     protected var imageDrawable: Int? = null
     protected var title: String? = null
     protected var subtitle: String? = null
     protected var btnContent: String? = null
-    protected lateinit var btnAction: () -> Unit
+    protected var isBackBtn: Boolean? = null
+    protected lateinit var btnDoAction: () -> Unit
+    protected lateinit var btnBackAction: () -> Unit
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -19,13 +21,18 @@ abstract class BindingCustomDialog:DialogFragment() {
         setImage()
         setTitle()
         setSubtitle()
-        setBtnClick { btnAction(); dismiss() }
+        setBackBtnVisibility()
+        setDoBtnClick { btnDoAction(); dismiss() }
+        setDoBtnClick { btnBackAction(); dismiss() }
     }
 
     abstract fun setImage()
     abstract fun setTitle()
     abstract fun setSubtitle()
-    abstract fun setBtnClick(action: () -> Unit)
+    abstract fun setDoBtnClick(action: () -> Unit)
+    abstract fun setBackBtnClick(action: () -> Unit)
+
+    abstract fun setBackBtnVisibility()
 
     class Builder() {
         fun build(
@@ -33,7 +40,9 @@ abstract class BindingCustomDialog:DialogFragment() {
             title: String,
             subtitle: String,
             btnContent: String,
-            btnAction: () -> Unit
+            btnDoAction: () -> Unit,
+            btnBackAction: () -> Unit,
+            isBackBtn: Boolean
         ): BindingCustomDialog {
             val dialog = CustomDialog()
             return dialog.apply {
@@ -41,7 +50,9 @@ abstract class BindingCustomDialog:DialogFragment() {
                 this.subtitle = subtitle
                 this.btnContent = btnContent
                 this.imageDrawable = imageDrawable
-                this.btnAction = btnAction
+                this.isBackBtn = isBackBtn
+                this.btnDoAction = btnDoAction
+                this.btnBackAction = btnBackAction
             }
         }
     }
