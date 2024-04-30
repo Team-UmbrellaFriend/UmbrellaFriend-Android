@@ -60,6 +60,9 @@ class RentalBottomSheet : BottomSheetDialogFragment() {
 
     private fun clickBtn(){
         binding.btnBottomSheetBack.setSingleOnClickListener {
+            setFragmentResult(
+                "RentalBottomSheet", bundleOf("isRental" to false)
+            )
             dismiss()
         }
         binding.btnBottomSheetDo.setSingleOnClickListener {

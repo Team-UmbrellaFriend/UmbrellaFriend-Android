@@ -3,12 +3,13 @@ package com.sookmyung.umbrellafriend.ui.rental
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
+import com.journeyapps.barcodescanner.BarcodeCallback
+import com.journeyapps.barcodescanner.BarcodeResult
 import com.journeyapps.barcodescanner.CaptureManager
-import com.journeyapps.barcodescanner.ScanContract
-import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
 import com.sookmyung.umbrellafriend.R
 import com.sookmyung.umbrellafriend.databinding.ActivityRentalBinding
@@ -22,14 +23,17 @@ class RentalActivity :
     BindingActivity<ActivityRentalBinding>(R.layout.activity_rental) {
     private val viewModel by viewModels<RentalViewModel>()
     private lateinit var capture: CaptureManager
-    private val barcodeLauncher =
-        registerForActivityResult(ScanContract()) { result: ScanIntentResult ->
-            if (result.contents == null) {
+
+    private val callback = BarcodeCallback { result: BarcodeResult? ->
+        if (result != null) {
+            if (result.text == null) {
                 toast("QR을 다시 인식해주세요.")
             } else {
-                viewModel.extractNumberFromUrl(result.contents)
+                viewModel.extractNumberFromUrl(result.text)
+                capture.onPause()
             }
         }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +47,7 @@ class RentalActivity :
         checkRentSuccess()
         capture = CaptureManager(this, binding.bsRental)
         capture.initializeFromIntent(intent, savedInstanceState)
-        capture.decode()
+        binding.bsRental.decodeContinuous(callback)
     }
 
     override fun onResume() {
@@ -116,7 +120,6 @@ class RentalActivity :
             setBeepEnabled(false)
             setOrientationLocked(true)
             setPrompt("")
-            barcodeLauncher.launch(options)
         }
     }
 
@@ -137,6 +140,7 @@ class RentalActivity :
     }
 
     private fun showBottomSheet() {
+        capture.onPause()
         val bottomSheet = RentalBottomSheet()
         with(bottomSheet) {
             setStyle(DialogFragment.STYLE_NORMAL, R.style.UmbrellaFriendBottomSheetTheme)
@@ -152,8 +156,11 @@ class RentalActivity :
             "RentalBottomSheet",
             this
         ) { _, data ->
-            if (data.getBoolean("isRental")) {
+            val clickDo = data.getBoolean("isRental")
+            if (clickDo) {
                 viewModel.rentUmbrella()
+            } else {
+                capture.onResume()
             }
         }
     }
@@ -168,7 +175,9 @@ class RentalActivity :
                     subtitle = "해당 우산은 대여가 불가해요.\n다른 우산을 대여해주세요.",
                     btnContent = "확인",
                     imageDrawable = R.drawable.ic_notice,
-                    btnAction = {}
+                    btnAction = {
+                        capture.onResume()
+                    }
                 ).show(supportFragmentManager, "CUSTOM_DIALOG")
             }
         }

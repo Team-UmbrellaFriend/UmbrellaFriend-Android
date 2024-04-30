@@ -50,7 +50,6 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
                 NOT_RENTED -> {
                     moveToRental()
                 }
-
                 OVERDUE -> showExtendedFailDialog()
                 else -> {}
             }
