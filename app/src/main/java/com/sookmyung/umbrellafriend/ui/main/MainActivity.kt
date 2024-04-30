@@ -17,10 +17,10 @@ import com.sookmyung.umbrellafriend.domain.entity.RentalStatus.OVERDUE
 import com.sookmyung.umbrellafriend.domain.entity.RentalStatus.RENTING
 import com.sookmyung.umbrellafriend.ui.map.UmbrellaMapActivity
 import com.sookmyung.umbrellafriend.ui.mypage.MypageActivity
+import com.sookmyung.umbrellafriend.ui.rental.RentalActivity
 import com.sookmyung.umbrellafriend.util.BindingCustomDialog
 import com.sookmyung.umbrellafriend.util.binding.BindingActivity
 import com.sookmyung.umbrellafriend.util.setSingleOnClickListener
-import com.sookmyung.umbrellafriend.util.toast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -38,14 +38,16 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         moveToUmbrellaMap()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getHomeInfo()
+    }
+
     private fun clickRentalBtn() {
         binding.clHomeUmbrellaRental.setSingleOnClickListener {
             when (viewModel.rentalStatus.value) {
                 RENTING -> viewModel.getExtend()
-                NOT_RENTED -> {
-                    toast("우산 대여 화면으로 넘어가기!")
-                }
-
+                NOT_RENTED -> startActivity(Intent(this, RentalActivity::class.java))
                 OVERDUE -> showExtendedFailDialog()
                 else -> {}
             }
@@ -60,6 +62,14 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
                     subtitle = "자동으로 3일이\n추가 연장되었습니다.",
                     btnContent = "확인",
                     imageDrawable = R.drawable.ic_check,
+                    btnAction = {}
+                ).show(supportFragmentManager, "CUSTOM_DIALOG")
+            } else {
+                BindingCustomDialog.Builder().build(
+                    title = "대여 연장 불가",
+                    subtitle = "대여 연장은 한 번만 가능합니다.",
+                    btnContent = "확인",
+                    imageDrawable = R.drawable.ic_notice,
                     btnAction = {}
                 ).show(supportFragmentManager, "CUSTOM_DIALOG")
             }

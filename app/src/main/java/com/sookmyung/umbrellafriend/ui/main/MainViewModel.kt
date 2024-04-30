@@ -25,14 +25,10 @@ class MainViewModel @Inject constructor(
     val home: LiveData<Home> get() = _home
     private val _rentalStatus: MutableLiveData<RentalStatus> = MutableLiveData(NOT_RENTED)
     val rentalStatus: LiveData<RentalStatus> get() = _rentalStatus
-    private val _isExtended: MutableLiveData<Boolean> = MutableLiveData(false)
+    private val _isExtended: MutableLiveData<Boolean> = MutableLiveData()
     val isExtended: LiveData<Boolean> get() = _isExtended
 
-    init {
-        getHome()
-    }
-
-    private fun getHome() {
+    fun getHomeInfo() {
         viewModelScope.launch {
             getHomeUseCase().onSuccess { response ->
                 _home.value = response
@@ -46,9 +42,10 @@ class MainViewModel @Inject constructor(
     fun getExtend() {
         viewModelScope.launch {
             getExtendUseCase().onSuccess {
-                getHome()
+                getHomeInfo()
                 _isExtended.value = true
-            }.onFailure {
+            }.onFailure { throwable ->
+                Timber.e("$throwable")
                 _isExtended.value = false
             }
         }

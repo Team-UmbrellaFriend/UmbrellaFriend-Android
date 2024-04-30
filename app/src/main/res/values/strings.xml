@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">UmbrellaFriend</string>
 
+    <!-- util -->
+    <string name="camera_permission_request">앱 실행을 위해서는 권한을 설정해야 합니다.</string>
+    <string name="camera_permission_granted">앱 실행을 위한 권한이 설정 되었습니다</string>
+    <string name="camera_permission_denied">앱 실행을 위한 권한이 취소 되었습니다</string>
+
     <!-- splash -->
     <string name="splash_sub_title">비올 때 마다 생각나는 친구</string>
     <string name="splash_title">우산친구</string>
@@ -19,5 +24,8 @@
     <string name="home_umbrella_map_title">우산 대여 지도</string>
     <string name="home_umbrella_map_subtitle">대여할 수 있는 우산의 위치를 파악해요</string>
     <string name="mypage_report">신고하기</string>
+
+    <!-- rental -->
+    <string name="rental_search"><u>우산위치를 검색하고 싶으신가요?</u></string>
 
 </resources>

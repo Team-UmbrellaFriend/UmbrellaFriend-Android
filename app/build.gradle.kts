@@ -38,6 +38,7 @@ android {
         }
     }
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
@@ -142,6 +143,11 @@ dependencies {
     //ML Kit
     implementation("com.google.mlkit:text-recognition-korean:16.0.0")
     implementation("com.google.android.gms:play-services-mlkit-text-recognition-korean:16.0.0")
+
+    // zxing
+    implementation("com.journeyapps:zxing-android-embedded:4.3.0")
+    implementation("androidx.multidex:multidex:2.0.1")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
 }
 
 fun getApiKey(propertyKey: String): String {
