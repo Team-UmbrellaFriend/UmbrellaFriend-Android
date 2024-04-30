@@ -28,11 +28,7 @@ class MainViewModel @Inject constructor(
     private val _isExtended: MutableLiveData<Boolean> = MutableLiveData(false)
     val isExtended: LiveData<Boolean> get() = _isExtended
 
-    init {
-        getHome()
-    }
-
-    private fun getHome() {
+    fun getHome() {
         viewModelScope.launch {
             getHomeUseCase().onSuccess { response ->
                 _home.value = response

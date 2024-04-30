@@ -21,4 +21,9 @@ class UmbrellaRepositoryImpl @Inject constructor(
         runCatching {
             umbrellaDataSource.getUmbrellaRental(umbrellaNumber)
         }.mapCatching { response -> requireNotNull(response.data).toUmbrellaRental() }
+
+    override suspend fun postUmbrellaRental(umbrellaNumber: Int): Result<String> =
+        runCatching {
+            umbrellaDataSource.postUmbrellaRental(umbrellaNumber)
+        }.mapCatching { response -> requireNotNull(response.data) }
 }

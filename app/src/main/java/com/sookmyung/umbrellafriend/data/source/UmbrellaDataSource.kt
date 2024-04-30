@@ -17,4 +17,7 @@ class UmbrellaDataSource @Inject constructor(
 
     suspend fun getUmbrellaRental(umbrellaNumber: Int): BaseResponse<UmbrellaRentalResponse> =
         umbrellaService.getUmbrellaRental(umbrellaNumber)
+
+    suspend fun postUmbrellaRental(umbrellaNumber: Int): BaseResponse<String> =
+        umbrellaService.postUmbrellaRental(umbrellaNumber)
 }

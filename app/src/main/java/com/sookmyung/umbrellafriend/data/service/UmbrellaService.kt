@@ -4,6 +4,7 @@ import com.sookmyung.umbrellafriend.data.entity.response.AvailableUmbrellaRespon
 import com.sookmyung.umbrellafriend.data.entity.response.BaseResponse
 import com.sookmyung.umbrellafriend.data.entity.response.UmbrellaRentalResponse
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface UmbrellaService {
@@ -17,4 +18,9 @@ interface UmbrellaService {
     suspend fun getUmbrellaRental(
         @Path("umbrella_number") umbrellaNumber: Int
     ): BaseResponse<UmbrellaRentalResponse>
+
+    @POST("/umbrella/{umbrella_number}/lend/")
+    suspend fun postUmbrellaRental(
+        @Path("umbrella_number") umbrellaNumber: Int
+    ): BaseResponse<String>
 }

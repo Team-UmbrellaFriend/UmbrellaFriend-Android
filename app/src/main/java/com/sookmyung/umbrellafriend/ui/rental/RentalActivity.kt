@@ -40,6 +40,7 @@ class RentalActivity :
         scanQRCode()
         checkUmbrellaRentAvailable()
         setRentalListener()
+        checkRentSuccess()
         capture = CaptureManager(this, binding.bsRental)
         capture.initializeFromIntent(intent, savedInstanceState)
         capture.decode()
@@ -152,6 +153,23 @@ class RentalActivity :
             this
         ) { _, data ->
             if (data.getBoolean("isRental")) {
+                viewModel.rentUmbrella()
+            }
+        }
+    }
+
+    private fun checkRentSuccess() {
+        viewModel.isRent.observe(this) { isRent ->
+            if (isRent) {
+                finish()
+            } else {
+                BindingCustomDialog.Builder().build(
+                    title = "잠시만요!",
+                    subtitle = "해당 우산은 대여가 불가해요.\n다른 우산을 대여해주세요.",
+                    btnContent = "확인",
+                    imageDrawable = R.drawable.ic_notice,
+                    btnAction = {}
+                ).show(supportFragmentManager, "CUSTOM_DIALOG")
             }
         }
     }

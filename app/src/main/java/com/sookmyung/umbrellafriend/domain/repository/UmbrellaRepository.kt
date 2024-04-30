@@ -8,4 +8,5 @@ interface UmbrellaRepository {
 
     suspend fun getAvailableUmbrella(): Result<List<AvailableUmbrella>>
     suspend fun getUmbrellaRental(umbrellaNumber: Int): Result<UmbrellaRental>
+    suspend fun postUmbrellaRental(umbrellaNumber: Int): Result<String>
 }

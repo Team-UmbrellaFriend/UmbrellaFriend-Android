@@ -40,6 +40,11 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         moveToRental()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getHome()
+    }
+
     private fun clickRentalBtn() {
         binding.clHomeUmbrellaRental.setSingleOnClickListener {
             when (viewModel.rentalStatus.value) {
