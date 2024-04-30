@@ -1,5 +1,6 @@
 package com.sookmyung.umbrellafriend.di
 
+import com.sookmyung.umbrellafriend.data.service.EtcService
 import com.sookmyung.umbrellafriend.data.service.HomeService
 import com.sookmyung.umbrellafriend.data.service.MypageService
 import com.sookmyung.umbrellafriend.data.service.UmbrellaService
@@ -27,4 +28,8 @@ object RetrofitServiceModule {
     @Provides
     fun providesUmbrellaService(@RetrofitModule.UmbrellaFriendType retrofit: Retrofit): UmbrellaService =
         retrofit.create(UmbrellaService::class.java)
+
+    @Provides
+    fun providesEtcService(@RetrofitModule.UmbrellaFriendType retrofit: Retrofit): EtcService =
+        retrofit.create(EtcService::class.java)
 }
