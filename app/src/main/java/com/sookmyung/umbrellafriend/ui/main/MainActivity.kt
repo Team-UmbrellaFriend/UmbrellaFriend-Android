@@ -64,6 +64,14 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
                     imageDrawable = R.drawable.ic_check,
                     btnAction = {}
                 ).show(supportFragmentManager, "CUSTOM_DIALOG")
+            } else {
+                BindingCustomDialog.Builder().build(
+                    title = "대여 연장 불가",
+                    subtitle = "대여 연장은 한 번만 가능합니다.",
+                    btnContent = "확인",
+                    imageDrawable = R.drawable.ic_notice,
+                    btnAction = {}
+                ).show(supportFragmentManager, "CUSTOM_DIALOG")
             }
         }
     }
