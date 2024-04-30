@@ -47,9 +47,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         binding.clHomeUmbrellaRental.setSingleOnClickListener {
             when (viewModel.rentalStatus.value) {
                 RENTING -> viewModel.getExtend()
-                NOT_RENTED -> {
-                    moveToRental()
-                }
+                NOT_RENTED -> startActivity(Intent(this, RentalActivity::class.java))
                 OVERDUE -> showExtendedFailDialog()
                 else -> {}
             }
@@ -175,12 +173,6 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
     private fun moveToUmbrellaMap() {
         binding.clHomeMap.setSingleOnClickListener {
             startActivity(Intent(this, UmbrellaMapActivity::class.java))
-        }
-    }
-
-    private fun moveToRental() {
-        binding.clHomeUmbrellaRental.setSingleOnClickListener {
-            startActivity(Intent(this, RentalActivity::class.java))
         }
     }
 }

@@ -37,17 +37,16 @@ class RentalActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding.vm = viewModel
+        capture = CaptureManager(this, binding.bsRental)
+        capture.initializeFromIntent(intent, savedInstanceState)
+        binding.bsRental.decodeContinuous(callback)
 
         checkCameraPermission()
         scanQRCode()
         checkUmbrellaRentAvailable()
         setRentalListener()
         checkRentSuccess()
-        capture = CaptureManager(this, binding.bsRental)
-        capture.initializeFromIntent(intent, savedInstanceState)
-        binding.bsRental.decodeContinuous(callback)
     }
 
     override fun onResume() {
