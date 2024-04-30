@@ -3,17 +3,16 @@ package com.sookmyung.umbrellafriend.ui.rental
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
-import com.google.zxing.integration.android.IntentIntegrator
 import com.journeyapps.barcodescanner.CaptureManager
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
 import com.sookmyung.umbrellafriend.R
 import com.sookmyung.umbrellafriend.databinding.ActivityRentalBinding
+import com.sookmyung.umbrellafriend.util.BindingCustomDialog
 import com.sookmyung.umbrellafriend.util.binding.BindingActivity
 import com.sookmyung.umbrellafriend.util.toast
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,16 +22,14 @@ class RentalActivity :
     BindingActivity<ActivityRentalBinding>(R.layout.activity_rental) {
     private val viewModel by viewModels<RentalViewModel>()
     private lateinit var capture: CaptureManager
-    private val barcodeLauncher = registerForActivityResult(ScanContract()) { result: ScanIntentResult ->
-        if (result.contents == null) {
-            toast("QR을 다시 인식해주세요.")
+    private val barcodeLauncher =
+        registerForActivityResult(ScanContract()) { result: ScanIntentResult ->
+            if (result.contents == null) {
+                toast("QR을 다시 인식해주세요.")
+            } else {
+                viewModel.extractNumberFromUrl(result.contents)
+            }
         }
-        else {
-            //bottom sheet
-            viewModel.extractNumberFromUrl(result.contents)
-            showBottomSheet()
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +38,8 @@ class RentalActivity :
 
         checkCameraPermission()
         scanQRCode()
+        checkUmbrellaRentAvailable()
+        setRentalListener()
         capture = CaptureManager(this, binding.bsRental)
         capture.initializeFromIntent(intent, savedInstanceState)
         capture.decode()
@@ -60,6 +59,7 @@ class RentalActivity :
         super.onDestroy()
         capture.onDestroy()
     }
+
     private fun checkCameraPermission() {
         if (ActivityCompat.checkSelfPermission(
                 this,
@@ -119,10 +119,41 @@ class RentalActivity :
         }
     }
 
-    private fun showBottomSheet(){
+    private fun checkUmbrellaRentAvailable() {
+        viewModel.isRentalAvailable.observe(this) { isRentalAvailable ->
+            if (isRentalAvailable) {
+                showBottomSheet()
+            } else {
+                BindingCustomDialog.Builder().build(
+                    title = "잠시만요!",
+                    subtitle = "해당 우산은 신고가 들어와 대여가 불가해요.\n다른 우산을 대여해주세요.",
+                    btnContent = "확인",
+                    imageDrawable = R.drawable.ic_notice,
+                    btnAction = {}
+                ).show(supportFragmentManager, "CUSTOM_DIALOG")
+            }
+        }
+    }
+
+    private fun showBottomSheet() {
         val bottomSheet = RentalBottomSheet()
-        bottomSheet.setStyle(DialogFragment.STYLE_NORMAL, R.style.UmbrellaFriendBottomSheetTheme)
-        bottomSheet.show(supportFragmentManager,"RentalBottomSheet")
+        with(bottomSheet) {
+            setStyle(DialogFragment.STYLE_NORMAL, R.style.UmbrellaFriendBottomSheetTheme)
+            viewModel.umbrellaInfo.value?.let { info ->
+                setUmbrellaInfo(info)
+            }
+            show(supportFragmentManager, "RentalBottomSheet")
+        }
+    }
+
+    private fun setRentalListener() {
+        supportFragmentManager.setFragmentResultListener(
+            "RentalBottomSheet",
+            this
+        ) { _, data ->
+            if (data.getBoolean("isRental")) {
+            }
+        }
     }
 
     companion object {
