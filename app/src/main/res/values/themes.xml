@@ -8,4 +8,12 @@
     </style>
 
     <style name="Theme.UmbrellaFriend" parent="Base.Theme.UmbrellaFriend" />
+
+    <style name="UmbrellaFriendBottomSheetTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/UmbrellaFriendBottomSheetStyle</item>
+    </style>
+
+    <style name="UmbrellaFriendBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/shape_white_fill_top_24_rect</item>
+    </style>
 </resources>

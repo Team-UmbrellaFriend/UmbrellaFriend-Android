@@ -3,10 +3,15 @@ package com.sookmyung.umbrellafriend.ui.rental
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.DialogFragment
 import com.google.zxing.integration.android.IntentIntegrator
 import com.journeyapps.barcodescanner.CaptureManager
+import com.journeyapps.barcodescanner.ScanContract
+import com.journeyapps.barcodescanner.ScanIntentResult
+import com.journeyapps.barcodescanner.ScanOptions
 import com.sookmyung.umbrellafriend.R
 import com.sookmyung.umbrellafriend.databinding.ActivityRentalBinding
 import com.sookmyung.umbrellafriend.util.binding.BindingActivity
@@ -18,7 +23,15 @@ class RentalActivity :
     BindingActivity<ActivityRentalBinding>(R.layout.activity_rental) {
     private val viewModel by viewModels<RentalViewModel>()
     private lateinit var capture: CaptureManager
-    private lateinit var qrScan: IntentIntegrator
+    private val barcodeLauncher = registerForActivityResult(ScanContract()) { result: ScanIntentResult ->
+        if (result.contents == null) {
+            toast("QR을 다시 인식해주세요.")
+        }
+        else {
+            //bottom sheet
+            showBottomSheet()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +42,7 @@ class RentalActivity :
         scanQRCode()
         capture = CaptureManager(this, binding.bsRental)
         capture.initializeFromIntent(intent, savedInstanceState)
-        capture.decode() //decode
+        capture.decode()
     }
 
     override fun onResume() {
@@ -46,7 +59,6 @@ class RentalActivity :
         super.onDestroy()
         capture.onDestroy()
     }
-
     private fun checkCameraPermission() {
         if (ActivityCompat.checkSelfPermission(
                 this,
@@ -95,16 +107,21 @@ class RentalActivity :
     }
 
     private fun scanQRCode() {
-        qrScan = IntentIntegrator(this)
-        with(qrScan) {
-            setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
+        val options = ScanOptions()
+        with(options) {
+            setDesiredBarcodeFormats(ScanOptions.QR_CODE)
             setCameraId(0)
-            captureActivity = RentalActivity::class.java
             setBeepEnabled(false)
             setOrientationLocked(true)
             setPrompt("")
-            initiateScan()
+            barcodeLauncher.launch(options)
         }
+    }
+
+    private fun showBottomSheet(){
+        val bottomSheet = RentalBottomSheet()
+        bottomSheet.setStyle(DialogFragment.STYLE_NORMAL, R.style.UmbrellaFriendBottomSheetTheme)
+        bottomSheet.show(supportFragmentManager,"RentalBottomSheet")
     }
 
     companion object {
