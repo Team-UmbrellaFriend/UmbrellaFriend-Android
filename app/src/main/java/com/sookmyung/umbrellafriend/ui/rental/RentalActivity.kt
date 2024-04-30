@@ -29,6 +29,7 @@ class RentalActivity :
         }
         else {
             //bottom sheet
+            viewModel.extractNumberFromUrl(result.contents)
             showBottomSheet()
         }
     }
