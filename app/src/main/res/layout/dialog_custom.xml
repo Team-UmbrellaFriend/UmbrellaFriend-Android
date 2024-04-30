@@ -52,7 +52,7 @@
         android:background="@drawable/shape_gray400_fill_12_rect"
         android:gravity="center"
         android:paddingVertical="12dp"
-        android:text="취소"
+        android:text="다음에 할래요"
         android:textColor="@color/white"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/btn_dialog_do"
