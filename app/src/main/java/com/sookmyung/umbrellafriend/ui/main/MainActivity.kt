@@ -21,7 +21,6 @@ import com.sookmyung.umbrellafriend.ui.rental.RentalActivity
 import com.sookmyung.umbrellafriend.util.BindingCustomDialog
 import com.sookmyung.umbrellafriend.util.binding.BindingActivity
 import com.sookmyung.umbrellafriend.util.setSingleOnClickListener
-import com.sookmyung.umbrellafriend.util.toast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,7 +36,6 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         checkRentalStatus()
         moveToMypage()
         moveToUmbrellaMap()
-        moveToRental()
     }
 
     override fun onResume() {
@@ -50,7 +48,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
             when (viewModel.rentalStatus.value) {
                 RENTING -> viewModel.getExtend()
                 NOT_RENTED -> {
-                    toast("우산 대여 화면으로 넘어가기!")
+                    moveToRental()
                 }
 
                 OVERDUE -> showExtendedFailDialog()
