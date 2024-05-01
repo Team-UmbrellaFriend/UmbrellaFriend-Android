@@ -1,5 +1,6 @@
 package com.sookmyung.umbrellafriend.data.source
 
+import com.sookmyung.umbrellafriend.data.entity.request.ReturnRequest
 import com.sookmyung.umbrellafriend.data.entity.response.AvailableUmbrellaResponse
 import com.sookmyung.umbrellafriend.data.entity.response.BaseResponse
 import com.sookmyung.umbrellafriend.data.entity.response.UmbrellaRentalResponse
@@ -20,4 +21,7 @@ class UmbrellaDataSource @Inject constructor(
 
     suspend fun postUmbrellaRental(umbrellaNumber: Int): BaseResponse<String> =
         umbrellaService.postUmbrellaRental(umbrellaNumber)
+
+    suspend fun postUmbrellaReturn(returnRequest: ReturnRequest): BaseResponse<String> =
+        umbrellaService.postUmbrellaReturn(returnRequest)
 }

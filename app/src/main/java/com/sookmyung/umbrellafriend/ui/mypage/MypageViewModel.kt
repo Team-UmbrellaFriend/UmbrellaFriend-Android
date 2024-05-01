@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sookmyung.umbrellafriend.domain.entity.Mypage
-import com.sookmyung.umbrellafriend.domain.usecase.GetLogoutUseCase
 import com.sookmyung.umbrellafriend.domain.usecase.GetMypageUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -14,8 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MypageViewModel @Inject constructor(
-    val getMypageUseCase: GetMypageUseCase,
-    val getLogoutUseCase: GetLogoutUseCase
+    val getMypageUseCase: GetMypageUseCase
 ) : ViewModel() {
     private val _mypage: MutableLiveData<Mypage> = MutableLiveData()
     val mypage: LiveData<Mypage> get() = _mypage
@@ -38,7 +36,7 @@ class MypageViewModel @Inject constructor(
         }
     }
 
-    companion object{
+    companion object {
         const val USER_ID = "USER_ID"
     }
 }

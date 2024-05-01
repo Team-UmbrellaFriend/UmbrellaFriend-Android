@@ -157,8 +157,8 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
             when (isWithDraw) {
                 true -> {
                     BindingCustomDialog.Builder().build(
-                        title = "신고 접수 완료",
-                        subtitle = "신고해 주셔서 감사합니다!\n이른 시일 내에 해결하겠습니다.",
+                        title = "탈퇴 완료",
+                        subtitle = "회원 탈퇴가 완료되었습니다.\n우산 대여가 필요하면 다시 찾아주세요!",
                         btnContent = "확인",
                         imageDrawable = R.drawable.ic_check,
                         btnDoAction = {

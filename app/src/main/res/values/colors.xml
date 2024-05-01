@@ -16,6 +16,7 @@
     <color name="white_90">#E6FFFFFF</color>
     <color name="white_60">#99FFFFFF</color>
     <color name="dimmend_60">#99000000</color>
+    <color name="location_70">#B3000000</color>
 
     <!-- Primary -->
     <color name="main_blue">#FF466DF4</color>

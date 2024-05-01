@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
-        <variable
-            name="vm"
-            type="com.sookmyung.umbrellafriend.ui.rental.RentalViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,7 +14,7 @@
 
 
         <com.journeyapps.barcodescanner.DecoratedBarcodeView
-            android:id="@+id/bs_rental"
+            android:id="@+id/bs_return"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -26,7 +24,7 @@
             app:zxing_scanner_layout="@layout/custom_qr_scanner" />
 
         <ImageView
-            android:id="@+id/btn_rental_exit"
+            android:id="@+id/btn_return_exit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_cancel"
@@ -35,12 +33,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_rental_title"
+            android:id="@+id/tv_return_title"
             style="@style/Title1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="380dp"
-            android:text="우산 QR코드 인식"
+            android:text="반납코드 QR코드 인식"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -48,7 +46,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_rental_subtitle"
+            android:id="@+id/tv_return_subtitle"
             style="@style/Body3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -57,18 +55,18 @@
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_rental_title" />
+            app:layout_constraintTop_toBottomOf="@id/tv_return_title" />
 
         <TextView
-            android:id="@+id/tv_rental_search"
+            android:id="@+id/tv_return_search"
             style="@style/Body5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="310dp"
-            android:text="@string/rental_help"
+            android:text="@string/return_help"
             android:textColor="@color/gray_300"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_rental_subtitle" />
+            app:layout_constraintTop_toBottomOf="@id/tv_return_subtitle" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -18,6 +18,7 @@ import com.sookmyung.umbrellafriend.domain.entity.RentalStatus.RENTING
 import com.sookmyung.umbrellafriend.ui.map.UmbrellaMapActivity
 import com.sookmyung.umbrellafriend.ui.mypage.MypageActivity
 import com.sookmyung.umbrellafriend.ui.rental.RentalActivity
+import com.sookmyung.umbrellafriend.ui.returnlocation.ReturnActivity
 import com.sookmyung.umbrellafriend.util.BindingCustomDialog
 import com.sookmyung.umbrellafriend.util.binding.BindingActivity
 import com.sookmyung.umbrellafriend.util.setSingleOnClickListener
@@ -36,6 +37,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         checkRentalStatus()
         moveToMypage()
         moveToUmbrellaMap()
+        moveToReturn()
     }
 
     override fun onResume() {
@@ -181,6 +183,12 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
     private fun moveToMypage() {
         binding.btnMypage.setOnClickListener {
             startActivity(Intent(this, MypageActivity::class.java))
+        }
+    }
+
+    private fun moveToReturn() {
+        binding.clHomeUmbrellaReturn.setOnClickListener {
+            startActivity(Intent(this, ReturnActivity::class.java))
         }
     }
 

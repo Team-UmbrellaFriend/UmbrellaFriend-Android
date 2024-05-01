@@ -107,10 +107,20 @@
             android:name=".ui.rental.RentalActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.returnlocation.ReturnActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
 
-        <activity android:name="com.journeyapps.barcodescanner.CaptureActivity"
+        <activity
+            android:name=".ui.returnlocation.complete.ReturnCompleteActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
-            tools:replace="screenOrientation"/>
+            tools:replace="screenOrientation" />
     </application>
 
 </manifest>
