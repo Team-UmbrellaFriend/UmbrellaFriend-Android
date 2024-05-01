@@ -4,16 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sookmyung.umbrellafriend.domain.usecase.GetUmbrellaRentalUseCase
-import com.sookmyung.umbrellafriend.domain.usecase.PostUmbrellaRentalUseCase
+import com.sookmyung.umbrellafriend.data.entity.request.ReturnRequest
+import com.sookmyung.umbrellafriend.domain.usecase.PostUmbrellaReturnUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ReturnViewModel @Inject constructor(
-    val getUmbrellaRentalUseCase: GetUmbrellaRentalUseCase,
-    val postUmbrellaRentalUseCase: PostUmbrellaRentalUseCase
+    val postUmbrellaReturnUseCase: PostUmbrellaReturnUseCase
 ) : ViewModel() {
     private val _isReturnAvailable: MutableLiveData<Boolean> = MutableLiveData()
     val isReturnAvailable: LiveData<Boolean> get() = _isReturnAvailable
@@ -35,8 +34,20 @@ class ReturnViewModel @Inject constructor(
     }
 
     fun returnUmbrella() {
+        val locationKor = when (qrLocation.value) {
+            "myungshin" -> "명신관"
+            "renaissance" -> "르네상스관"
+            "science" -> "과학관"
+            else -> {
+                ""
+            }
+        }
         viewModelScope.launch {
-            _isReturn.value = true
+            postUmbrellaReturnUseCase(ReturnRequest(locationKor)).onSuccess {
+                _isReturn.value = true
+            }.onFailure {
+                _isReturn.value = false
+            }
         }
     }
 }

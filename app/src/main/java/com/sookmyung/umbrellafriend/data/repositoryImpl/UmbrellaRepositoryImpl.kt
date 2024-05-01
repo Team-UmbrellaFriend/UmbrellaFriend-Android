@@ -1,5 +1,6 @@
 package com.sookmyung.umbrellafriend.data.repositoryImpl
 
+import com.sookmyung.umbrellafriend.data.entity.request.ReturnRequest
 import com.sookmyung.umbrellafriend.data.source.UmbrellaDataSource
 import com.sookmyung.umbrellafriend.domain.entity.AvailableUmbrella
 import com.sookmyung.umbrellafriend.domain.entity.UmbrellaRental
@@ -25,5 +26,10 @@ class UmbrellaRepositoryImpl @Inject constructor(
     override suspend fun postUmbrellaRental(umbrellaNumber: Int): Result<String> =
         runCatching {
             umbrellaDataSource.postUmbrellaRental(umbrellaNumber)
+        }.mapCatching { response -> requireNotNull(response.data) }
+
+    override suspend fun postUmbrellaReturn(returnRequest: ReturnRequest): Result<String> =
+        runCatching {
+            umbrellaDataSource.postUmbrellaReturn(returnRequest)
         }.mapCatching { response -> requireNotNull(response.data) }
 }
