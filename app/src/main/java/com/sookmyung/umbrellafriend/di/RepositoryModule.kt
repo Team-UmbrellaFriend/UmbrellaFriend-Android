@@ -1,9 +1,11 @@
 package com.sookmyung.umbrellafriend.di
 
+import com.sookmyung.umbrellafriend.data.repositoryImpl.EtcRepositoryImpl
 import com.sookmyung.umbrellafriend.data.repositoryImpl.HomeRepositoryImpl
 import com.sookmyung.umbrellafriend.data.repositoryImpl.MypageRepositoryImpl
 import com.sookmyung.umbrellafriend.data.repositoryImpl.UmbrellaRepositoryImpl
 import com.sookmyung.umbrellafriend.data.repositoryImpl.UsersRepositoryImpl
+import com.sookmyung.umbrellafriend.domain.repository.EtcRepository
 import com.sookmyung.umbrellafriend.domain.repository.HomeRepository
 import com.sookmyung.umbrellafriend.domain.repository.MypageRepository
 import com.sookmyung.umbrellafriend.domain.repository.UmbrellaRepository
@@ -41,4 +43,9 @@ abstract class RepositoryModule {
         umbrellaRepositoryImpl: UmbrellaRepositoryImpl
     ): UmbrellaRepository
 
+    @Binds
+    @Singleton
+    abstract fun bindToEtcRepository(
+        etcRepositoryImpl: EtcRepositoryImpl
+    ): EtcRepository
 }

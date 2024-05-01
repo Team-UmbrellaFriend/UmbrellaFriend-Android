@@ -35,7 +35,18 @@ class CustomDialog : BindingCustomDialog() {
         binding.dialogSubtitle.text = subtitle
     }
 
-    override fun setBtnClick(action: () -> Unit) {
-        binding.btnDialog.setSingleOnClickListener { action() }
+    override fun setDoBtnClick(action: () -> Unit) {
+        binding.btnDialogDo.setSingleOnClickListener { action() }
+    }
+
+    override fun setBackBtnClick(action: () -> Unit) {
+        binding.btnDialogBack.setSingleOnClickListener { action() }
+    }
+
+    override fun setBackBtnVisibility() {
+        binding.btnDialogBack.visibility = when(isBackBtn){
+            true -> View.VISIBLE
+            else -> View.GONE
+        }
     }
 }

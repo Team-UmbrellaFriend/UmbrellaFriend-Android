@@ -157,27 +157,31 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
             when (isWithDraw) {
                 true -> {
                     BindingCustomDialog.Builder().build(
-                        R.drawable.ic_check,
-                        "신고 접수 완료",
-                        "신고해 주셔서 감사합니다!\n이른 시일 내에 해결하겠습니다.",
-                        "확인"
-                    ) {
-                        viewModel.withdrawSuccess()
-                        val intent = Intent(this, SplashActivity::class.java)
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NO_HISTORY)
-                        startActivity(intent)
-                    }
-                        .show(supportFragmentManager, "CUSTOM_DIALOG")
+                        title = "신고 접수 완료",
+                        subtitle = "신고해 주셔서 감사합니다!\n이른 시일 내에 해결하겠습니다.",
+                        btnContent = "확인",
+                        imageDrawable = R.drawable.ic_check,
+                        btnDoAction = {
+                            viewModel.withdrawSuccess()
+                            val intent = Intent(this, SplashActivity::class.java)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NO_HISTORY)
+                            startActivity(intent)
+                        },
+                        btnBackAction = {},
+                        isBackBtn = false
+                    ).show(supportFragmentManager, "CUSTOM_DIALOG")
                 }
 
                 false -> {
                     BindingCustomDialog.Builder().build(
-                        R.drawable.ic_notice,
-                        "잠시만요!",
-                        "우산을 반납하지 않아 탈퇴할 수 없습니다.\n반납 후 다시 진행해 주세요!",
-                        "확인"
-                    ) { finish() }
-                        .show(supportFragmentManager, "CUSTOM_DIALOG")
+                        title = "잠시만요!",
+                        subtitle = "우산을 반납하지 않아 탈퇴할 수 없습니다.\n반납 후 다시 진행해 주세요!",
+                        btnContent = "확인",
+                        imageDrawable = R.drawable.ic_notice,
+                        btnDoAction = { finish() },
+                        btnBackAction = {},
+                        isBackBtn = false
+                    ).show(supportFragmentManager, "CUSTOM_DIALOG")
                 }
             }
         }

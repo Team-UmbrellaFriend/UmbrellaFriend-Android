@@ -62,7 +62,9 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
                     subtitle = "자동으로 3일이\n추가 연장되었습니다.",
                     btnContent = "확인",
                     imageDrawable = R.drawable.ic_check,
-                    btnAction = {}
+                    btnDoAction = {},
+                    btnBackAction = {},
+                    isBackBtn = false
                 ).show(supportFragmentManager, "CUSTOM_DIALOG")
             } else {
                 BindingCustomDialog.Builder().build(
@@ -70,7 +72,9 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
                     subtitle = "대여 연장은 한 번만 가능합니다.",
                     btnContent = "확인",
                     imageDrawable = R.drawable.ic_notice,
-                    btnAction = {}
+                    btnDoAction = {},
+                    btnBackAction = {},
+                    isBackBtn = false
                 ).show(supportFragmentManager, "CUSTOM_DIALOG")
             }
         }
@@ -82,7 +86,9 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
             subtitle = "연체된 사용자는 연장할 수 없습니다.",
             btnContent = "확인",
             imageDrawable = R.drawable.ic_fail,
-            btnAction = {}
+            btnDoAction = {},
+            btnBackAction = {},
+            isBackBtn = false
         ).show(supportFragmentManager, "CUSTOM_DIALOG")
     }
 

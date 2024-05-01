@@ -132,7 +132,9 @@ class RentalActivity :
                     subtitle = "해당 우산은 신고가 들어와 대여가 불가해요.\n다른 우산을 대여해주세요.",
                     btnContent = "확인",
                     imageDrawable = R.drawable.ic_notice,
-                    btnAction = {}
+                    btnDoAction = {},
+                    btnBackAction = {},
+                    isBackBtn = false
                 ).show(supportFragmentManager, "CUSTOM_DIALOG")
             }
         }
@@ -174,9 +176,9 @@ class RentalActivity :
                     subtitle = "해당 우산은 대여가 불가해요.\n다른 우산을 대여해주세요.",
                     btnContent = "확인",
                     imageDrawable = R.drawable.ic_notice,
-                    btnAction = {
-                        capture.onResume()
-                    }
+                    btnDoAction = { capture.onResume()},
+                    btnBackAction = {},
+                    isBackBtn = false
                 ).show(supportFragmentManager, "CUSTOM_DIALOG")
             }
         }
