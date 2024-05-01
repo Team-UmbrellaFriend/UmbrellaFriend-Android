@@ -54,7 +54,6 @@ class WithdrawViewModel @Inject constructor(
         viewModelScope.launch {
             deleteWithdrawUseCase(
                 WithdrawRequest(
-                    isNoticeCheck.value ?: false,
                     withdrawType.value?.getType() ?: "기타",
                     etc.value ?: ""
                 )
