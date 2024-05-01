@@ -22,8 +22,8 @@ abstract class BindingCustomDialog : DialogFragment() {
         setTitle()
         setSubtitle()
         setBackBtnVisibility()
-        setDoBtnClick { btnDoAction(); dismiss() }
-        setDoBtnClick { btnBackAction(); dismiss() }
+        setDoBtnClick { btnDoAction() }
+        setBackBtnClick { btnBackAction() }
     }
 
     abstract fun setImage()
@@ -31,7 +31,6 @@ abstract class BindingCustomDialog : DialogFragment() {
     abstract fun setSubtitle()
     abstract fun setDoBtnClick(action: () -> Unit)
     abstract fun setBackBtnClick(action: () -> Unit)
-
     abstract fun setBackBtnVisibility()
 
     class Builder() {

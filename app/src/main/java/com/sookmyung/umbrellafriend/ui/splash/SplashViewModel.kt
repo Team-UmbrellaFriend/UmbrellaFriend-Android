@@ -29,7 +29,6 @@ class SplashViewModel @Inject constructor(
 
     init {
         getVersion()
-        isLogin()
     }
 
     private fun getVersion() {
@@ -56,13 +55,10 @@ class SplashViewModel @Inject constructor(
             )
         val versionNameNum = versionStringToNumber(versionName)
 
-        if (storeAppVersionNum > forceAppVersionNum) {
-            if (versionNameNum < forceAppVersionNum) _isUpdate.value = UpdateType.FORCE
-            else if (versionNameNum == storeAppVersionNum) _isUpdate.value = UpdateType.NONE
-            else _isUpdate.value = UpdateType.RECOMMEND
-        } else {
-            _isUpdate.value = UpdateType.NONE
-        }
+        if (versionNameNum < forceAppVersionNum) _isUpdate.value = UpdateType.FORCE
+        else if (versionNameNum < storeAppVersionNum) _isUpdate.value = UpdateType.RECOMMEND
+        else _isUpdate.value = UpdateType.NONE
+
     }
 
     private fun versionStringToNumber(version: String): Int {
@@ -77,7 +73,7 @@ class SplashViewModel @Inject constructor(
         return result
     }
 
-    private fun isLogin() {
+    fun isLogin() {
         _isLogin.value = getLoginUseCase()
     }
 

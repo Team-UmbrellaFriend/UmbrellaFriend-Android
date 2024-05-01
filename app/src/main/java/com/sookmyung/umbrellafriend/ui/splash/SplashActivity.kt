@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import androidx.activity.viewModels
 import com.sookmyung.umbrellafriend.R
 import com.sookmyung.umbrellafriend.databinding.ActivitySplashBinding
@@ -41,6 +40,7 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
     }
 
     private fun startApp() {
+        viewModel.isLogin()
         viewModel.isLogin.observe(this) { isLogin ->
             val intent: Intent = if (isLogin) {
                 Intent(this, MainActivity::class.java)
