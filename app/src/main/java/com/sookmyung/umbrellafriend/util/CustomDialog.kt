@@ -44,7 +44,7 @@ class CustomDialog : BindingCustomDialog() {
     }
 
     override fun setBackBtnVisibility() {
-        binding.btnDialogBack.visibility = when(isBackBtn){
+        binding.btnDialogBack.visibility = when (isBackBtn) {
             true -> View.VISIBLE
             else -> View.GONE
         }
