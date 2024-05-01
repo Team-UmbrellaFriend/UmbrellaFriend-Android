@@ -1,6 +1,7 @@
 package com.sookmyung.umbrellafriend.ui.returnlocation
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -12,6 +13,7 @@ import com.journeyapps.barcodescanner.CaptureManager
 import com.journeyapps.barcodescanner.ScanOptions
 import com.sookmyung.umbrellafriend.R
 import com.sookmyung.umbrellafriend.databinding.ActivityReturnBinding
+import com.sookmyung.umbrellafriend.ui.returnlocation.complete.ReturnCompleteActivity
 import com.sookmyung.umbrellafriend.util.BindingCustomDialog
 import com.sookmyung.umbrellafriend.util.binding.BindingActivity
 import com.sookmyung.umbrellafriend.util.toast
@@ -172,7 +174,8 @@ class ReturnActivity :
     private fun checkRentSuccess() {
         viewModel.isReturn.observe(this) { isReturn ->
             if (isReturn) {
-//                startActivity(Intent(this, ))
+                startActivity(Intent(this@ReturnActivity, ReturnCompleteActivity::class.java))
+                finish()
             } else {
                 toast("반납이 되지 않았습니다. 다시 시도해주세요.")
                 finish()
