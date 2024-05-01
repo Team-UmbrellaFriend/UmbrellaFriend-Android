@@ -6,17 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.setFragmentResult
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.sookmyung.umbrellafriend.R
 import com.sookmyung.umbrellafriend.databinding.FragmentReturnBottomsheetBinding
 import com.sookmyung.umbrellafriend.domain.entity.Location
+import com.sookmyung.umbrellafriend.util.ItemDecoration
 import com.sookmyung.umbrellafriend.util.setSingleOnClickListener
 
 class ReturnBottomSheet : BottomSheetDialogFragment() {
     private var _binding: FragmentReturnBottomsheetBinding? = null
     private val binding get() = requireNotNull(_binding)
     private var selectedLocation: String = ""
-
+    private lateinit var itemDeco: RecyclerView.ItemDecoration
 
     private val returnLocationListAdapter: ReturnLocationListAdapter?
         get() = binding.rvReturnLocation.adapter as? ReturnLocationListAdapter
@@ -44,11 +46,25 @@ class ReturnBottomSheet : BottomSheetDialogFragment() {
     }
 
     private fun setLocationList() {
+        itemDeco = ItemDecoration(requireContext())
+        binding.rvReturnLocation.addItemDecoration(itemDeco)
         returnLocationListAdapter?.submitList(
             listOf(
-                Location("명신관", "myungshin", Uri.parse("android.resource://com.sookmyung.umbrellafriend/${R.drawable.img_myungsin}")),
-                Location("르네상스관", "renaissance", Uri.parse("android.resource://com.sookmyung.umbrellafriend/${R.drawable.img_renaissance}")),
-                Location("과학관", "science", Uri.parse("android.resource://com.sookmyung.umbrellafriend/${R.drawable.img_science}"))
+                Location(
+                    "명신관",
+                    "myungshin",
+                    Uri.parse("android.resource://com.sookmyung.umbrellafriend/${R.drawable.img_myungsin}")
+                ),
+                Location(
+                    "르네상스관",
+                    "renaissance",
+                    Uri.parse("android.resource://com.sookmyung.umbrellafriend/${R.drawable.img_renaissance}")
+                ),
+                Location(
+                    "과학관",
+                    "science",
+                    Uri.parse("android.resource://com.sookmyung.umbrellafriend/${R.drawable.img_science}")
+                )
             )
         )
     }
