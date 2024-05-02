@@ -21,6 +21,7 @@ import com.sookmyung.umbrellafriend.ui.rental.RentalActivity
 import com.sookmyung.umbrellafriend.ui.returnlocation.ReturnActivity
 import com.sookmyung.umbrellafriend.util.BindingCustomDialog
 import com.sookmyung.umbrellafriend.util.binding.BindingActivity
+import com.sookmyung.umbrellafriend.util.customSnackBar
 import com.sookmyung.umbrellafriend.util.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,15 +30,20 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
     private val viewModel by viewModels<MainViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding.vm = viewModel
 
+        setEntrySnackBar()
         clickRentalBtn()
         showExtendedDialog()
         checkRentalStatus()
         moveToMypage()
         moveToUmbrellaMap()
         moveToReturn()
+    }
+
+    private fun setEntrySnackBar() {
+        val isEntry = intent.getBooleanExtra("ENTRY", false)
+        if (isEntry) customSnackBar(binding.viewHomeSnackbar, "로그인되었어요!")
     }
 
     override fun onResume() {

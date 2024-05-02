@@ -43,7 +43,7 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
         viewModel.isLogin()
         viewModel.isLogin.observe(this) { isLogin ->
             val intent: Intent = if (isLogin) {
-                Intent(this, MainActivity::class.java)
+                Intent(this, MainActivity::class.java).putExtra("ENTRY",true)
             } else {
                 Intent(this, SplashEntryActivity::class.java)
             }
