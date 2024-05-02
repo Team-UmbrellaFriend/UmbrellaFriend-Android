@@ -49,6 +49,7 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
                     ).apply {
                         addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                         addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        putExtra("ENTRY",true)
                     })
             }
         }

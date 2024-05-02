@@ -21,7 +21,7 @@ class MainViewModel @Inject constructor(
     private val getHomeUseCase: GetHomeUseCase,
     private val getExtendUseCase: GetExtendUseCase
 ) : ViewModel() {
-    private val _home: MutableLiveData<Home> = MutableLiveData()
+    private val _home: MutableLiveData<Home> = MutableLiveData(Home())
     val home: LiveData<Home> get() = _home
     private val _rentalStatus: MutableLiveData<RentalStatus> = MutableLiveData(NOT_RENTED)
     val rentalStatus: LiveData<RentalStatus> get() = _rentalStatus
