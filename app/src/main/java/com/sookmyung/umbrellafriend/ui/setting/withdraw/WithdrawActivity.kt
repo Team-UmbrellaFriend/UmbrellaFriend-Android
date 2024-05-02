@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import com.sookmyung.umbrellafriend.R
 import com.sookmyung.umbrellafriend.databinding.ActivityWithdrawBinding
 import com.sookmyung.umbrellafriend.domain.entity.WithdrawType
+import com.sookmyung.umbrellafriend.ui.main.MainActivity
 import com.sookmyung.umbrellafriend.ui.splash.SplashActivity
 import com.sookmyung.umbrellafriend.util.BindingCustomDialog
 import com.sookmyung.umbrellafriend.util.binding.BindingActivity
@@ -178,7 +179,14 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
                         subtitle = "우산을 반납하지 않아 탈퇴할 수 없습니다.\n반납 후 다시 진행해 주세요!",
                         btnContent = "확인",
                         imageDrawable = R.drawable.ic_notice,
-                        btnDoAction = { finish() },
+                        btnDoAction = {
+                            startActivity(
+                                Intent(
+                                    this,
+                                    MainActivity::class.java
+                                ).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                            )
+                        },
                         btnBackAction = {},
                         isBackBtn = false
                     ).show(supportFragmentManager, "CUSTOM_DIALOG")
