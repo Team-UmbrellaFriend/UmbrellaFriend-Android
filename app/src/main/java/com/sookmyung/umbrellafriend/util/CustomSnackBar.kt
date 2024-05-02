@@ -9,11 +9,11 @@ import com.google.android.material.snackbar.Snackbar
 import com.sookmyung.umbrellafriend.R
 import com.sookmyung.umbrellafriend.databinding.CustomSnackbarBinding
 
-class CustomSnackBar(view: View, private val message: String, anchor: View) {
+class CustomSnackBar(view: View, private val message: String, anchor: View?) {
 
     private val context = view.context
     private val snackbar = Snackbar.make(view, "", Snackbar.LENGTH_SHORT).apply {
-        anchorView = anchor
+        if (anchor != null) anchorView = anchor
     }
     private val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
 
@@ -47,6 +47,6 @@ class CustomSnackBar(view: View, private val message: String, anchor: View) {
     }
 
     companion object {
-        fun make(view: View, message: String, anchor: View) = CustomSnackBar(view, message, anchor)
+        fun make(view: View, message: String, anchor: View?) = CustomSnackBar(view, message, anchor)
     }
 }

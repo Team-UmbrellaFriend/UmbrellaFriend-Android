@@ -43,7 +43,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
 
     private fun setEntrySnackBar() {
         val isEntry = intent.getBooleanExtra("ENTRY", false)
-        if (isEntry) customSnackBar(binding.viewHomeSnackbar, "로그인되었어요!")
+        if (isEntry) customSnackBar(binding.root, binding.viewHomeSnackbar, "로그인되었어요!")
     }
 
     override fun onResume() {

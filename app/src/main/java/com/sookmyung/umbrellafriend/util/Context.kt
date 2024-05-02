@@ -39,10 +39,11 @@ fun snackBar(
 }
 
 fun customSnackBar(
-    anchorView: View,
+    view: View,
+    anchorView: View?,
     message: String,
 ) {
-    CustomSnackBar.make(anchorView, message, anchorView).show()
+    CustomSnackBar.make(view = view, message = message, anchor = anchorView).show()
 }
 
 fun View.setSingleOnClickListener(onSingleClick: (View) -> Unit) {
