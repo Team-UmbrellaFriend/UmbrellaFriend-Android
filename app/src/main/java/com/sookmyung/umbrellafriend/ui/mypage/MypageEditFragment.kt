@@ -10,6 +10,7 @@ import com.sookmyung.umbrellafriend.R
 import com.sookmyung.umbrellafriend.databinding.FragmentMypageEditBinding
 import com.sookmyung.umbrellafriend.ui.mypage.MypageViewModel.Companion.USER_ID
 import com.sookmyung.umbrellafriend.util.binding.BindingFragment
+import com.sookmyung.umbrellafriend.util.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,11 +21,23 @@ class MypageEditFragment :
         super.onViewCreated(view, savedInstanceState)
         binding.vm = viewModel
 
+        setHideKeyBoard()
         getUserIdBundle()
         showError()
         checkJoinAvailable()
         edit()
         moveToMain()
+    }
+
+    private fun setHideKeyBoard() {
+        val hideKeyBoardViewList = listOf(
+            binding.clMypageEdit,
+            binding.root
+        )
+
+        hideKeyBoardViewList.map {
+            it.setOnClickListener { hideKeyboard() }
+        }
     }
     private fun getUserIdBundle() {
         val bundle = arguments
