@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.sookmyung.umbrellafriend.domain.entity.Home
 import com.sookmyung.umbrellafriend.domain.entity.RentalStatus
 import com.sookmyung.umbrellafriend.domain.entity.RentalStatus.NOT_RENTED
+import com.sookmyung.umbrellafriend.domain.entity.RentalStatus.NOT_RENTED_OVERDUE
 import com.sookmyung.umbrellafriend.domain.entity.RentalStatus.OVERDUE
 import com.sookmyung.umbrellafriend.domain.entity.RentalStatus.RENTING
 import com.sookmyung.umbrellafriend.domain.usecase.GetExtendUseCase
@@ -55,7 +56,8 @@ class MainViewModel @Inject constructor(
         val dDay = home.value?.dDay
 
         _rentalStatus.value = when {
-            dDay?.isOverDue == true -> OVERDUE
+            dDay?.isOverDue == true && dDay.hasUmbrella -> OVERDUE
+            dDay?.isOverDue == true && !dDay.hasUmbrella -> NOT_RENTED_OVERDUE
             dDay?.overdueDays == -1 -> NOT_RENTED
             else -> RENTING
         }

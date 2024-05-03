@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import com.sookmyung.umbrellafriend.R
 import com.sookmyung.umbrellafriend.databinding.ActivityMainBinding
 import com.sookmyung.umbrellafriend.domain.entity.RentalStatus.NOT_RENTED
+import com.sookmyung.umbrellafriend.domain.entity.RentalStatus.NOT_RENTED_OVERDUE
 import com.sookmyung.umbrellafriend.domain.entity.RentalStatus.OVERDUE
 import com.sookmyung.umbrellafriend.domain.entity.RentalStatus.RENTING
 import com.sookmyung.umbrellafriend.ui.map.UmbrellaMapActivity
@@ -33,12 +34,12 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         binding.vm = viewModel
 
         setEntrySnackBar()
+        clickReturnBtn()
         clickRentalBtn()
         showExtendedDialog()
         checkRentalStatus()
         moveToMypage()
         moveToUmbrellaMap()
-        moveToReturn()
     }
 
     private fun setEntrySnackBar() {
@@ -51,12 +52,24 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         viewModel.getHomeInfo()
     }
 
+    private fun clickReturnBtn() {
+        binding.clHomeUmbrellaReturn.setSingleOnClickListener {
+            when (viewModel.rentalStatus.value) {
+                RENTING -> startActivity(Intent(this, ReturnActivity::class.java))
+                OVERDUE -> startActivity(Intent(this, ReturnActivity::class.java))
+                else -> {
+                    customSnackBar(binding.root, binding.viewHomeSnackbar, "우산을 대여해야 반납이 가능해요!")
+                }
+            }
+        }
+    }
+
     private fun clickRentalBtn() {
         binding.clHomeUmbrellaRental.setSingleOnClickListener {
             when (viewModel.rentalStatus.value) {
                 RENTING -> viewModel.getExtend()
                 NOT_RENTED -> startActivity(Intent(this, RentalActivity::class.java))
-                OVERDUE -> showExtendedFailDialog()
+                OVERDUE,NOT_RENTED_OVERDUE -> showExtendedFailDialog()
                 else -> {}
             }
         }
@@ -106,19 +119,21 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
                 NOT_RENTED -> updateViewForNotRented()
                 RENTING -> updateViewForRenting()
                 OVERDUE -> updateViewForOverdue()
+                NOT_RENTED_OVERDUE -> updateViewForNotRentedOverDue()
+                else -> {}
             }
         }
     }
 
     private fun updateViewForNotRented() {
-        updateReturnView(true, "사용한 우산을 반납해요")
+        updateReturnView(true, R.drawable.ic_fold_umbrella_gray, "사용한 우산을 반납해요")
         updateRentalView("우산 대여", "우산을 대여할 수 있어요", R.drawable.ic_unfold_umbrella)
     }
 
 
     private fun updateViewForRenting() {
         updateReturnView(
-            false, "사용한 우산을 반납해요", R.color.main_blue, getString(
+            false, R.drawable.ic_fold_umbrella, "사용한 우산을 반납해요", R.color.main_blue, getString(
                 R.string.home_return_renting_date,
                 viewModel.home.value?.dDay?.daysRemaining.toString()
             )
@@ -129,7 +144,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
 
     private fun updateViewForOverdue() {
         updateReturnView(
-            false, "대여한 우산이 연체되었어요", R.color.sub_orange, getString(
+            false, R.drawable.ic_fold_umbrella, "대여한 우산이 연체되었어요", R.color.sub_orange, getString(
                 R.string.home_return_overdue_date,
                 viewModel.home.value?.dDay?.overdueDays.toString()
             )
@@ -138,8 +153,15 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         setSpannableBuilder()
     }
 
+    private fun updateViewForNotRentedOverDue() {
+        updateReturnView(true, R.drawable.ic_fold_umbrella_gray, "사용한 우산을 반납해요")
+        updateRentalView("대여 불가", "연체해서 대여할 수 없어요", R.drawable.ic_unfold_umbrella_gray)
+        setSpannableBuilder()
+    }
+
     private fun updateReturnView(
         iconVisible: Boolean,
+        icon: Int = R.drawable.ic_fold_umbrella,
         subTitle: String,
         dateColor: Int = R.color.main_blue,
         dateText: String = ""
@@ -152,6 +174,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
 
         with(binding) {
             ivHomeUmbrellaReturnIcon.visibility = if (iconVisible) View.VISIBLE else View.INVISIBLE
+            ivHomeUmbrellaReturnIcon.setImageResource(icon)
             tvHomeUmbrellaReturnSubtitle.text = subTitle
         }
     }
@@ -189,12 +212,6 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
     private fun moveToMypage() {
         binding.btnMypage.setOnClickListener {
             startActivity(Intent(this, MypageActivity::class.java))
-        }
-    }
-
-    private fun moveToReturn() {
-        binding.clHomeUmbrellaReturn.setOnClickListener {
-            startActivity(Intent(this, ReturnActivity::class.java))
         }
     }
 
