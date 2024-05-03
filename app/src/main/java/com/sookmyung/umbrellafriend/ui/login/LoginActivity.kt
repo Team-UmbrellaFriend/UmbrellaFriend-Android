@@ -8,6 +8,7 @@ import com.sookmyung.umbrellafriend.R
 import com.sookmyung.umbrellafriend.databinding.ActivityLoginBinding
 import com.sookmyung.umbrellafriend.ui.main.MainActivity
 import com.sookmyung.umbrellafriend.util.binding.BindingActivity
+import com.sookmyung.umbrellafriend.util.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -17,8 +18,20 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
         super.onCreate(savedInstanceState)
         binding.vm = viewModel
 
+        setHideKeyBoard()
         checkIsLoginAvailable()
         login()
+        close()
+    }
+
+    private fun setHideKeyBoard() {
+        val hideKeyBoardViewList = listOf(
+            binding.root
+        )
+
+        hideKeyBoardViewList.map {
+            it.setOnClickListener { hideKeyboard() }
+        }
     }
 
     private fun checkIsLoginAvailable() {
@@ -52,6 +65,12 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
                         putExtra("ENTRY",true)
                     })
             }
+        }
+    }
+
+    private fun close() {
+        binding.ivLoginNaviBack.setOnClickListener {
+            finish()
         }
     }
 }

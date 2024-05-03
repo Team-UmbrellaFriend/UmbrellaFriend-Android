@@ -16,6 +16,7 @@ import com.sookmyung.umbrellafriend.ui.join.JoinRegisterPhotoFragment.Companion.
 import com.sookmyung.umbrellafriend.ui.splash.SplashEntryActivity
 import com.sookmyung.umbrellafriend.util.ContentUriRequestBody
 import com.sookmyung.umbrellafriend.util.binding.BindingFragment
+import com.sookmyung.umbrellafriend.util.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,11 +26,23 @@ class JoinInfoFragment : BindingFragment<FragmentJoinInfoBinding>(R.layout.fragm
         super.onViewCreated(view, savedInstanceState)
         binding.vm = viewModel
 
+        setHideKeyBoard()
         getStudentBundle()
         showError()
         checkJoinAvailable()
         join()
         moveToMain()
+    }
+
+    private fun setHideKeyBoard() {
+        val hideKeyBoardViewList = listOf(
+            binding.root,
+            binding.clJoinInfo
+        )
+
+        hideKeyBoardViewList.map {
+            it.setOnClickListener { hideKeyboard() }
+        }
     }
 
     private fun getStudentBundle() {

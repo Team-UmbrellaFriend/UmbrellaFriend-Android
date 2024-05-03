@@ -1,6 +1,7 @@
 package com.sookmyung.umbrellafriend.ui.rental
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +14,7 @@ import com.journeyapps.barcodescanner.CaptureManager
 import com.journeyapps.barcodescanner.ScanOptions
 import com.sookmyung.umbrellafriend.R
 import com.sookmyung.umbrellafriend.databinding.ActivityRentalBinding
+import com.sookmyung.umbrellafriend.ui.map.UmbrellaMapActivity
 import com.sookmyung.umbrellafriend.util.BindingCustomDialog
 import com.sookmyung.umbrellafriend.util.binding.BindingActivity
 import com.sookmyung.umbrellafriend.util.toast
@@ -42,11 +44,19 @@ class RentalActivity :
         capture.initializeFromIntent(intent, savedInstanceState)
         binding.bsRental.decodeContinuous(callback)
 
+        close()
         checkCameraPermission()
         scanQRCode()
         checkUmbrellaRentAvailable()
         setRentalListener()
         checkRentSuccess()
+        moveToUmbrellaMap()
+    }
+
+    private fun close() {
+        binding.btnRentalExit.setOnClickListener {
+            finish()
+        }
     }
 
     override fun onResume() {
@@ -181,6 +191,12 @@ class RentalActivity :
                     isBackBtn = false
                 ).show(supportFragmentManager, "CUSTOM_DIALOG")
             }
+        }
+    }
+
+    private fun moveToUmbrellaMap() {
+        binding.tvRentalSearch.setOnClickListener {
+            startActivity(Intent(this, UmbrellaMapActivity::class.java))
         }
     }
 

@@ -16,6 +16,7 @@ import com.sookmyung.umbrellafriend.databinding.ActivityReturnBinding
 import com.sookmyung.umbrellafriend.ui.returnlocation.complete.ReturnCompleteActivity
 import com.sookmyung.umbrellafriend.util.BindingCustomDialog
 import com.sookmyung.umbrellafriend.util.binding.BindingActivity
+import com.sookmyung.umbrellafriend.util.setSingleOnClickListener
 import com.sookmyung.umbrellafriend.util.toast
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -43,12 +44,15 @@ class ReturnActivity :
         capture.initializeFromIntent(intent, savedInstanceState)
         binding.bsReturn.decodeContinuous(callback)
 
+
+        clickHelp()
         checkCameraPermission()
         scanQRCode()
-        showBottomSheet()
+        scanQrSuccess()
         checkLocationSame()
         setReturnBtnClickListener()
         checkRentSuccess()
+        close()
     }
 
     override fun onResume() {
@@ -64,6 +68,13 @@ class ReturnActivity :
     override fun onDestroy() {
         super.onDestroy()
         capture.onDestroy()
+    }
+
+    private fun clickHelp() {
+        binding.tvReturnHelp.setSingleOnClickListener {
+            viewModel.updateIsHelp(true)
+            showBottomSheet()
+        }
     }
 
     private fun checkCameraPermission() {
@@ -124,14 +135,19 @@ class ReturnActivity :
         }
     }
 
-    private fun showBottomSheet() {
+    private fun scanQrSuccess() {
         viewModel.qrLocation.observe(this) {
-            capture.onPause()
-            val bottomSheet = ReturnBottomSheet()
-            with(bottomSheet) {
-                setStyle(DialogFragment.STYLE_NORMAL, R.style.UmbrellaFriendBottomSheetTheme)
-                show(supportFragmentManager, "ReturnBottomSheet")
-            }
+            if(viewModel.isHelp.value != true) showBottomSheet()
+        }
+    }
+
+    private fun showBottomSheet() {
+        capture.onPause()
+        val bottomSheet = ReturnBottomSheet()
+
+        with(bottomSheet) {
+            setStyle(DialogFragment.STYLE_NORMAL, R.style.UmbrellaFriendBottomSheetTheme)
+            show(supportFragmentManager, "ReturnBottomSheet")
         }
     }
 
@@ -145,8 +161,9 @@ class ReturnActivity :
                 val location = bundle.getString("location", "")
 
                 if (clickDo) {
-                    viewModel.checkLocationSame(location)
+                    viewModel.checkReturnAvailable(location)
                 } else {
+                    viewModel.updateIsHelp(false)
                     capture.onResume()
                 }
             }
@@ -180,6 +197,12 @@ class ReturnActivity :
                 toast("반납이 되지 않았습니다. 다시 시도해주세요.")
                 finish()
             }
+        }
+    }
+
+    private fun close() {
+        binding.btnReturnExit.setOnClickListener {
+            finish()
         }
     }
 

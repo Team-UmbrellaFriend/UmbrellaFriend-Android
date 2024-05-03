@@ -1,6 +1,8 @@
 package com.sookmyung.umbrellafriend.ui.setting.report
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -15,6 +17,7 @@ import com.sookmyung.umbrellafriend.domain.entity.ReportType.ETC
 import com.sookmyung.umbrellafriend.domain.entity.ReportType.MISSING
 import com.sookmyung.umbrellafriend.domain.entity.ReportType.NONE
 import com.sookmyung.umbrellafriend.domain.entity.ReportType.QR
+import com.sookmyung.umbrellafriend.domain.entity.WithdrawType
 import com.sookmyung.umbrellafriend.util.BindingCustomDialog
 import com.sookmyung.umbrellafriend.util.binding.BindingFragment
 import com.sookmyung.umbrellafriend.util.hideKeyboard
@@ -114,13 +117,18 @@ class ReportFragment : BindingFragment<FragmentReportBinding>(R.layout.fragment_
         ivView.setImageResource(R.drawable.ic_radio_check)
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun switchReportType() {
         with(binding) {
             setReportTypeClickListener(clReportMissingUmbrella, MISSING)
             setReportTypeClickListener(clReportBreakUmbrella, BROKEN)
             setReportTypeClickListener(clReportBreakQr, QR)
-            etReportEtc.setOnClickListener {
-                viewModel.updateReportType(ETC)
+            etReportEtc.setOnTouchListener { _, event ->
+                if (event.action == MotionEvent.ACTION_UP) {
+                    hideKeyboard()
+                    viewModel.updateReportType(ETC)
+                }
+                return@setOnTouchListener false
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.sookmyung.umbrellafriend.ui.returnlocation
 
+import android.content.DialogInterface
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -89,6 +90,14 @@ class ReturnBottomSheet : BottomSheetDialogFragment() {
         returnLocationListAdapter?.setOnThemeClickListener { location ->
             selectedLocation = location.locationEngName
         }
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        val bundle = Bundle()
+        bundle.putBoolean("isReturn", false)
+        bundle.putString("location", selectedLocation)
+        setFragmentResult("ReturnBottomSheet", bundle)
     }
 
     override fun onDestroyView() {
