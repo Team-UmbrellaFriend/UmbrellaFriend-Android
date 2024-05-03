@@ -21,6 +21,7 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
         setHideKeyBoard()
         checkIsLoginAvailable()
         login()
+        close()
     }
 
     private fun setHideKeyBoard() {
@@ -64,6 +65,12 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
                         putExtra("ENTRY",true)
                     })
             }
+        }
+    }
+
+    private fun close() {
+        binding.ivLoginNaviBack.setOnClickListener {
+            finish()
         }
     }
 }

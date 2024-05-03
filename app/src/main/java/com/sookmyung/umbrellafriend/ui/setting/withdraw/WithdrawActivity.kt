@@ -36,6 +36,7 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
         switchWithdrawType()
         handleEtcObservation()
         finishReport()
+        close()
     }
 
     private fun withdraw() {
@@ -195,6 +196,12 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
                     ).show(supportFragmentManager, "CUSTOM_DIALOG")
                 }
             }
+        }
+    }
+
+    private fun close() {
+        binding.ivWithdrawNaviBack.setOnClickListener {
+            finish()
         }
     }
 }

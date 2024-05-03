@@ -21,12 +21,19 @@ class MypageEditFragment :
         super.onViewCreated(view, savedInstanceState)
         binding.vm = viewModel
 
+        moveBack()
         setHideKeyBoard()
         getUserIdBundle()
         showError()
         checkJoinAvailable()
         edit()
         moveToMain()
+    }
+
+    private fun moveBack() {
+        binding.ivMypageEditNaviBack.setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
+        }
     }
 
     private fun setHideKeyBoard() {

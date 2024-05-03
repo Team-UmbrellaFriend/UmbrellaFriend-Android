@@ -23,10 +23,17 @@ class MypageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
         super.onViewCreated(view, savedInstanceState)
         binding.vm = viewModel
 
+        moveBack()
         setMypageHistoryListAdapter()
         setHistoryObserver()
         moveToMypageEdit()
         moveToSetting()
+    }
+
+    private fun moveBack() {
+        binding.ivMypageNaviBack.setOnClickListener {
+            requireActivity().finish()
+        }
     }
 
     override fun onResume() {

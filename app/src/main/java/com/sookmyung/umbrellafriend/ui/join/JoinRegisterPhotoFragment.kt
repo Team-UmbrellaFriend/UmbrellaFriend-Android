@@ -10,6 +10,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.PickVisualMedia
+import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
@@ -20,7 +21,7 @@ import com.sookmyung.umbrellafriend.ui.join.ImageCropActivity.Companion.CROP_URI
 import com.sookmyung.umbrellafriend.ui.join.ImageCropActivity.Companion.IMAGE_URI
 import com.sookmyung.umbrellafriend.util.binding.BindingAdapter.setImage
 import com.sookmyung.umbrellafriend.util.binding.BindingFragment
-import dagger.hilt.android.AndroidEntryPoint
+import com.sookmyung.umbrellafriend.util.setSingleOnClickListener
 import java.io.IOException
 
 
@@ -47,13 +48,13 @@ class JoinRegisterPhotoFragment :
     }
 
     private fun removePhoto() {
-        binding.btnJoinRegisterClose.setOnClickListener {
+        binding.btnJoinRegisterClose.setSingleOnClickListener {
             viewModel.clearUri()
         }
     }
 
     private fun startGallery() {
-        binding.ivJoinRegisterPhotoBackground.setOnClickListener {
+        binding.ivJoinRegisterPhotoBackground.setSingleOnClickListener {
             imageChooserCallback.launch(PickVisualMediaRequest(PickVisualMedia.ImageOnly))
         }
     }
@@ -69,7 +70,7 @@ class JoinRegisterPhotoFragment :
     }
 
     private fun moveToJoinInfo() {
-        binding.btnJoinRegisterPhotoNext.setOnClickListener {
+        binding.btnJoinRegisterPhotoNext.setSingleOnClickListener {
             extractNameStudentId(Uri.parse(viewModel.croppedUri.value))
             viewModel.isExtractFinish.observe(viewLifecycleOwner) { finish ->
                 if (finish) {
@@ -82,11 +83,10 @@ class JoinRegisterPhotoFragment :
                     val joinInfoFragment = JoinInfoFragment()
                     joinInfoFragment.arguments = bundle
 
-                    val fragmentTransaction =
-                        requireActivity().supportFragmentManager.beginTransaction()
-                    fragmentTransaction.replace(R.id.fcv_join, joinInfoFragment)
-                    fragmentTransaction.addToBackStack(null)
-                    fragmentTransaction.commit()
+                    requireActivity().supportFragmentManager.commit {
+                        replace(R.id.fcv_join, joinInfoFragment)
+                        addToBackStack(this.toString())
+                    }
                 }
             }
         }

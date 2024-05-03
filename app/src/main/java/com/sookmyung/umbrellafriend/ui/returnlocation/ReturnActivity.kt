@@ -49,6 +49,7 @@ class ReturnActivity :
         checkLocationSame()
         setReturnBtnClickListener()
         checkRentSuccess()
+        close()
     }
 
     override fun onResume() {
@@ -180,6 +181,12 @@ class ReturnActivity :
                 toast("반납이 되지 않았습니다. 다시 시도해주세요.")
                 finish()
             }
+        }
+    }
+
+    private fun close() {
+        binding.btnReturnExit.setOnClickListener {
+            finish()
         }
     }
 

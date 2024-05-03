@@ -44,12 +44,19 @@ class RentalActivity :
         capture.initializeFromIntent(intent, savedInstanceState)
         binding.bsRental.decodeContinuous(callback)
 
+        close()
         checkCameraPermission()
         scanQRCode()
         checkUmbrellaRentAvailable()
         setRentalListener()
         checkRentSuccess()
         moveToUmbrellaMap()
+    }
+
+    private fun close() {
+        binding.btnRentalExit.setOnClickListener {
+            finish()
+        }
     }
 
     override fun onResume() {

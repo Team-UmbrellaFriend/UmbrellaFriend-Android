@@ -19,9 +19,17 @@ class SettingActivity : BindingActivity<ActivitySettingBinding>(R.layout.activit
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         logout()
         moveToWithdraw()
         moveToReport()
+        close()
+    }
+
+    private fun close() {
+        binding.ivSettingNaviBack.setOnClickListener {
+            finish()
+        }
     }
 
 
