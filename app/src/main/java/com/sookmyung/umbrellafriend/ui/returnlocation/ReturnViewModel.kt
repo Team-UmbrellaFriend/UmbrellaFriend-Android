@@ -14,6 +14,8 @@ import javax.inject.Inject
 class ReturnViewModel @Inject constructor(
     val postUmbrellaReturnUseCase: PostUmbrellaReturnUseCase
 ) : ViewModel() {
+    private val _isHelp: MutableLiveData<Boolean> = MutableLiveData()
+    val isHelp: LiveData<Boolean> get() = _isHelp
     private val _isReturnAvailable: MutableLiveData<Boolean> = MutableLiveData()
     val isReturnAvailable: LiveData<Boolean> get() = _isReturnAvailable
     private val _isReturn: MutableLiveData<Boolean> = MutableLiveData()
@@ -29,8 +31,15 @@ class ReturnViewModel @Inject constructor(
         _qrLocation.value = subResult ?: ""
     }
 
-    fun checkLocationSame(locationName: String) {
-        _isReturnAvailable.value = (locationName == qrLocation.value)
+    fun checkReturnAvailable(locationName: String) {
+        if (isHelp.value == true) {
+            _qrLocation.value = locationName
+            _isReturnAvailable.value = !(locationName.isNullOrBlank())
+        } else _isReturnAvailable.value = (locationName == qrLocation.value)
+    }
+
+    fun updateIsHelp(isHelp: Boolean) {
+        _isHelp.value = isHelp
     }
 
     fun returnUmbrella() {
