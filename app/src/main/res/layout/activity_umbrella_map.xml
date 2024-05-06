@@ -145,7 +145,7 @@
                 android:background="@drawable/shape_gray500_fill_24_rect"
                 android:paddingHorizontal="24dp"
                 android:paddingVertical="16dp"
-                android:text="N개"
+                android:text="0개"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
