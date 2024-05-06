@@ -5,5 +5,6 @@ import android.net.Uri
 data class Location(
     val locationName: String,
     val locationEngName: String,
-    val imageUri: Uri
+    val imageUri: Uri,
+    val isClicked: Boolean
 )

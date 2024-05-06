@@ -54,17 +54,20 @@ class ReturnBottomSheet : BottomSheetDialogFragment() {
                 Location(
                     "명신관",
                     "myungshin",
-                    Uri.parse("android.resource://com.sookmyung.umbrellafriend/${R.drawable.img_myungsin}")
+                    Uri.parse("android.resource://com.sookmyung.umbrellafriend/${R.drawable.img_myungsin}"),
+                    false
                 ),
                 Location(
                     "르네상스관",
                     "renaissance",
-                    Uri.parse("android.resource://com.sookmyung.umbrellafriend/${R.drawable.img_renaissance}")
+                    Uri.parse("android.resource://com.sookmyung.umbrellafriend/${R.drawable.img_renaissance}"),
+                    false
                 ),
                 Location(
                     "과학관",
                     "science",
-                    Uri.parse("android.resource://com.sookmyung.umbrellafriend/${R.drawable.img_science}")
+                    Uri.parse("android.resource://com.sookmyung.umbrellafriend/${R.drawable.img_science}"),
+                    false
                 )
             )
         )
