@@ -60,6 +60,7 @@ class ReportViewModel @Inject constructor(
                 _isReport.value = true
             }.onFailure { throwable ->
                 Timber.e("$throwable")
+                _isReport.value = false
             }
         }
     }

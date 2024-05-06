@@ -17,7 +17,6 @@ import com.sookmyung.umbrellafriend.domain.entity.ReportType.ETC
 import com.sookmyung.umbrellafriend.domain.entity.ReportType.MISSING
 import com.sookmyung.umbrellafriend.domain.entity.ReportType.NONE
 import com.sookmyung.umbrellafriend.domain.entity.ReportType.QR
-import com.sookmyung.umbrellafriend.domain.entity.WithdrawType
 import com.sookmyung.umbrellafriend.util.BindingCustomDialog
 import com.sookmyung.umbrellafriend.util.binding.BindingFragment
 import com.sookmyung.umbrellafriend.util.hideKeyboard
@@ -168,7 +167,17 @@ class ReportFragment : BindingFragment<FragmentReportBinding>(R.layout.fragment_
                     subtitle = "신고해 주셔서 감사합니다!\n이른 시일 내에 해결하겠습니다.",
                     btnContent = "확인",
                     imageDrawable = R.drawable.ic_check,
-                    btnDoAction = {requireActivity().finish() },
+                    btnDoAction = { requireActivity().finish() },
+                    btnBackAction = {},
+                    isBackBtn = false
+                ).show(requireActivity().supportFragmentManager, "CUSTOM_DIALOG")
+            } else {
+                BindingCustomDialog.Builder().build(
+                    title = "신고 접수 실패",
+                    subtitle = "신고가 접수되지 않았습니다.\n다시 시도해주시길 바랍니다.",
+                    btnContent = "확인",
+                    imageDrawable = R.drawable.ic_fail,
+                    btnDoAction = { requireActivity().finish() },
                     btnBackAction = {},
                     isBackBtn = false
                 ).show(requireActivity().supportFragmentManager, "CUSTOM_DIALOG")
