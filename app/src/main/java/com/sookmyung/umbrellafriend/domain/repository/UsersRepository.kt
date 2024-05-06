@@ -31,4 +31,7 @@ interface UsersRepository {
     fun initToken(token: String)
     fun setLogin(login: Boolean)
     fun getLogin(): Boolean
+
+    fun setUpdate(update: Boolean)
+    fun getUpdate(): Boolean
 }

@@ -31,4 +31,8 @@
     <!-- return -->
     <string name="return_help"><u>QR 인식이 잘 안되나요?</u></string>
 
+    <!-- setting -->
+    <string name="need_update">업데이트 필요</string>
+    <string name="latest_version">최신버전입니다</string>
+
 </resources>
