@@ -8,6 +8,7 @@ import com.sookmyung.umbrellafriend.BuildConfig
 import com.sookmyung.umbrellafriend.domain.entity.Version
 import com.sookmyung.umbrellafriend.domain.usecase.GetLoginUseCase
 import com.sookmyung.umbrellafriend.domain.usecase.GetVersionUseCase
+import com.sookmyung.umbrellafriend.domain.usecase.SetUpdateUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -17,7 +18,8 @@ import kotlin.math.pow
 @HiltViewModel
 class SplashViewModel @Inject constructor(
     private val getLoginUseCase: GetLoginUseCase,
-    private val getVersionUseCase: GetVersionUseCase
+    private val getVersionUseCase: GetVersionUseCase,
+    private val setUpdateUseCase: SetUpdateUseCase
 ) : ViewModel() {
     private val _isLogin: MutableLiveData<Boolean> = MutableLiveData(false)
     val isLogin: LiveData<Boolean> get() = _isLogin
@@ -59,6 +61,7 @@ class SplashViewModel @Inject constructor(
         else if (versionNameNum < storeAppVersionNum) _isUpdate.value = UpdateType.RECOMMEND
         else _isUpdate.value = UpdateType.NONE
 
+        setUpdateUseCase(isUpdate.value == UpdateType.NONE)
     }
 
     private fun versionStringToNumber(version: String): Int {

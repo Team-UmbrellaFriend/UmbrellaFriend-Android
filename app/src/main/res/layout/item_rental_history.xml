@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="data"
             type="com.sookmyung.umbrellafriend.domain.entity.History" />
@@ -12,14 +13,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="12dp">
+        android:paddingTop="12dp">
 
         <TextView
             android:id="@+id/tv_item_rental_history_date"
             style="@style/Body5"
-            android:text="@{data.rentDate}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{data.rentDate}"
             android:textColor="@color/gray_1000"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -28,13 +29,22 @@
         <TextView
             android:id="@+id/tv_item_rental_history_term"
             style="@style/Body4"
-            android:text="@{data.rentalPeriod}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{data.rentalPeriod}"
             android:textColor="@color/gray_1000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="1일간 대여" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/shape_gray400_fill_rect"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_item_rental_history_term" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

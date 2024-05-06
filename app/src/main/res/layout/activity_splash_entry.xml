@@ -42,7 +42,7 @@
             app:layout_constraintDimensionRatio="1.4:1"
             app:layout_constraintTop_toBottomOf="@id/tv_splash_entry_title" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <TextView
             android:id="@+id/btn_splash_entry_login"
             style="@style/Subtitle1"
             android:layout_width="match_parent"
@@ -50,14 +50,15 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="72dp"
             android:background="@drawable/selector_login_btn"
-            android:stateListAnimator="@null"
+            android:gravity="center"
+            android:padding="15dp"
             android:text="@string/splash_login_title"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_splash_character" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <TextView
             android:id="@+id/btn_splash_entry_join"
             style="@style/Subtitle1"
             android:layout_width="match_parent"
@@ -65,7 +66,8 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/selector_join_btn"
-            android:stateListAnimator="@null"
+            android:gravity="center"
+            android:padding="15dp"
             android:text="@string/splash_join_title"
             android:textColor="@color/main_blue"
             app:layout_constraintEnd_toEndOf="parent"

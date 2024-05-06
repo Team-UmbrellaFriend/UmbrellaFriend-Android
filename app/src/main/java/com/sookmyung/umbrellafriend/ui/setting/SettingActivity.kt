@@ -20,6 +20,7 @@ class SettingActivity : BindingActivity<ActivitySettingBinding>(R.layout.activit
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        binding.vm = viewModel
         logout()
         moveToWithdraw()
         moveToReport()

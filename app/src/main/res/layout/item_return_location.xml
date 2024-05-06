@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="data"
             type="com.sookmyung.umbrellafriend.domain.entity.Location" />
@@ -16,16 +18,27 @@
         android:paddingEnd="8dp">
 
         <ImageView
+            android:id="@+id/iv_loaction"
             android:layout_width="152dp"
             android:layout_height="166dp"
             android:background="@drawable/shape_white_fill_24_rect"
             android:clipToOutline="true"
+            android:src="@{data.imageUri}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:src="@{data.imageUri}"
             tools:src="@drawable/img_myungsin" />
+
+        <ImageView
+            android:layout_width="152dp"
+            android:layout_height="166dp"
+            android:src="@drawable/shape_mainblue_stroke_24_rect"
+            android:visibility="@{data.isClicked ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/iv_loaction"
+            app:layout_constraintEnd_toEndOf="@id/iv_loaction"
+            app:layout_constraintStart_toStartOf="@id/iv_loaction"
+            app:layout_constraintTop_toTopOf="@id/iv_loaction" />
 
         <TextView
             style="@style/Body3"
@@ -35,8 +48,8 @@
             android:background="@drawable/shape_location70_fill_16_rect"
             android:paddingHorizontal="8dp"
             android:paddingVertical="4dp"
-            android:textColor="@color/white"
             android:text="@{data.locationName}"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="명신관" />

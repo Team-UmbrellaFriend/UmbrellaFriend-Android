@@ -58,4 +58,9 @@ class UsersRepositoryImpl @Inject constructor(
     }
 
     override fun getLogin() = localDataSource.login
+    override fun setUpdate(update: Boolean) {
+        localDataSource.update = update
+    }
+
+    override fun getUpdate(): Boolean = localDataSource.update
 }

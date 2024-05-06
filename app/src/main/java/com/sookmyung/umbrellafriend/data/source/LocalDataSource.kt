@@ -15,8 +15,13 @@ class LocalDataSource @Inject constructor(
         set(value) = prefs.edit { putBoolean(LOGIN, value) }
         get() = prefs.getBoolean(LOGIN, false)
 
+    var update: Boolean
+        set(value) = prefs.edit { putBoolean(UPDATE, value) }
+        get() = prefs.getBoolean(UPDATE, false)
+
     companion object {
         private const val TOKEN = "token"
         private const val LOGIN = "login"
+        private const val UPDATE = "update"
     }
 }
