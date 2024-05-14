@@ -24,9 +24,9 @@ class ReportViewModel @Inject constructor(
     val screenStatus: LiveData<ReportScreen> get() = _screenStatus
     private val _isNext: MutableLiveData<Boolean> = MutableLiveData(false)
     val isNext: LiveData<Boolean> get() = _isNext
-    private val _isReport: MutableLiveData<Boolean> = MutableLiveData(false)
+    private val _isReport: MutableLiveData<Boolean> = MutableLiveData()
     val isReport: LiveData<Boolean> get() = _isReport
-    private val _isReportAvailable: MutableLiveData<Boolean> = MutableLiveData(false)
+    private val _isReportAvailable: MutableLiveData<Boolean> = MutableLiveData()
     val isReportAvailable: LiveData<Boolean> get() = _isReportAvailable
     private val _reportType: MutableLiveData<ReportType> = MutableLiveData(NONE)
     val reportType: LiveData<ReportType> get() = _reportType

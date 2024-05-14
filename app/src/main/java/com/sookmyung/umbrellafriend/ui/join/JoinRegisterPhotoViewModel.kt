@@ -29,7 +29,7 @@ class JoinRegisterPhotoViewModel : ViewModel() {
     }
 
     fun extractNumberAndName(input: String) {
-        val regex = Regex("(\\p{L}+)\\s*\\((\\d{7})\\s*\\)")
+        val regex = Regex("(\\p{L}+)\\s*\\((\\d{5,7})\\s*\\)")
         val matchResult = regex.find(input)
         if (matchResult != null) {
             val studentId = matchResult.groupValues[2]
