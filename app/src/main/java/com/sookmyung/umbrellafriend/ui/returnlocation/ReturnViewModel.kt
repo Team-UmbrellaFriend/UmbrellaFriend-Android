@@ -1,5 +1,6 @@
 package com.sookmyung.umbrellafriend.ui.returnlocation
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -52,11 +53,13 @@ class ReturnViewModel @Inject constructor(
             }
         }
         viewModelScope.launch {
-            postUmbrellaReturnUseCase(ReturnRequest(locationKor)).onSuccess {
-                _isReturn.value = true
-            }.onFailure {
-                _isReturn.value = false
-            }
+            postUmbrellaReturnUseCase(ReturnRequest(locationKor))
+                .onSuccess {
+                    _isReturn.value = true
+                }
+                .onFailure {
+                    _isReturn.value = false
+                }
         }
     }
 }
