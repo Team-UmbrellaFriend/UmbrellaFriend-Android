@@ -10,7 +10,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black">
-        <!-- Image Cropper fill the remaining available height -->
+
+        <com.canhub.cropper.CropImageView
+            android:id="@+id/cropImageView_image_crop"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:cropFixAspectRatio="true"
+            app:cropShape="rectangle"
+            app:cropScaleType="centerCrop"
+            app:layout_constraintDimensionRatio="1"
+            android:adjustViewBounds="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/btn_image_crop"
@@ -21,16 +34,6 @@
             android:text="자르기"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.canhub.cropper.CropImageView
-            android:id="@+id/cropImageView_image_crop"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="3:4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
