@@ -39,18 +39,18 @@ class UmbrellaMapActivity :
     }
 
     private fun observeClickedBuilding() {
-        viewModel.buildingStatus.observe(this) { buildingName ->
-            when (buildingName) {
+        viewModel.location.observe(this) { _ ->
+            when (viewModel.buildingStatus.value) {
                 MYUNGSIN -> {
-                    setTitle("명신관 우산 잔여 개수", "명신관 311A")
+                    setTitle("명신관 우산 잔여 개수", viewModel.location.value ?: "")
                 }
 
                 RENAISSANCE -> {
-                    setTitle("르네상스관 우산 잔여 개수", "르네상스관 311A")
+                    setTitle("르네상스관 우산 잔여 개수", viewModel.location.value ?: "")
                 }
 
                 SCIENCE -> {
-                    setTitle("과학관 우산 잔여 개수", "과학관 311A")
+                    setTitle("과학관 우산 잔여 개수", viewModel.location.value ?: "")
                 }
             }
         }
