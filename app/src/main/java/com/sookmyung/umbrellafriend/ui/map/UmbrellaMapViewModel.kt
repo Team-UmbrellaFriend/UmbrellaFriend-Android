@@ -20,6 +20,8 @@ class UmbrellaMapViewModel @Inject constructor(
     val buildingStatus: LiveData<Int> = _buildingStatus
     private val _availableUmbrella: MutableLiveData<Int> = MutableLiveData()
     val availableUmbrella: LiveData<Int> = _availableUmbrella
+    private val _location: MutableLiveData<String> = MutableLiveData()
+    val location: LiveData<String> = _location
 
     init {
         getAvailableUmbrella()
@@ -27,12 +29,21 @@ class UmbrellaMapViewModel @Inject constructor(
 
     fun updateBuildingStatus(buildingNum: Int) {
         _buildingStatus.value = buildingNum
-        updateAvailableUmbrella()
+        val index = (buildingStatus.value?.minus(1)) ?: 0
+        val umbrella = _availableUmbrellaList.value?.get(index) ?: AvailableUmbrella(0, "", "", 0)
+
+        updateAvailableUmbrella(umbrella)
+        updateLocation(umbrella)
     }
 
-    private fun updateAvailableUmbrella() {
-        val index = (buildingStatus.value?.minus(1)) ?: 0
-        _availableUmbrella.value = _availableUmbrellaList.value?.get(index)?.numUmbrellas ?: 0
+    private fun updateAvailableUmbrella(building: AvailableUmbrella) {
+        _availableUmbrella.value = building.numUmbrellas
+    }
+
+    private fun updateLocation(building: AvailableUmbrella) {
+        val locationName = building.locationName
+        val locationDetail = building.locationDetail
+        _location.value = "$locationName $locationDetail"
     }
 
     private fun getAvailableUmbrella() {
