@@ -6,6 +6,9 @@
     <string name="camera_permission_granted">앱 실행을 위한 권한이 설정 되었습니다</string>
     <string name="camera_permission_denied">앱 실행을 위한 권한이 취소 되었습니다</string>
 
+    <!-- common -->
+    <string name="cancle">취소</string>
+
     <!-- splash -->
     <string name="splash_sub_title">비올 때 마다 생각나는 친구</string>
     <string name="splash_title">우산친구</string>
@@ -53,5 +56,9 @@
     <string name="setting_account_title">계정설정</string>
     <string name="setting_logout_title">로그아웃</string>
     <string name="setting_withdraw_title">탈퇴하기</string>
+
+    <!-- return bottomsheet -->
+    <string name="return_bottomsheet_title">반납 완료할 장소를 선택해주세요</string>
+    <string name="btn_return_bottomsheet_yes">반납 완료</string>
 
 </resources>
