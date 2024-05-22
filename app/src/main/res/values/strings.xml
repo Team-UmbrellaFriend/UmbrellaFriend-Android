@@ -43,4 +43,15 @@
     <string name="return_complete_title">우산 반납이 완료되었습니다.\n다음에 또 이용해주세요:)</string>
     <string name="btn_return_complete">홈으로</string>
 
+    <!-- setting -->
+    <string name="setting_title">설정</string>
+    <string name="setting_help_title">도움</string>
+    <string name="setting_report_title">신고하기</string>
+    <string name="setting_version_title">버전</string>
+    <string name="setting_service_term_title">서비스 이용약관</string>
+    <string name="setting_privacy_policy_title">개인정보 처리 방침</string>
+    <string name="setting_account_title">계정설정</string>
+    <string name="setting_logout_title">로그아웃</string>
+    <string name="setting_withdraw_title">탈퇴하기</string>
+
 </resources>
