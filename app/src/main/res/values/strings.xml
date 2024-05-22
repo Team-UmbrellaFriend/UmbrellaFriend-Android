@@ -61,4 +61,8 @@
     <string name="return_bottomsheet_title">반납 완료할 장소를 선택해주세요</string>
     <string name="btn_return_bottomsheet_yes">반납 완료</string>
 
+    <!-- report umbrella number -->
+    <string name="report_umbrella_number_title">신고할 우산번호를\n입력해주세요.</string>
+    <string name="report_umbrella_number_umbrella_title">우산번호</string>
+
 </resources>
