@@ -103,5 +103,7 @@
     <string name="join_info_title">기본 정보를\n입력해주세요</string>
     <string name="join_register_photo_info_title">학생증을\n등록해 인증해주세요.</string>
     <string name="join_register_photo_info_subtitle">학번과 이름이 보이게 첨부해주세요.</string>
+    <string name="mypage_rental_history_title">대여 내역</string>
+    <string name="mypage_rental_history_empty_title">아직 내역이 없어요</string>
 
 </resources>
