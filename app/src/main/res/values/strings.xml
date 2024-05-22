@@ -27,6 +27,8 @@
 
     <!-- rental -->
     <string name="rental_help"><u>우산위치를 검색하고 싶으신가요?</u></string>
+    <string name="rental_title">우산 QR코드 인식</string>
+    <string name="rental_subtitle">QR을 사각형에 맞춰 스캔해주세요</string>
 
     <!-- return -->
     <string name="return_help"><u>QR 인식이 잘 안되나요?</u></string>
