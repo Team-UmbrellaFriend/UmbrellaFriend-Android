@@ -99,5 +99,6 @@
     <string name="profile_password_check">비밀번호 확인</string>
     <string name="profile_password_condition">* 영어, 숫자로 이루어진 최소 8자 이상 (특수문자x)</string>
     <string name="profile_password_not_match">* 비밀번호가 일치하지 않습니다</string>
+    <string name="join_info_title">기본 정보를\n입력해주세요</string>
 
 </resources>
