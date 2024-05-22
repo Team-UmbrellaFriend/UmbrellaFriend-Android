@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="84dp"
             android:gravity="center"
-            android:text="우산 반납이 완료되었습니다.\n다음에 또 이용해주세요:)"
+            android:text="@string/return_complete_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -45,7 +45,7 @@
             android:background="@drawable/shape_mainblue_fill_12_rect"
             android:paddingVertical="15dp"
             android:stateListAnimator="@null"
-            android:text="홈으로"
+            android:text="@string/btn_return_complete"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
