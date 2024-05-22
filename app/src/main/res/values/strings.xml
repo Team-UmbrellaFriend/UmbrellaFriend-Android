@@ -65,4 +65,12 @@
     <string name="report_umbrella_number_title">신고할 우산번호를\n입력해주세요.</string>
     <string name="report_umbrella_number_umbrella_title">우산번호</string>
 
+    <!-- report -->
+    <string name="report_title">신고하기</string>
+    <string name="report_missing_umbrella">우산을 분실했어요</string>
+    <string name="report_break_qr">QR코드가 파손되었어요</string>
+    <string name="report_break_umbrella">우산이 부러졌어요</string>
+    <string name="report_etc_hint">기타사항 (직접 입력)</string>
+    <string name="btn_report">신고하기</string>
+
 </resources>
