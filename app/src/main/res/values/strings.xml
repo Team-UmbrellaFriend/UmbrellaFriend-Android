@@ -73,4 +73,11 @@
     <string name="report_etc_hint">기타사항 (직접 입력)</string>
     <string name="btn_report">신고하기</string>
 
+    <!-- rental bottomsheet -->
+    <string name="rental_bottomsheet_title">우산을 정말로 대여할까요?</string>
+    <string name="rental_bottomsheet_name_default">눈송이</string>
+    <string name="rental_bottomsheet_studentId_default">1111111</string>
+    <string name="rental_bottomsheet_date_notice">(3일 대여)</string>
+    <string name="btn_rental_bottom_sheet_yes">대여하기</string>
+
 </resources>
