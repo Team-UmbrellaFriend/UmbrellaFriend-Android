@@ -8,6 +8,7 @@
 
     <!-- common -->
     <string name="cancle">취소</string>
+    <string name="complete">완료</string>
 
     <!-- splash -->
     <string name="splash_sub_title">비올 때 마다 생각나는 친구</string>
@@ -79,5 +80,24 @@
     <string name="rental_bottomsheet_studentId_default">1111111</string>
     <string name="rental_bottomsheet_date_notice">(3일 대여)</string>
     <string name="btn_rental_bottom_sheet_yes">대여하기</string>
+
+    <!-- mypage edit -->
+    <string name="mypage_edit_title">프로필 수정</string>
+
+    <!-- profile -->
+    <string name="profile_name_title">이름</string>
+    <string name="profile_name_hint">눈송이</string>
+    <string name="profile_student_id_title">학번</string>
+    <string name="profile_student_id_hint">1234567</string>
+    <string name="profile_phone_title">전화번호</string>
+    <string name="profile_phone_hint">01012341234</string>
+    <string name="profile_email_title">이메일</string>
+    <string name="profile_email">woosanfriend</string>
+    <string name="profile_email_domain">\@sookmyung.ac.kr</string>
+    <string name="profile_password_title">비밀번호</string>
+    <string name="profile_password">비밀번호</string>
+    <string name="profile_password_check">비밀번호 확인</string>
+    <string name="profile_password_condition">* 영어, 숫자로 이루어진 최소 8자 이상 (특수문자x)</string>
+    <string name="profile_password_not_match">* 비밀번호가 일치하지 않습니다</string>
 
 </resources>
