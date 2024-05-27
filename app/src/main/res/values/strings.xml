@@ -6,6 +6,11 @@
     <string name="camera_permission_granted">앱 실행을 위한 권한이 설정 되었습니다</string>
     <string name="camera_permission_denied">앱 실행을 위한 권한이 취소 되었습니다</string>
 
+    <!-- common -->
+    <string name="cancle">취소</string>
+    <string name="complete">완료</string>
+    <string name="next">다음</string>
+
     <!-- splash -->
     <string name="splash_sub_title">비올 때 마다 생각나는 친구</string>
     <string name="splash_title">우산친구</string>
@@ -27,12 +32,78 @@
 
     <!-- rental -->
     <string name="rental_help"><u>우산위치를 검색하고 싶으신가요?</u></string>
+    <string name="rental_title">우산 QR코드 인식</string>
+    <string name="rental_subtitle">QR을 사각형에 맞춰 스캔해주세요</string>
 
     <!-- return -->
     <string name="return_help"><u>QR 인식이 잘 안되나요?</u></string>
+    <string name="return_title">반납코드 QR코드 인식</string>
+    <string name="return_subtitle">QR을 사각형에 맞춰 스캔해주세요</string>
 
     <!-- setting -->
     <string name="need_update">업데이트 필요</string>
     <string name="latest_version">최신버전입니다</string>
+
+    <!-- return complete -->
+    <string name="return_complete_title">우산 반납이 완료되었습니다.\n다음에 또 이용해주세요:)</string>
+    <string name="btn_return_complete">홈으로</string>
+
+    <!-- setting -->
+    <string name="setting_title">설정</string>
+    <string name="setting_help_title">도움</string>
+    <string name="setting_report_title">신고하기</string>
+    <string name="setting_version_title">버전</string>
+    <string name="setting_service_term_title">서비스 이용약관</string>
+    <string name="setting_privacy_policy_title">개인정보 처리 방침</string>
+    <string name="setting_account_title">계정설정</string>
+    <string name="setting_logout_title">로그아웃</string>
+    <string name="setting_withdraw_title">탈퇴하기</string>
+
+    <!-- return bottomsheet -->
+    <string name="return_bottomsheet_title">반납 완료할 장소를 선택해주세요</string>
+    <string name="btn_return_bottomsheet_yes">반납 완료</string>
+
+    <!-- report umbrella number -->
+    <string name="report_umbrella_number_title">신고할 우산번호를\n입력해주세요.</string>
+    <string name="report_umbrella_number_umbrella_title">우산번호</string>
+
+    <!-- report -->
+    <string name="report_title">신고하기</string>
+    <string name="report_missing_umbrella">우산을 분실했어요</string>
+    <string name="report_break_qr">QR코드가 파손되었어요</string>
+    <string name="report_break_umbrella">우산이 부러졌어요</string>
+    <string name="report_etc_hint">기타사항 (직접 입력)</string>
+    <string name="btn_report">신고하기</string>
+
+    <!-- rental bottomsheet -->
+    <string name="rental_bottomsheet_title">우산을 정말로 대여할까요?</string>
+    <string name="rental_bottomsheet_name_default">눈송이</string>
+    <string name="rental_bottomsheet_studentId_default">1111111</string>
+    <string name="rental_bottomsheet_date_notice">(3일 대여)</string>
+    <string name="btn_rental_bottom_sheet_yes">대여하기</string>
+
+    <!-- mypage edit -->
+    <string name="mypage_edit_title">프로필 수정</string>
+
+    <!-- profile -->
+    <string name="profile_name_title">이름</string>
+    <string name="profile_name_hint">눈송이</string>
+    <string name="profile_student_id_title">학번</string>
+    <string name="profile_student_id_hint">1234567</string>
+    <string name="profile_phone_title">전화번호</string>
+    <string name="profile_phone_hint">01012341234</string>
+    <string name="profile_email_title">이메일</string>
+    <string name="profile_email">woosanfriend</string>
+    <string name="profile_email_domain">\@sookmyung.ac.kr</string>
+    <string name="profile_password_title">비밀번호</string>
+    <string name="profile_password">비밀번호</string>
+    <string name="profile_password_check">비밀번호 확인</string>
+    <string name="profile_password_condition">* 영어, 숫자로 이루어진 최소 8자 이상 (특수문자x)</string>
+    <string name="profile_password_not_match">* 비밀번호가 일치하지 않습니다</string>
+    <string name="join_info_title">기본 정보를\n입력해주세요</string>
+    <string name="join_register_photo_info_title">학생증을\n등록해 인증해주세요.</string>
+    <string name="join_register_photo_info_subtitle">학번과 이름이 보이게 첨부해주세요.</string>
+    <string name="mypage_rental_history_title">대여 내역</string>
+    <string name="mypage_rental_history_empty_title">아직 내역이 없어요</string>
 
 </resources>

@@ -25,7 +25,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:maxLength="20"
-            android:text="학생증을\n등록해 인증해주세요."
+            android:text="@string/join_register_photo_info_title"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="학번과 이름이 보이게 첨부해주세요."
+            android:text="@string/join_register_photo_info_subtitle"
             android:textColor="@color/gray_700"
             app:layout_constraintStart_toStartOf="@id/tv_join_register_photo_info_title"
             app:layout_constraintTop_toBottomOf="@+id/tv_join_register_photo_info_title" />
@@ -118,7 +118,7 @@
             android:clickable="@{vm.isUriUpdated}"
             android:gravity="center"
             android:paddingVertical="15dp"
-            android:text="다음"
+            android:text="@string/next"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
