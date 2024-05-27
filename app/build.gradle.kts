@@ -20,7 +20,7 @@ android {
         applicationId = "com.sookmyung.umbrellafriend"
         minSdk = 29
         targetSdk = 34
-        versionCode = 2
+        versionCode = 3
         versionName = "1.0.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "BASE_URL", getApiKey("BASE_URL"))

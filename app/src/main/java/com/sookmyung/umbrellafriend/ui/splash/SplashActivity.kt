@@ -1,6 +1,7 @@
 package com.sookmyung.umbrellafriend.ui.splash
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -43,7 +44,7 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
         viewModel.isLogin()
         viewModel.isLogin.observe(this) { isLogin ->
             val intent: Intent = if (isLogin) {
-                Intent(this, MainActivity::class.java).putExtra("ENTRY",true)
+                Intent(this, MainActivity::class.java).putExtra("ENTRY", true)
             } else {
                 Intent(this, SplashEntryActivity::class.java)
             }
@@ -79,7 +80,13 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
     }
 
     private fun goToStore() {
+        val url = "https://play.google.com/store/apps/details?id=com.sookmyung.umbrellafriend"
+        moveToWebView(url)
+    }
 
+    private fun moveToWebView(url: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
     }
 
     companion object {
