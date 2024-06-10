@@ -48,6 +48,7 @@ class ReturnViewModel @Inject constructor(
             "myungshin" -> "명신관"
             "renaissance" -> "르네상스관"
             "science" -> "과학관"
+            "art" -> "미술대학"
             else -> {
                 ""
             }
