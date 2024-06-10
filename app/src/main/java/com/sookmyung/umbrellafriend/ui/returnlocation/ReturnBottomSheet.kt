@@ -68,7 +68,12 @@ class ReturnBottomSheet : BottomSheetDialogFragment() {
                     "science",
                     Uri.parse("android.resource://com.sookmyung.umbrellafriend/${R.drawable.img_science}"),
                     false
-                )
+                ),Location(
+                    "미술대학",
+                    "art",
+                    Uri.parse("android.resource://com.sookmyung.umbrellafriend/${R.drawable.img_art}"),
+                    false
+                ),
             )
         )
     }
