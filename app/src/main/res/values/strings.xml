@@ -51,7 +51,7 @@
     <!-- setting -->
     <string name="setting_title">설정</string>
     <string name="setting_help_title">도움</string>
-    <string name="setting_report_title">신고하기</string>
+    <string name="setting_report_title">우산 신고</string>
     <string name="setting_version_title">버전</string>
     <string name="setting_service_term_title">서비스 이용약관</string>
     <string name="setting_privacy_policy_title">개인정보 처리 방침</string>
@@ -68,7 +68,7 @@
     <string name="report_umbrella_number_umbrella_title">우산번호</string>
 
     <!-- report -->
-    <string name="report_title">신고하기</string>
+    <string name="report_title">우산 신고</string>
     <string name="report_missing_umbrella">우산을 분실했어요</string>
     <string name="report_break_qr">QR코드가 파손되었어요</string>
     <string name="report_break_umbrella">우산이 부러졌어요</string>
@@ -89,7 +89,7 @@
     <string name="profile_name_title">이름</string>
     <string name="profile_name_hint">눈송이</string>
     <string name="profile_student_id_title">학번</string>
-    <string name="profile_student_id_hint">1234567</string>
+    <string name="profile_student_id_hint">학번 및 교번을 입력해주세요.</string>
     <string name="profile_phone_title">전화번호</string>
     <string name="profile_phone_hint">01012341234</string>
     <string name="profile_email_title">이메일</string>
