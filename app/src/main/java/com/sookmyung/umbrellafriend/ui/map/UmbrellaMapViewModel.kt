@@ -62,5 +62,6 @@ class UmbrellaMapViewModel @Inject constructor(
         const val MYUNGSIN = 1
         const val RENAISSANCE = 2
         const val SCIENCE = 3
+        const val ART = 4
     }
 }
