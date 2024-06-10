@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.sookmyung.umbrellafriend.R
 import com.sookmyung.umbrellafriend.databinding.ActivityUmbrellaMapBinding
+import com.sookmyung.umbrellafriend.ui.map.UmbrellaMapViewModel.Companion.ART
 import com.sookmyung.umbrellafriend.ui.map.UmbrellaMapViewModel.Companion.MYUNGSIN
 import com.sookmyung.umbrellafriend.ui.map.UmbrellaMapViewModel.Companion.RENAISSANCE
 import com.sookmyung.umbrellafriend.ui.map.UmbrellaMapViewModel.Companion.SCIENCE
@@ -51,6 +52,9 @@ class UmbrellaMapActivity :
 
                 SCIENCE -> {
                     setTitle("과학관 우산 잔여 개수", viewModel.location.value ?: "")
+                }
+                ART -> {
+                    setTitle("미술대학 우산 잔여 개수", viewModel.location.value ?: "")
                 }
             }
         }
